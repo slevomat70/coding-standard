@@ -190,7 +190,7 @@ class ClassStructureSniffTest extends TestCase
 			);
 			self::fail();
 		} catch (UnsupportedClassGroupException $e) {
-			self::assertStringContainsString('whatever', $e->getMessage());
+			self::assertContains('whatever', $e->getMessage());
 		}
 	}
 
@@ -206,7 +206,7 @@ class ClassStructureSniffTest extends TestCase
 			);
 			self::fail();
 		} catch (MissingClassGroupsException $e) {
-			self::assertStringContainsString(', constructor, static constructors, destructor, ', $e->getMessage());
+			self::assertContains(', constructor, static constructors, destructor, ', $e->getMessage());
 		}
 	}
 
@@ -235,7 +235,7 @@ class ClassStructureSniffTest extends TestCase
 			);
 			self::fail();
 		} catch (MissingClassGroupsException $e) {
-			self::assertStringContainsString(
+			self::assertContains(
 				': public static final methods, protected static final methods, public final methods, protected final methods.',
 				$e->getMessage()
 			);

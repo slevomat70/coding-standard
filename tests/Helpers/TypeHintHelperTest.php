@@ -169,7 +169,7 @@ class TypeHintHelperTest extends TestCase
 		$functionPointer = $this->findFunctionPointerByName($phpcsFile, 'fooFunctionWithParameterAnnotation');
 		$parameterAnnotation = FunctionHelper::getParametersAnnotations($phpcsFile, $functionPointer)[0];
 		$parts = preg_split('~\\s+~', $parameterAnnotation->getContent());
-		self::assertIsArray($parts);
+		self::assertTrue(is_array($parts));
 		$parameterTypeHint = $parts[0];
 		self::assertSame(
 			'\Doctrine\Common\Collections\ArrayCollection',
@@ -229,7 +229,7 @@ class TypeHintHelperTest extends TestCase
 		$methodPointer = $this->findFunctionPointerByName($phpcsFile, 'fooMethodWithParameterAnnotation');
 		$parameterAnnotation = FunctionHelper::getParametersAnnotations($phpcsFile, $methodPointer)[0];
 		$parts = preg_split('~\\s+~', $parameterAnnotation->getContent());
-		self::assertIsArray($parts);
+		self::assertTrue(is_array($parts));
 		$parameterTypeHint = $parts[0];
 		self::assertSame(
 			'\Doctrine\ORM\Mapping\Id',
@@ -289,7 +289,7 @@ class TypeHintHelperTest extends TestCase
 		$functionPointer = $this->findFunctionPointerByName($phpcsFile, 'fooFunctionWithParameterAnnotation');
 		$parameterAnnotation = FunctionHelper::getParametersAnnotations($phpcsFile, $functionPointer)[0];
 		$parts = preg_split('~\\s+~', $parameterAnnotation->getContent());
-		self::assertIsArray($parts);
+		self::assertTrue(is_array($parts));
 		$parameterTypeHint = $parts[0];
 		self::assertSame(
 			'\Doctrine\Common\Collections\ArrayCollection',
@@ -349,7 +349,7 @@ class TypeHintHelperTest extends TestCase
 		$methodPointer = $this->findFunctionPointerByName($phpcsFile, 'fooMethodWithParameterAnnotation');
 		$parameterAnnotation = FunctionHelper::getParametersAnnotations($phpcsFile, $methodPointer)[0];
 		$parts = preg_split('~\\s+~', $parameterAnnotation->getContent());
-		self::assertIsArray($parts);
+		self::assertTrue(is_array($parts));
 		$parameterTypeHint = $parts[0];
 		self::assertSame(
 			'\Doctrine\ORM\Mapping\Id',
