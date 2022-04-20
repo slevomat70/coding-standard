@@ -24,18 +24,18 @@ use const T_WHITESPACE;
 class UnionTypeHintFormatSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_WHITESPACE = 'DisallowedWhitespace';
-	public const CODE_REQUIRED_WHITESPACE = 'RequiredWhitespace';
-	public const CODE_REQUIRED_SHORT_NULLABLE = 'RequiredShortNullable';
-	public const CODE_DISALLOWED_SHORT_NULLABLE = 'DisallowedShortNullable';
-	public const CODE_NULL_TYPE_HINT_NOT_ON_FIRST_POSITION = 'NullTypeHintNotOnFirstPosition';
-	public const CODE_NULL_TYPE_HINT_NOT_ON_LAST_POSITION = 'NullTypeHintNotOnLastPosition';
+	const CODE_DISALLOWED_WHITESPACE = 'DisallowedWhitespace';
+	const CODE_REQUIRED_WHITESPACE = 'RequiredWhitespace';
+	const CODE_REQUIRED_SHORT_NULLABLE = 'RequiredShortNullable';
+	const CODE_DISALLOWED_SHORT_NULLABLE = 'DisallowedShortNullable';
+	const CODE_NULL_TYPE_HINT_NOT_ON_FIRST_POSITION = 'NullTypeHintNotOnFirstPosition';
+	const CODE_NULL_TYPE_HINT_NOT_ON_LAST_POSITION = 'NullTypeHintNotOnLastPosition';
 
-	private const YES = 'yes';
-	private const NO = 'no';
+	const YES = 'yes';
+	const NO = 'no';
 
-	private const FIRST = 'first';
-	private const LAST = 'last';
+	const FIRST = 'first';
+	const LAST = 'last';
 
 	/** @var bool|null */
 	public $enable = null;
@@ -63,8 +63,10 @@ class UnionTypeHintFormatSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $pointer): void
+	public function process(File $phpcsFile, $pointer)
 	{
 		$this->enable = SniffSettingsHelper::isEnabledByPhpVersion($this->enable, 80000);
 
@@ -99,7 +101,10 @@ class UnionTypeHintFormatSniff implements Sniff
 		}
 	}
 
-	private function checkTypeHint(File $phpcsFile, TypeHint $typeHint): void
+	/**
+	 * @return void
+	 */
+	private function checkTypeHint(File $phpcsFile, TypeHint $typeHint)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -235,7 +240,10 @@ class UnionTypeHintFormatSniff implements Sniff
 		return $content;
 	}
 
-	private function fixTypeHint(File $phpcsFile, TypeHint $typeHint, string $fixedTypeHint): void
+	/**
+	 * @return void
+	 */
+	private function fixTypeHint(File $phpcsFile, TypeHint $typeHint, string $fixedTypeHint)
 	{
 		$phpcsFile->fixer->beginChangeset();
 

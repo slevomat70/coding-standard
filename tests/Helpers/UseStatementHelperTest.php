@@ -9,35 +9,50 @@ use const T_USE;
 class UseStatementHelperTest extends TestCase
 {
 
-	public function testIsAnonymousFunctionUse(): void
+	/**
+	 * @return void
+	 */
+	public function testIsAnonymousFunctionUse()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/anonymousFunction.php');
 		$usePointer = TokenHelper::findNext($phpcsFile, T_USE, 0);
 		self::assertTrue(UseStatementHelper::isAnonymousFunctionUse($phpcsFile, $usePointer));
 	}
 
-	public function testIsNotAnonymousFunctionUse(): void
+	/**
+	 * @return void
+	 */
+	public function testIsNotAnonymousFunctionUse()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/useStatements.php');
 		$usePointer = TokenHelper::findNext($phpcsFile, T_USE, 0);
 		self::assertFalse(UseStatementHelper::isAnonymousFunctionUse($phpcsFile, $usePointer));
 	}
 
-	public function testIsTraitUse(): void
+	/**
+	 * @return void
+	 */
+	public function testIsTraitUse()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/classWithTrait.php');
 		$usePointer = TokenHelper::findNext($phpcsFile, T_USE, 0);
 		self::assertTrue(UseStatementHelper::isTraitUse($phpcsFile, $usePointer));
 	}
 
-	public function testIsTraitUseInAnonymousClass(): void
+	/**
+	 * @return void
+	 */
+	public function testIsTraitUseInAnonymousClass()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/anonymousClassWithTrait.php');
 		$usePointer = TokenHelper::findNext($phpcsFile, T_USE, 0);
 		self::assertTrue(UseStatementHelper::isTraitUse($phpcsFile, $usePointer));
 	}
 
-	public function testIsNotTraitUse(): void
+	/**
+	 * @return void
+	 */
+	public function testIsNotTraitUse()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/useStatements.php');
 		$usePointer = TokenHelper::findNext($phpcsFile, T_USE, 0);
@@ -49,7 +64,10 @@ class UseStatementHelperTest extends TestCase
 		self::assertFalse(UseStatementHelper::isTraitUse($phpcsFile, $usePointer));
 	}
 
-	public function testGetAlias(): void
+	/**
+	 * @return void
+	 */
+	public function testGetAlias()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/useStatements.php');
 		$bazUsePointer = TokenHelper::findNext($phpcsFile, T_USE, 0);
@@ -62,7 +80,10 @@ class UseStatementHelperTest extends TestCase
 		self::assertSame('LoremIpsum', UseStatementHelper::getAlias($phpcsFile, $loremIpsumUsePointer));
 	}
 
-	public function testGetNameAsReferencedInClassFromUse(): void
+	/**
+	 * @return void
+	 */
+	public function testGetNameAsReferencedInClassFromUse()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/useStatements.php');
 		$bazUsePointer = TokenHelper::findNext($phpcsFile, T_USE, 0);
@@ -75,7 +96,10 @@ class UseStatementHelperTest extends TestCase
 		self::assertSame('LoremIpsum', UseStatementHelper::getNameAsReferencedInClassFromUse($phpcsFile, $loremIpsumUsePointer));
 	}
 
-	public function testGetFullyQualifiedTypeNameFromUse(): void
+	/**
+	 * @return void
+	 */
+	public function testGetFullyQualifiedTypeNameFromUse()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/useStatements.php');
 		$bazUsePointer = TokenHelper::findNext($phpcsFile, T_USE, 0);
@@ -106,7 +130,10 @@ class UseStatementHelperTest extends TestCase
 		self::assertSame('Rasmus\foo', UseStatementHelper::getFullyQualifiedTypeNameFromUse($phpcsFile, $rasmusFooFunctionUsePointer));
 	}
 
-	public function testGetFileUseStatements(): void
+	/**
+	 * @return void
+	 */
+	public function testGetFileUseStatements()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/useStatements.php');
 		$useStatements = UseStatementHelper::getFileUseStatements($phpcsFile)[0];
@@ -178,14 +205,18 @@ class UseStatementHelperTest extends TestCase
 		);
 	}
 
+	/**
+	 * @param string|null $alias
+	 * @return void
+	 */
 	private function assertUseStatement(
 		string $fullyQualifiedTypeName,
 		string $referencedName,
 		UseStatement $useStatement,
 		bool $isFunction,
 		bool $isConstant,
-		?string $alias
-	): void
+		$alias
+	)
 	{
 		self::assertSame($fullyQualifiedTypeName, $useStatement->getFullyQualifiedTypeName());
 		self::assertSame($referencedName, $useStatement->getNameAsReferencedInFile());

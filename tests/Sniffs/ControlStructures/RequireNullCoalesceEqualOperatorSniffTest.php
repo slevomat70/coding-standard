@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireNullCoalesceEqualOperatorSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNullCoalesceEqualOperatorNoErrors.php', [
 			'enable' => true,
@@ -15,7 +18,10 @@ class RequireNullCoalesceEqualOperatorSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/requireNullCoalesceEqualOperatorErrors.php',
@@ -32,7 +38,10 @@ class RequireNullCoalesceEqualOperatorSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testShouldNotReportIfSniffIsDisabled(): void
+	/**
+	 * @return void
+	 */
+	public function testShouldNotReportIfSniffIsDisabled()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/requireNullCoalesceEqualOperatorErrors.php',

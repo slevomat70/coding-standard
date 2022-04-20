@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireNowdocSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNowdocNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNowdocErrors.php');
 

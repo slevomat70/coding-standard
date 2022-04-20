@@ -14,7 +14,11 @@ use function in_array;
 class ParameterHelper
 {
 
-	public static function isParameter(File $phpcsFile, int $variablePointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $variablePointer
+	 */
+	public static function isParameter($phpcsFile, $variablePointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 

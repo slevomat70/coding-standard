@@ -26,7 +26,7 @@ use const T_OPEN_SHORT_ARRAY;
 class RequireMultiLineCallSniff extends AbstractLineCall
 {
 
-	public const CODE_REQUIRED_MULTI_LINE_CALL = 'RequiredMultiLineCall';
+	const CODE_REQUIRED_MULTI_LINE_CALL = 'RequiredMultiLineCall';
 
 	/** @var int */
 	public $minLineLength = 121;
@@ -34,8 +34,10 @@ class RequireMultiLineCallSniff extends AbstractLineCall
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $stringPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $stringPointer): void
+	public function process(File $phpcsFile, $stringPointer)
 	{
 		if (!$this->isCall($phpcsFile, $stringPointer)) {
 			return;

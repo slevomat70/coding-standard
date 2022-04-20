@@ -16,8 +16,9 @@ class AnnotationConstantExpressionHelper
 
 	/**
 	 * @return array<int, ConstFetchNode>
+	 * @param \PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $contantExpressionNode
 	 */
-	public static function getConstantFetchNodes(ConstExprNode $contantExpressionNode): array
+	public static function getConstantFetchNodes($contantExpressionNode): array
 	{
 		if ($contantExpressionNode instanceof ConstExprArrayNode) {
 			$constantFetchNodes = [];
@@ -42,7 +43,12 @@ class AnnotationConstantExpressionHelper
 		return [];
 	}
 
-	public static function change(ConstExprNode $masterNode, ConstExprNode $nodeToChange, ConstExprNode $changedNode): ConstExprNode
+	/**
+	 * @param \PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $masterNode
+	 * @param \PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $nodeToChange
+	 * @param \PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $changedNode
+	 */
+	public static function change($masterNode, $nodeToChange, $changedNode): ConstExprNode
 	{
 		if ($masterNode === $nodeToChange) {
 			return $changedNode;

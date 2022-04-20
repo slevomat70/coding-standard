@@ -34,7 +34,7 @@ use const T_WHITESPACE;
 class NegationOperatorSpacingSniff implements Sniff
 {
 
-	public const CODE_INVALID_SPACE_AFTER_MINUS = 'InvalidSpaceAfterMinus';
+	const CODE_INVALID_SPACE_AFTER_MINUS = 'InvalidSpaceAfterMinus';
 
 	/** @var int */
 	public $spacesCount = 0;
@@ -50,8 +50,10 @@ class NegationOperatorSpacingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $pointer): void
+	public function process(File $phpcsFile, $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

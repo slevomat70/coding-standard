@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class DeadCatchSniffTest extends TestCase
 {
 
-	public function testNoDeadCatches(): void
+	/**
+	 * @return void
+	 */
+	public function testNoDeadCatches()
 	{
 		$report = self::checkFile(__DIR__ . '/data/noDeadCatches.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDeadCatchesWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testDeadCatchesWithoutNamespace()
 	{
 		$report = self::checkFile(__DIR__ . '/data/deadCatchesWithoutNamespace.php');
 
@@ -27,7 +33,10 @@ class DeadCatchSniffTest extends TestCase
 		self::assertSniffError($report, 47, DeadCatchSniff::CODE_CATCH_AFTER_THROWABLE_CATCH);
 	}
 
-	public function testDeadCatchesInNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testDeadCatchesInNamespace()
 	{
 		$report = self::checkFile(__DIR__ . '/data/deadCatches.php');
 
@@ -39,7 +48,10 @@ class DeadCatchSniffTest extends TestCase
 		self::assertSniffError($report, 63, DeadCatchSniff::CODE_CATCH_AFTER_THROWABLE_CATCH);
 	}
 
-	public function testDeadUnionCatches(): void
+	/**
+	 * @return void
+	 */
+	public function testDeadUnionCatches()
 	{
 		$report = self::checkFile(__DIR__ . '/data/deadUnionCatches.php');
 
@@ -49,7 +61,10 @@ class DeadCatchSniffTest extends TestCase
 		self::assertSniffError($report, 41, DeadCatchSniff::CODE_CATCH_AFTER_THROWABLE_CATCH);
 	}
 
-	public function testDeadCatchWeirdDefinition(): void
+	/**
+	 * @return void
+	 */
+	public function testDeadCatchWeirdDefinition()
 	{
 		$report = self::checkFile(__DIR__ . '/data/deadCatchesWeirdDefinition.php');
 

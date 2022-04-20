@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UseDoesNotStartWithBackslashSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useDoesNotStartWithBackslashNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useDoesNotStartWithBackslashErrors.php');
 
@@ -24,7 +30,10 @@ class UseDoesNotStartWithBackslashSniffTest extends TestCase
 		self::assertSniffError($report, 5, UseDoesNotStartWithBackslashSniff::CODE_STARTS_WITH_BACKSLASH);
 	}
 
-	public function testFixable(): void
+	/**
+	 * @return void
+	 */
+	public function testFixable()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableUseDoesNotStartWithBackslash.php',

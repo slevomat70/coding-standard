@@ -24,7 +24,7 @@ use const T_OPEN_TAG;
 abstract class AbstractFullyQualifiedGlobalReference implements Sniff
 {
 
-	public const CODE_NON_FULLY_QUALIFIED = 'NonFullyQualified';
+	const CODE_NON_FULLY_QUALIFIED = 'NonFullyQualified';
 
 	/** @var string[] */
 	public $exclude = [];
@@ -42,7 +42,10 @@ abstract class AbstractFullyQualifiedGlobalReference implements Sniff
 
 	abstract protected function isCaseSensitive(): bool;
 
-	abstract protected function isValidType(ReferencedName $name): bool;
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\ReferencedName $name
+	 */
+	abstract protected function isValidType($name): bool;
 
 	/**
 	 * @return (int|string)[]
@@ -57,8 +60,10 @@ abstract class AbstractFullyQualifiedGlobalReference implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $openTagPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $openTagPointer): void
+	public function process(File $phpcsFile, $openTagPointer)
 	{
 		if (TokenHelper::findPrevious($phpcsFile, T_OPEN_TAG, $openTagPointer - 1) !== null) {
 			return;

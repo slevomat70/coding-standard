@@ -28,7 +28,11 @@ class VariableAnnotation extends Annotation
 	/** @var VarTagValueNode|null */
 	private $contentNode;
 
-	public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?VarTagValueNode $contentNode)
+	/**
+	 * @param string|null $content
+	 * @param \PHPStan\PhpDocParser\Ast\PhpDoc\VarTagValueNode|null $contentNode
+	 */
+	public function __construct(string $name, int $startPointer, int $endPointer, $content, $contentNode)
 	{
 		if (!in_array($name, ['@var', '@psalm-var', '@phpstan-var'], true)) {
 			throw new InvalidArgumentException(sprintf('Unsupported annotation %s.', $name));
@@ -56,14 +60,20 @@ class VariableAnnotation extends Annotation
 		return $this->getDescription() !== null;
 	}
 
-	public function getDescription(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getDescription()
 	{
 		$this->errorWhenInvalid();
 
 		return $this->contentNode->description !== '' ? $this->contentNode->description : null;
 	}
 
-	public function getVariableName(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getVariableName()
 	{
 		$this->errorWhenInvalid();
 

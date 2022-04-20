@@ -15,7 +15,7 @@ use const T_SEMICOLON;
 class RequireNullCoalesceEqualOperatorSniff implements Sniff
 {
 
-	public const CODE_REQUIRED_NULL_COALESCE_EQUAL_OPERATOR = 'RequiredNullCoalesceEqualOperator';
+	const CODE_REQUIRED_NULL_COALESCE_EQUAL_OPERATOR = 'RequiredNullCoalesceEqualOperator';
 
 	/** @var bool|null */
 	public $enable = null;
@@ -33,8 +33,10 @@ class RequireNullCoalesceEqualOperatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $equalPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $equalPointer): void
+	public function process(File $phpcsFile, $equalPointer)
 	{
 		$this->enable = SniffSettingsHelper::isEnabledByPhpVersion($this->enable, 70400);
 

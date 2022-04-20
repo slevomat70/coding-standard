@@ -23,7 +23,7 @@ use const T_WHITESPACE;
 class DisallowCommentAfterCodeSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_COMMENT_AFTER_CODE = 'DisallowedCommentAfterCode';
+	const CODE_DISALLOWED_COMMENT_AFTER_CODE = 'DisallowedCommentAfterCode';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -37,8 +37,10 @@ class DisallowCommentAfterCodeSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $commentPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $commentPointer): void
+	public function process(File $phpcsFile, $commentPointer)
 	{
 		$firstNonWhitespacePointerOnLine = TokenHelper::findFirstNonWhitespaceOnLine($phpcsFile, $commentPointer);
 

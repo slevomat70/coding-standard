@@ -11,7 +11,10 @@ use SlevomatCodingStandard\Helpers\TestCase;
 class VariableAnnotationTest extends TestCase
 {
 
-	public function testAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotation()
 	{
 		$annotation = new VariableAnnotation(
 			'@var',
@@ -34,14 +37,20 @@ class VariableAnnotationTest extends TestCase
 		self::assertSame('@var string $variable Description', $annotation->export());
 	}
 
-	public function testUnsupportedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testUnsupportedAnnotation()
 	{
 		self::expectException(InvalidArgumentException::class);
 		self::expectExceptionMessage('Unsupported annotation @param.');
 		new VariableAnnotation('@param', 1, 1, null, null);
 	}
 
-	public function testGetContentNodeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetContentNodeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @var annotation.');
@@ -49,7 +58,10 @@ class VariableAnnotationTest extends TestCase
 		$annotation->getContentNode();
 	}
 
-	public function testGetDescriptionWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetDescriptionWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @var annotation.');
@@ -57,7 +69,10 @@ class VariableAnnotationTest extends TestCase
 		$annotation->getDescription();
 	}
 
-	public function testGetVariableNameWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetVariableNameWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @var annotation.');
@@ -65,7 +80,10 @@ class VariableAnnotationTest extends TestCase
 		$annotation->getVariableName();
 	}
 
-	public function testGetTypeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetTypeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @var annotation.');

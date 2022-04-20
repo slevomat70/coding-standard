@@ -20,7 +20,7 @@ use const T_WHITESPACE;
 class RequireArrowFunctionSniff implements Sniff
 {
 
-	public const CODE_REQUIRED_ARROW_FUNCTION = 'RequiredArrowFunction';
+	const CODE_REQUIRED_ARROW_FUNCTION = 'RequiredArrowFunction';
 
 	/** @var bool */
 	public $allowNested = true;
@@ -41,8 +41,10 @@ class RequireArrowFunctionSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $closurePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $closurePointer): void
+	public function process(File $phpcsFile, $closurePointer)
 	{
 		$this->enable = SniffSettingsHelper::isEnabledByPhpVersion($this->enable, 70400);
 

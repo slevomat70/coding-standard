@@ -15,7 +15,7 @@ use const T_VARIABLE;
 class DuplicateAssignmentToVariableSniff implements Sniff
 {
 
-	public const CODE_DUPLICATE_ASSIGNMENT = 'DuplicateAssignment';
+	const CODE_DUPLICATE_ASSIGNMENT = 'DuplicateAssignment';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -30,8 +30,10 @@ class DuplicateAssignmentToVariableSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $assignmentPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $assignmentPointer): void
+	public function process(File $phpcsFile, $assignmentPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

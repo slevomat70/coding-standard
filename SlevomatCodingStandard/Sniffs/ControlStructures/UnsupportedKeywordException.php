@@ -9,7 +9,10 @@ use function sprintf;
 class UnsupportedKeywordException extends Exception
 {
 
-	public function __construct(string $keyword, ?Throwable $previous = null)
+	/**
+	 * @param \Throwable|null $previous
+	 */
+	public function __construct(string $keyword, $previous = null)
 	{
 		parent::__construct(sprintf('"%s" is not supported.', $keyword), 0, $previous);
 	}

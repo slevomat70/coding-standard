@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireNumericLiteralSeparatorSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNumericLiteralSeparatorNoErrors.php', [
 			'enable' => true,
@@ -15,7 +18,10 @@ class RequireNumericLiteralSeparatorSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNumericLiteralSeparatorErrors.php', [
 			'enable' => true,
@@ -29,7 +35,10 @@ class RequireNumericLiteralSeparatorSniffTest extends TestCase
 		self::assertSniffError($report, 6, RequireNumericLiteralSeparatorSniff::CODE_REQUIRED_NUMERIC_LITERAL_SEPARATOR);
 	}
 
-	public function testModifiedSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNumericLiteralSeparatorModifiedSettingsNoErrors.php', [
 			'enable' => true,
@@ -40,7 +49,10 @@ class RequireNumericLiteralSeparatorSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNumericLiteralSeparatorModifiedSettingsErrors.php', [
 			'enable' => true,
@@ -56,7 +68,10 @@ class RequireNumericLiteralSeparatorSniffTest extends TestCase
 		self::assertSniffError($report, 5, RequireNumericLiteralSeparatorSniff::CODE_REQUIRED_NUMERIC_LITERAL_SEPARATOR);
 	}
 
-	public function testShouldNotReportIfSniffIsDisabled(): void
+	/**
+	 * @return void
+	 */
+	public function testShouldNotReportIfSniffIsDisabled()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNumericLiteralSeparatorErrors.php', [
 			'enable' => false,

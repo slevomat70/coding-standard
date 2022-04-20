@@ -9,7 +9,7 @@ use const T_OPEN_USE_GROUP;
 class DisallowGroupUseSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_GROUP_USE = 'DisallowedGroupUse';
+	const CODE_DISALLOWED_GROUP_USE = 'DisallowedGroupUse';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -24,8 +24,10 @@ class DisallowGroupUseSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $usePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $usePointer): void
+	public function process(File $phpcsFile, $usePointer)
 	{
 		$phpcsFile->addError(
 			'Group use declaration is disallowed, use single use for every import.',

@@ -25,22 +25,38 @@ use const T_VARIABLE;
 class VariableHelper
 {
 
-	public static function isUsedInScope(File $phpcsFile, int $scopeOwnerPointer, int $variablePointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $scopeOwnerPointer
+	 * @param int $variablePointer
+	 */
+	public static function isUsedInScope($phpcsFile, $scopeOwnerPointer, $variablePointer): bool
 	{
 		return self::isUsedInScopeInternal($phpcsFile, $scopeOwnerPointer, $variablePointer, null);
 	}
 
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $scopeOwnerPointer
+	 * @param int $variablePointer
+	 * @param int $startCheckPointer
+	 */
 	public static function isUsedInScopeAfterPointer(
-		File $phpcsFile,
-		int $scopeOwnerPointer,
-		int $variablePointer,
-		int $startCheckPointer
+		$phpcsFile,
+		$scopeOwnerPointer,
+		$variablePointer,
+		$startCheckPointer
 	): bool
 	{
 		return self::isUsedInScopeInternal($phpcsFile, $scopeOwnerPointer, $variablePointer, $startCheckPointer);
 	}
 
-	public static function isUsedAsVariable(File $phpcsFile, int $variablePointer, int $variableToCheckPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $variablePointer
+	 * @param int $variableToCheckPointer
+	 */
+	public static function isUsedAsVariable($phpcsFile, $variablePointer, $variableToCheckPointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -56,7 +72,12 @@ class VariableHelper
 		return !ParameterHelper::isParameter($phpcsFile, $variableToCheckPointer);
 	}
 
-	public static function isUsedInCompactFunction(File $phpcsFile, int $variablePointer, int $stringPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $variablePointer
+	 * @param int $stringPointer
+	 */
+	public static function isUsedInCompactFunction($phpcsFile, $variablePointer, $stringPointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -80,7 +101,12 @@ class VariableHelper
 		return false;
 	}
 
-	public static function isUsedInScopeInString(File $phpcsFile, string $variableName, int $stringPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param string $variableName
+	 * @param int $stringPointer
+	 */
+	public static function isUsedInScopeInString($phpcsFile, $variableName, $stringPointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -100,11 +126,14 @@ class VariableHelper
 		return preg_match('~\$\{' . preg_quote($variableNameWithoutDollar, '~') . '(<=\}|\b)~', $stringContent) !== 0;
 	}
 
+	/**
+	 * @param int|null $startCheckPointer
+	 */
 	private static function isUsedInScopeInternal(
 		File $phpcsFile,
 		int $scopeOwnerPointer,
 		int $variablePointer,
-		?int $startCheckPointer
+		$startCheckPointer
 	): bool
 	{
 		$tokens = $phpcsFile->getTokens();

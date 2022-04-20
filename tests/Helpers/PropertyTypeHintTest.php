@@ -5,7 +5,10 @@ namespace SlevomatCodingStandard\Helpers;
 class PropertyTypeHintTest extends TestCase
 {
 
-	public function test(): void
+	/**
+	 * @return void
+	 */
+	public function test()
 	{
 		$propertyTypeHint = new TypeHint('?string', true, 1, 6);
 

@@ -25,7 +25,7 @@ use const T_VARIABLE;
 class DisallowMultiPropertyDefinitionSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_MULTI_PROPERTY_DEFINITION = 'DisallowedMultiPropertyDefinition';
+	const CODE_DISALLOWED_MULTI_PROPERTY_DEFINITION = 'DisallowedMultiPropertyDefinition';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -38,8 +38,10 @@ class DisallowMultiPropertyDefinitionSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $visibilityPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $visibilityPointer): void
+	public function process(File $phpcsFile, $visibilityPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

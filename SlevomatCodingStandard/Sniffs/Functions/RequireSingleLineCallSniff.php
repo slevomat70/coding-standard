@@ -23,7 +23,7 @@ use const T_STRING;
 class RequireSingleLineCallSniff extends AbstractLineCall
 {
 
-	public const CODE_REQUIRED_SINGLE_LINE_CALL = 'RequiredSingleLineCall';
+	const CODE_REQUIRED_SINGLE_LINE_CALL = 'RequiredSingleLineCall';
 
 	/** @var int */
 	public $maxLineLength = 120;
@@ -34,8 +34,10 @@ class RequireSingleLineCallSniff extends AbstractLineCall
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $stringPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $stringPointer): void
+	public function process(File $phpcsFile, $stringPointer)
 	{
 		if (!$this->isCall($phpcsFile, $stringPointer)) {
 			return;

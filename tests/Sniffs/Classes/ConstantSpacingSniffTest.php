@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ConstantSpacingSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/constantSpacingNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/constantSpacingErrors.php');
 
@@ -26,7 +32,10 @@ class ConstantSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testErrorsWithModifiedLinesCount(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithModifiedLinesCount()
 	{
 		$report = self::checkFile(__DIR__ . '/data/constantSpacingErrors.php', [
 			'minLinesCountBeforeWithComment' => 2,
@@ -40,7 +49,10 @@ class ConstantSpacingSniffTest extends TestCase
 		self::assertSniffError($report, 26, ConstantSpacingSniff::CODE_INCORRECT_COUNT_OF_BLANK_LINES_AFTER_CONSTANT);
 	}
 
-	public function testInGlobalNamespaceNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testInGlobalNamespaceNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/constantSpacingInGlobalNamespaceNoErrors.php');
 		self::assertNoSniffErrorInFile($report);

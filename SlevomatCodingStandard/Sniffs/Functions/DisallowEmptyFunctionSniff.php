@@ -13,7 +13,7 @@ use const T_WHITESPACE;
 class DisallowEmptyFunctionSniff implements Sniff
 {
 
-	public const CODE_EMPTY_FUNCTION = 'EmptyFunction';
+	const CODE_EMPTY_FUNCTION = 'EmptyFunction';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -26,8 +26,10 @@ class DisallowEmptyFunctionSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $functionPointer): void
+	public function process(File $phpcsFile, $functionPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

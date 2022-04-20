@@ -15,7 +15,7 @@ use const T_VARIABLE;
 final class ForbiddenPublicPropertySniff implements Sniff
 {
 
-	public const CODE_FORBIDDEN_PUBLIC_PROPERTY = 'ForbiddenPublicProperty';
+	const CODE_FORBIDDEN_PUBLIC_PROPERTY = 'ForbiddenPublicProperty';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -28,8 +28,10 @@ final class ForbiddenPublicPropertySniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $variablePointer
+	 * @param \PHP_CodeSniffer\Files\File $file
+	 * @return void
 	 */
-	public function process(File $file, $variablePointer): void
+	public function process($file, $variablePointer)
 	{
 		if (!PropertyHelper::isProperty($file, $variablePointer)) {
 			return;

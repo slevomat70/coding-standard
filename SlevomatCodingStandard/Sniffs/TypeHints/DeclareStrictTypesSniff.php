@@ -20,13 +20,13 @@ use const T_WHITESPACE;
 class DeclareStrictTypesSniff implements Sniff
 {
 
-	public const CODE_DECLARE_STRICT_TYPES_MISSING = 'DeclareStrictTypesMissing';
+	const CODE_DECLARE_STRICT_TYPES_MISSING = 'DeclareStrictTypesMissing';
 
-	public const CODE_INCORRECT_STRICT_TYPES_FORMAT = 'IncorrectStrictTypesFormat';
+	const CODE_INCORRECT_STRICT_TYPES_FORMAT = 'IncorrectStrictTypesFormat';
 
-	public const CODE_INCORRECT_WHITESPACE_BEFORE_DECLARE = 'IncorrectWhitespaceBeforeDeclare';
+	const CODE_INCORRECT_WHITESPACE_BEFORE_DECLARE = 'IncorrectWhitespaceBeforeDeclare';
 
-	public const CODE_INCORRECT_WHITESPACE_AFTER_DECLARE = 'IncorrectWhitespaceAfterDeclare';
+	const CODE_INCORRECT_WHITESPACE_AFTER_DECLARE = 'IncorrectWhitespaceAfterDeclare';
 
 	/** @var bool */
 	public $declareOnFirstLine = false;
@@ -53,8 +53,10 @@ class DeclareStrictTypesSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $openTagPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $openTagPointer): void
+	public function process(File $phpcsFile, $openTagPointer)
 	{
 		if (TokenHelper::findPrevious($phpcsFile, T_OPEN_TAG, $openTagPointer - 1) !== null) {
 			return;

@@ -12,7 +12,7 @@ use const T_DOC_COMMENT_OPEN_TAG;
 class DeprecatedAnnotationDeclarationSniff implements Sniff
 {
 
-	public const MISSING_DESCRIPTION = 'MissingDescription';
+	const MISSING_DESCRIPTION = 'MissingDescription';
 
 	/** @return array<int, (int|string)> */
 	public function register(): array
@@ -23,8 +23,10 @@ class DeprecatedAnnotationDeclarationSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $docCommentStartPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $docCommentStartPointer): void
+	public function process(File $phpcsFile, $docCommentStartPointer)
 	{
 		/** @var GenericAnnotation[] $annotations */
 		$annotations = AnnotationHelper::getAnnotationsByName($phpcsFile, $docCommentStartPointer, '@deprecated');

@@ -15,7 +15,10 @@ class EmptyFileException extends Exception
 	/** @var string */
 	private $filename;
 
-	public function __construct(string $filename, ?Throwable $previous = null)
+	/**
+	 * @param \Throwable|null $previous
+	 */
+	public function __construct(string $filename, $previous = null)
 	{
 		parent::__construct(sprintf(
 			'File %s is empty',

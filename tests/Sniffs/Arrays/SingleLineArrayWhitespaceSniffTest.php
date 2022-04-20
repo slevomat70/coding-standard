@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class SingleLineArrayWhitespaceSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/singleLineArrayWhitespaceNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/singleLineArrayWhitespaceErrors.php', [
 			'enableEmptyArrayCheck' => true,
@@ -41,7 +47,10 @@ class SingleLineArrayWhitespaceSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testRequireSpacesErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testRequireSpacesErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/singleLineArrayWhitespaceRequireSpacesErrors.php', [
 			'spacesAroundBrackets' => 1,

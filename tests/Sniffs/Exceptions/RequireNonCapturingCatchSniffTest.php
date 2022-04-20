@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireNonCapturingCatchSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNonCapturingCatchNoErrors.php', [
 			'enable' => true,
@@ -15,7 +18,10 @@ class RequireNonCapturingCatchSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNonCapturingCatchErrors.php', [
 			'enable' => true,
@@ -30,7 +36,10 @@ class RequireNonCapturingCatchSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testShouldNotReportIfSniffIsDisabled(): void
+	/**
+	 * @return void
+	 */
+	public function testShouldNotReportIfSniffIsDisabled()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNonCapturingCatchWhenDisabled.php', [
 			'enable' => false,

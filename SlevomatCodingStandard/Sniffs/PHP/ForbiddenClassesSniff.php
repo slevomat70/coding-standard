@@ -31,10 +31,10 @@ use const T_USE;
 class ForbiddenClassesSniff implements Sniff
 {
 
-	public const CODE_FORBIDDEN_CLASS = 'ForbiddenClass';
-	public const CODE_FORBIDDEN_PARENT_CLASS = 'ForbiddenParentClass';
-	public const CODE_FORBIDDEN_INTERFACE = 'ForbiddenInterface';
-	public const CODE_FORBIDDEN_TRAIT = 'ForbiddenTrait';
+	const CODE_FORBIDDEN_CLASS = 'ForbiddenClass';
+	const CODE_FORBIDDEN_PARENT_CLASS = 'ForbiddenParentClass';
+	const CODE_FORBIDDEN_INTERFACE = 'ForbiddenInterface';
+	const CODE_FORBIDDEN_TRAIT = 'ForbiddenTrait';
 
 	/** @var array<string, (string|null)> */
 	public $forbiddenClasses = [];
@@ -85,8 +85,10 @@ class ForbiddenClassesSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $tokenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $tokenPointer): void
+	public function process(File $phpcsFile, $tokenPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 		$token = $tokens[$tokenPointer];
@@ -139,6 +141,7 @@ class ForbiddenClassesSniff implements Sniff
 	/**
 	 * @param array{fullyQualifiedName: string, startPointer: int|null, endPointer: int|null}[] $references
 	 * @param array<string, (string|null)> $forbiddenNames
+	 * @return void
 	 */
 	private function checkReferences(
 		File $phpcsFile,
@@ -146,7 +149,7 @@ class ForbiddenClassesSniff implements Sniff
 		array $references,
 		array $forbiddenNames,
 		bool $isFixable = true
-	): void
+	)
 	{
 		$token = $phpcsFile->getTokens()[$tokenPointer];
 		$details = [
@@ -163,7 +166,7 @@ class ForbiddenClassesSniff implements Sniff
 			}
 
 			$alternative = $forbiddenNames[$reference['fullyQualifiedName']];
-			[$nameType, $code] = $details[$token['code']];
+			list($nameType, $code) = $details[$token['code']];
 
 			if ($alternative === null) {
 				$phpcsFile->addError(
@@ -260,7 +263,11 @@ class ForbiddenClassesSniff implements Sniff
 		return $forbiddenClasses;
 	}
 
-	private static function normalizeClassName(?string $typeName): ?string
+	/**
+	 * @param string|null $typeName
+	 * @return string|null
+	 */
+	private static function normalizeClassName($typeName)
 	{
 		if ($typeName === null || strlen($typeName) === 0 || strtolower($typeName) === 'null') {
 			return null;

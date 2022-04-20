@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireMultiLineCallSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineCallNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineCallErrors.php');
 
@@ -113,7 +119,10 @@ class RequireMultiLineCallSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testAllCallsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testAllCallsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineCallAllCallsNoErrors.php', [
 			'minLineLength' => 0,
@@ -121,7 +130,10 @@ class RequireMultiLineCallSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testAllCallsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testAllCallsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineCallAllCallsErrors.php', [
 			'minLineLength' => 0,

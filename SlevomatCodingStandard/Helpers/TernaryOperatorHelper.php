@@ -31,7 +31,11 @@ use const T_THROW;
 class TernaryOperatorHelper
 {
 
-	public static function isConditionOfTernaryOperator(File $phpcsFile, int $pointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	public static function isConditionOfTernaryOperator($phpcsFile, $pointer): bool
 	{
 		$inlineThenPointer = TokenHelper::findNext($phpcsFile, T_INLINE_THEN, $pointer + 1);
 
@@ -44,7 +48,11 @@ class TernaryOperatorHelper
 		return $startPointer <= $pointer;
 	}
 
-	public static function getElsePointer(File $phpcsFile, int $inlineThenPointer): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $inlineThenPointer
+	 */
+	public static function getElsePointer($phpcsFile, $inlineThenPointer): int
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -74,7 +82,11 @@ class TernaryOperatorHelper
 		return $pointer;
 	}
 
-	public static function getStartPointer(File $phpcsFile, int $inlineThenPointer): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $inlineThenPointer
+	 */
+	public static function getStartPointer($phpcsFile, $inlineThenPointer): int
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -107,7 +119,12 @@ class TernaryOperatorHelper
 		return TokenHelper::findNextEffective($phpcsFile, $pointerBeforeCondition + 1);
 	}
 
-	public static function getEndPointer(File $phpcsFile, int $inlineThenPointer, int $inlineElsePointer): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $inlineThenPointer
+	 * @param int $inlineElsePointer
+	 */
+	public static function getEndPointer($phpcsFile, $inlineThenPointer, $inlineElsePointer): int
 	{
 		$tokens = $phpcsFile->getTokens();
 

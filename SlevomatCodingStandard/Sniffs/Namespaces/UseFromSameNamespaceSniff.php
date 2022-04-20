@@ -18,7 +18,7 @@ use const T_USE;
 class UseFromSameNamespaceSniff implements Sniff
 {
 
-	public const CODE_USE_FROM_SAME_NAMESPACE = 'UseFromSameNamespace';
+	const CODE_USE_FROM_SAME_NAMESPACE = 'UseFromSameNamespace';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -33,8 +33,10 @@ class UseFromSameNamespaceSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $usePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $usePointer): void
+	public function process(File $phpcsFile, $usePointer)
 	{
 		if (
 			UseStatementHelper::isAnonymousFunctionUse($phpcsFile, $usePointer)
@@ -84,7 +86,10 @@ class UseFromSameNamespaceSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function findAsPointer(File $phpcsFile, int $startPointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findAsPointer(File $phpcsFile, int $startPointer)
 	{
 		return TokenHelper::findNextLocal($phpcsFile, T_AS, $startPointer);
 	}

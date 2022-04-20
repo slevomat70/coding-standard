@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UseFromSameNamespaceSniffTest extends TestCase
 {
 
-	public function test(): void
+	/**
+	 * @return void
+	 */
+	public function test()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useFromSameNamespace.php');
 
@@ -33,7 +36,10 @@ class UseFromSameNamespaceSniffTest extends TestCase
 		self::assertNoSniffError($report, 19);
 	}
 
-	public function testFixableUseFromSameNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableUseFromSameNamespace()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableUseFromSameNamespace.php',
@@ -43,7 +49,10 @@ class UseFromSameNamespaceSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testUseFromRootNamespaceInFileWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testUseFromRootNamespaceInFileWithoutNamespace()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useFromRootNamespaceWithoutNamespace.php');
 

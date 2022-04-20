@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UnusedVariableSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unusedVariableNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unusedVariableErrors.php');
 
@@ -46,7 +52,10 @@ class UnusedVariableSniffTest extends TestCase
 		self::assertSniffError($report, 128, UnusedVariableSniff::CODE_UNUSED_VARIABLE, 'Unused variable $a.');
 	}
 
-	public function testErrorsWithIgnoredUnusedValuesWhenOnlyKeysAreUsedInForeach(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithIgnoredUnusedValuesWhenOnlyKeysAreUsedInForeach()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unusedVariableErrorsWithIgnoredUnusedValuesWhenOnlyKeysAreUsedInForeach.php', [
 			'ignoreUnusedValuesWhenOnlyKeysAreUsedInForeach' => true,

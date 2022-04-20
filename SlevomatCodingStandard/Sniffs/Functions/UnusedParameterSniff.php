@@ -18,10 +18,10 @@ use const T_VARIABLE;
 class UnusedParameterSniff implements Sniff
 {
 
-	public const CODE_UNUSED_PARAMETER = 'UnusedParameter';
-	public const CODE_USELESS_SUPPRESS = 'UselessSuppress';
+	const CODE_UNUSED_PARAMETER = 'UnusedParameter';
+	const CODE_USELESS_SUPPRESS = 'UselessSuppress';
 
-	private const NAME = 'SlevomatCodingStandard.Functions.UnusedParameter';
+	const NAME = 'SlevomatCodingStandard.Functions.UnusedParameter';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -34,8 +34,10 @@ class UnusedParameterSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $functionPointer): void
+	public function process(File $phpcsFile, $functionPointer)
 	{
 		if (FunctionHelper::isAbstract($phpcsFile, $functionPointer)) {
 			return;

@@ -14,7 +14,7 @@ use const T_COMMA;
 class UselessParameterDefaultValueSniff implements Sniff
 {
 
-	public const CODE_USELESS_PARAMETER_DEFAULT_VALUE = 'UselessParameterDefaultValue';
+	const CODE_USELESS_PARAMETER_DEFAULT_VALUE = 'UselessParameterDefaultValue';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -27,8 +27,10 @@ class UselessParameterDefaultValueSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $functionPointer): void
+	public function process(File $phpcsFile, $functionPointer)
 	{
 		$parameters = $phpcsFile->getMethodParameters($functionPointer);
 		$parametersCount = count($parameters);

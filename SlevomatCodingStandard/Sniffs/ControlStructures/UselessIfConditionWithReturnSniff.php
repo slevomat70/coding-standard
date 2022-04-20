@@ -21,7 +21,7 @@ use const T_TRUE;
 class UselessIfConditionWithReturnSniff implements Sniff
 {
 
-	public const CODE_USELESS_IF_CONDITION = 'UselessIfCondition';
+	const CODE_USELESS_IF_CONDITION = 'UselessIfCondition';
 
 	/** @var bool */
 	public $assumeAllConditionExpressionsAreAlreadyBoolean = false;
@@ -39,8 +39,10 @@ class UselessIfConditionWithReturnSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $ifPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $ifPointer): void
+	public function process(File $phpcsFile, $ifPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -162,7 +164,10 @@ class UselessIfConditionWithReturnSniff implements Sniff
 		);
 	}
 
-	private function findBooleanAfterReturnInScope(File $phpcsFile, int $scopeOpenerPointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findBooleanAfterReturnInScope(File $phpcsFile, int $scopeOpenerPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -185,7 +190,10 @@ class UselessIfConditionWithReturnSniff implements Sniff
 		return $booleanPointer;
 	}
 
-	private function findBooleanAfterReturn(File $phpcsFile, int $returnPointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findBooleanAfterReturn(File $phpcsFile, int $returnPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -197,7 +205,10 @@ class UselessIfConditionWithReturnSniff implements Sniff
 		return null;
 	}
 
-	private function findSemicolonAfterReturnWithBoolean(File $phpcsFile, int $returnPointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findSemicolonAfterReturnWithBoolean(File $phpcsFile, int $returnPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

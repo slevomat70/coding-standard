@@ -19,10 +19,10 @@ use const T_UNSET_CAST;
 class TypeCastSniff implements Sniff
 {
 
-	public const CODE_FORBIDDEN_CAST_USED = 'ForbiddenCastUsed';
-	public const CODE_INVALID_CAST_USED = 'InvalidCastUsed';
+	const CODE_FORBIDDEN_CAST_USED = 'ForbiddenCastUsed';
+	const CODE_INVALID_CAST_USED = 'InvalidCastUsed';
 
-	private const INVALID_CASTS = [
+	const INVALID_CASTS = [
 		'binary' => null,
 		'boolean' => 'bool',
 		'double' => 'float',
@@ -49,8 +49,10 @@ class TypeCastSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $pointer): void
+	public function process(File $phpcsFile, $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 		$cast = $tokens[$pointer]['content'];

@@ -13,7 +13,7 @@ use const T_TRAIT;
 class SuperfluousTraitNamingSniff implements Sniff
 {
 
-	public const CODE_SUPERFLUOUS_SUFFIX = 'SuperfluousSuffix';
+	const CODE_SUPERFLUOUS_SUFFIX = 'SuperfluousSuffix';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -28,15 +28,20 @@ class SuperfluousTraitNamingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $traitPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $traitPointer): void
+	public function process(File $phpcsFile, $traitPointer)
 	{
 		$traitName = ClassHelper::getName($phpcsFile, $traitPointer);
 
 		$this->checkSuffix($phpcsFile, $traitPointer, $traitName);
 	}
 
-	private function checkSuffix(File $phpcsFile, int $traitPointer, string $traitName): void
+	/**
+	 * @return void
+	 */
+	private function checkSuffix(File $phpcsFile, int $traitPointer, string $traitName)
 	{
 		$suffix = substr($traitName, -5);
 

@@ -27,7 +27,11 @@ class MethodAnnotation extends Annotation
 	/** @var MethodTagValueNode|null */
 	private $contentNode;
 
-	public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?MethodTagValueNode $contentNode)
+	/**
+	 * @param string|null $content
+	 * @param \PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode|null $contentNode
+	 */
+	public function __construct(string $name, int $startPointer, int $endPointer, $content, $contentNode)
 	{
 		if (!in_array($name, ['@method', '@psalm-method', '@phpstan-method'], true)) {
 			throw new InvalidArgumentException(sprintf('Unsupported annotation %s.', $name));
@@ -55,14 +59,20 @@ class MethodAnnotation extends Annotation
 		return $this->getDescription() !== null;
 	}
 
-	public function getDescription(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getDescription()
 	{
 		$this->errorWhenInvalid();
 
 		return $this->contentNode->description !== '' ? $this->contentNode->description : null;
 	}
 
-	public function getMethodName(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getMethodName()
 	{
 		$this->errorWhenInvalid();
 
@@ -70,9 +80,9 @@ class MethodAnnotation extends Annotation
 	}
 
 	/**
-	 * @return GenericTypeNode|CallableTypeNode|IntersectionTypeNode|UnionTypeNode|ArrayTypeNode|IdentifierTypeNode|ThisTypeNode
+	 * @return \PHPStan\PhpDocParser\Ast\Type\TypeNode|null
 	 */
-	public function getMethodReturnType(): ?TypeNode
+	public function getMethodReturnType()
 	{
 		$this->errorWhenInvalid();
 

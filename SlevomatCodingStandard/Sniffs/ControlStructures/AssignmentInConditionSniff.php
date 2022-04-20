@@ -17,7 +17,7 @@ use const T_WHILE;
 class AssignmentInConditionSniff implements Sniff
 {
 
-	public const CODE_ASSIGNMENT_IN_CONDITION = 'AssignmentInCondition';
+	const CODE_ASSIGNMENT_IN_CONDITION = 'AssignmentInCondition';
 
 	/** @var bool */
 	public $ignoreAssignmentsInsideFunctionCalls = false;
@@ -37,8 +37,10 @@ class AssignmentInConditionSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $conditionStartPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $conditionStartPointer): void
+	public function process(File $phpcsFile, $conditionStartPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 		$token = $tokens[$conditionStartPointer];
@@ -56,7 +58,10 @@ class AssignmentInConditionSniff implements Sniff
 		$this->processCondition($phpcsFile, $parenthesisOpener, $parenthesisCloser, $type);
 	}
 
-	private function processCondition(File $phpcsFile, int $parenthesisOpener, int $parenthesisCloser, string $conditionType): void
+	/**
+	 * @return void
+	 */
+	private function processCondition(File $phpcsFile, int $parenthesisOpener, int $parenthesisCloser, string $conditionType)
 	{
 		$equalsTokenPointers = TokenHelper::findNextAll($phpcsFile, T_EQUAL, $parenthesisOpener + 1, $parenthesisCloser);
 		if ($equalsTokenPointers === []) {
@@ -94,7 +99,10 @@ class AssignmentInConditionSniff implements Sniff
 		}
 	}
 
-	private function error(File $phpcsFile, string $conditionType, int $equalsTokenPointer): void
+	/**
+	 * @return void
+	 */
+	private function error(File $phpcsFile, string $conditionType, int $equalsTokenPointer)
 	{
 		$phpcsFile->addError(
 			sprintf('Assignment in %s condition is not allowed.', $conditionType),

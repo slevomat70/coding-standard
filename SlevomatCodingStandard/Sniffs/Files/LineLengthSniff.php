@@ -18,7 +18,7 @@ use const T_OPEN_TAG;
 class LineLengthSniff implements Sniff
 {
 
-	public const CODE_LINE_TOO_LONG = 'LineTooLong';
+	const CODE_LINE_TOO_LONG = 'LineTooLong';
 
 	/**
 	 * The limit that the length of a line must not exceed.
@@ -53,6 +53,7 @@ class LineLengthSniff implements Sniff
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
 	public function process(File $phpcsFile, $pointer): int
 	{
@@ -68,7 +69,10 @@ class LineLengthSniff implements Sniff
 		return $phpcsFile->numTokens + 1;
 	}
 
-	private function checkLineLength(File $phpcsFile, int $pointer): void
+	/**
+	 * @return void
+	 */
+	private function checkLineLength(File $phpcsFile, int $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

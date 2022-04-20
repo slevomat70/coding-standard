@@ -27,8 +27,11 @@ class ConditionHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataConditionReturnsBoolean
+	 * @param int $line
+	 * @param bool $result
+	 * @return void
 	 */
-	public function testConditionReturnsBoolean(int $line, bool $result): void
+	public function testConditionReturnsBoolean($line, $result)
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/conditions.php');
 		$tokens = $phpcsFile->getTokens();

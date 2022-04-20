@@ -11,7 +11,10 @@ use SlevomatCodingStandard\Helpers\TestCase;
 class ThrowsAnnotationTest extends TestCase
 {
 
-	public function testAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotation()
 	{
 		$annotation = new ThrowsAnnotation(
 			'@throws',
@@ -33,14 +36,20 @@ class ThrowsAnnotationTest extends TestCase
 		self::assertSame('@throws Exception Description', $annotation->export());
 	}
 
-	public function testUnsupportedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testUnsupportedAnnotation()
 	{
 		self::expectException(InvalidArgumentException::class);
 		self::expectExceptionMessage('Unsupported annotation @param.');
 		new ThrowsAnnotation('@param', 1, 1, null, null);
 	}
 
-	public function testGetContentNodeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetContentNodeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @throws annotation.');
@@ -48,7 +57,10 @@ class ThrowsAnnotationTest extends TestCase
 		$annotation->getContentNode();
 	}
 
-	public function testGetDescriptionWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetDescriptionWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @throws annotation.');
@@ -56,7 +68,10 @@ class ThrowsAnnotationTest extends TestCase
 		$annotation->getDescription();
 	}
 
-	public function testGetTypeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetTypeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @throws annotation.');

@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class NullableTypeForNullDefaultValueSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/nullableTypeForNullDefaultValueNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/nullableTypeForNullDefaultValueErrors.php');
 
@@ -37,7 +43,10 @@ class NullableTypeForNullDefaultValueSniffTest extends TestCase
 		self::assertSniffError($report, 73, $code);
 	}
 
-	public function testFixable(): void
+	/**
+	 * @return void
+	 */
+	public function testFixable()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableNullableTypeForNullDefaultValue.php',

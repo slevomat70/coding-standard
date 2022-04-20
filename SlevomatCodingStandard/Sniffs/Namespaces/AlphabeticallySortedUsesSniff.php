@@ -30,7 +30,7 @@ use const T_WHITESPACE;
 class AlphabeticallySortedUsesSniff implements Sniff
 {
 
-	public const CODE_INCORRECT_ORDER = 'IncorrectlyOrderedUses';
+	const CODE_INCORRECT_ORDER = 'IncorrectlyOrderedUses';
 
 	/** @var bool */
 	public $psr12Compatible = true;
@@ -51,8 +51,10 @@ class AlphabeticallySortedUsesSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $openTagPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $openTagPointer): void
+	public function process(File $phpcsFile, $openTagPointer)
 	{
 		if (TokenHelper::findPrevious($phpcsFile, T_OPEN_TAG, $openTagPointer - 1) !== null) {
 			return;
@@ -90,8 +92,9 @@ class AlphabeticallySortedUsesSniff implements Sniff
 
 	/**
 	 * @param UseStatement[] $useStatements
+	 * @return void
 	 */
-	private function fixAlphabeticalOrder(File $phpcsFile, array $useStatements): void
+	private function fixAlphabeticalOrder(File $phpcsFile, array $useStatements)
 	{
 		/** @var UseStatement $firstUseStatement */
 		$firstUseStatement = reset($useStatements);

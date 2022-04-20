@@ -28,7 +28,7 @@ use const T_STRING_CONCAT;
 class RequireCombinedAssignmentOperatorSniff implements Sniff
 {
 
-	public const CODE_REQUIRED_COMBINED_ASSIGMENT_OPERATOR = 'RequiredCombinedAssigmentOperator';
+	const CODE_REQUIRED_COMBINED_ASSIGMENT_OPERATOR = 'RequiredCombinedAssigmentOperator';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -43,8 +43,10 @@ class RequireCombinedAssignmentOperatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $equalPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $equalPointer): void
+	public function process(File $phpcsFile, $equalPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

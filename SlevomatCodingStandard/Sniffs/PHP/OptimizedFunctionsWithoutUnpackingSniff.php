@@ -22,7 +22,7 @@ use const T_OPEN_PARENTHESIS;
 class OptimizedFunctionsWithoutUnpackingSniff implements Sniff
 {
 
-	public const CODE_UNPACKING_USED = 'UnpackingUsed';
+	const CODE_UNPACKING_USED = 'UnpackingUsed';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -35,8 +35,10 @@ class OptimizedFunctionsWithoutUnpackingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $pointer): void
+	public function process(File $phpcsFile, $pointer)
 	{
 		$previousTokenPointer = TokenHelper::findPreviousEffective($phpcsFile, $pointer - 1);
 		$openBracketPointer = TokenHelper::findNextEffective($phpcsFile, $pointer + 1);

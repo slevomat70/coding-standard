@@ -14,12 +14,21 @@ use const T_COMMENT;
 class CommentHelper
 {
 
-	public static function isLineComment(File $phpcsFile, int $commentPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $commentPointer
+	 */
+	public static function isLineComment($phpcsFile, $commentPointer): bool
 	{
 		return (bool) preg_match('~^(?://|#)(.*)~', $phpcsFile->getTokens()[$commentPointer]['content']);
 	}
 
-	public static function getCommentEndPointer(File $phpcsFile, int $commentStartPointer): ?int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $commentStartPointer
+	 * @return int|null
+	 */
+	public static function getCommentEndPointer($phpcsFile, $commentStartPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -40,7 +49,11 @@ class CommentHelper
 		return $nextPointerAfterComment - 1;
 	}
 
-	public static function getMultilineCommentStartPointer(File $phpcsFile, int $commentEndPointer): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $commentEndPointer
+	 */
+	public static function getMultilineCommentStartPointer($phpcsFile, $commentEndPointer): int
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -61,7 +74,11 @@ class CommentHelper
 		return $commentStartPointer;
 	}
 
-	public static function getMultilineCommentEndPointer(File $phpcsFile, int $commentStartPointer): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $commentStartPointer
+	 */
+	public static function getMultilineCommentEndPointer($phpcsFile, $commentStartPointer): int
 	{
 		$tokens = $phpcsFile->getTokens();
 

@@ -14,7 +14,7 @@ use function strlen;
 class RequireSingleLineMethodSignatureSniff extends AbstractMethodSignature
 {
 
-	public const CODE_REQUIRED_SINGLE_LINE_SIGNATURE = 'RequiredSingleLineSignature';
+	const CODE_REQUIRED_SINGLE_LINE_SIGNATURE = 'RequiredSingleLineSignature';
 
 	/** @var int */
 	public $maxLineLength = 120;
@@ -34,8 +34,10 @@ class RequireSingleLineMethodSignatureSniff extends AbstractMethodSignature
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $methodPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $methodPointer): void
+	public function process(File $phpcsFile, $methodPointer)
 	{
 		if (!FunctionHelper::isMethod($phpcsFile, $methodPointer)) {
 			return;
@@ -43,7 +45,7 @@ class RequireSingleLineMethodSignatureSniff extends AbstractMethodSignature
 
 		$tokens = $phpcsFile->getTokens();
 
-		[$signatureStartPointer, $signatureEndPointer] = $this->getSignatureStartAndEndPointers($phpcsFile, $methodPointer);
+		list($signatureStartPointer, $signatureEndPointer) = $this->getSignatureStartAndEndPointers($phpcsFile, $methodPointer);
 
 		if ($tokens[$signatureStartPointer]['line'] === $tokens[$signatureEndPointer]['line']) {
 			return;

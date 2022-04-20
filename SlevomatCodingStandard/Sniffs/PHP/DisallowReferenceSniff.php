@@ -20,10 +20,10 @@ use const T_USE;
 class DisallowReferenceSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_PASSING_BY_REFERENCE = 'DisallowedPassingByReference';
-	public const CODE_DISALLOWED_RETURNING_REFERENCE = 'DisallowedReturningReference';
-	public const CODE_DISALLOWED_INHERITING_VARIABLE_BY_REFERENCE = 'DisallowedInheritingVariableByReference';
-	public const CODE_DISALLOWED_ASSIGNING_BY_REFERENCE = 'DisallowedAssigningByReference';
+	const CODE_DISALLOWED_PASSING_BY_REFERENCE = 'DisallowedPassingByReference';
+	const CODE_DISALLOWED_RETURNING_REFERENCE = 'DisallowedReturningReference';
+	const CODE_DISALLOWED_INHERITING_VARIABLE_BY_REFERENCE = 'DisallowedInheritingVariableByReference';
+	const CODE_DISALLOWED_ASSIGNING_BY_REFERENCE = 'DisallowedAssigningByReference';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -38,8 +38,10 @@ class DisallowReferenceSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $referencePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $referencePointer): void
+	public function process(File $phpcsFile, $referencePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

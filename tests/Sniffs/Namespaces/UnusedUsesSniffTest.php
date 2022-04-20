@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UnusedUsesSniffTest extends TestCase
 {
 
-	public function testUnusedUse(): void
+	/**
+	 * @return void
+	 */
+	public function testUnusedUse()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unusedUses.php');
 
@@ -70,7 +73,10 @@ class UnusedUsesSniffTest extends TestCase
 		self::assertNoSniffError($report, 30);
 	}
 
-	public function testUnusedUseWithMultipleNamespaces(): void
+	/**
+	 * @return void
+	 */
+	public function testUnusedUseWithMultipleNamespaces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unusedUsesMultipleNamespaces.php');
 
@@ -84,13 +90,19 @@ class UnusedUsesSniffTest extends TestCase
 		self::assertSniffError($report, 56, UnusedUsesSniff::CODE_UNUSED_USE, 'Human\HEAD_SIZE_UNUSED');
 	}
 
-	public function testUnusedUseNoNamespaceNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testUnusedUseNoNamespaceNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unusedUsesNoNamespaceNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testUsedUseInAnnotationWithDisabledSearchAnnotations(): void
+	/**
+	 * @return void
+	 */
+	public function testUsedUseInAnnotationWithDisabledSearchAnnotations()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unusedUsesInAnnotation.php', [
 			'searchAnnotations' => false,
@@ -202,7 +214,10 @@ class UnusedUsesSniffTest extends TestCase
 		self::assertSniffError($report, 82, UnusedUsesSniff::CODE_UNUSED_USE, 'Type Conditional9 is not used in this file.');
 	}
 
-	public function testUsedUseInAnnotationWithEnabledSearchAnnotations(): void
+	/**
+	 * @return void
+	 */
+	public function testUsedUseInAnnotationWithEnabledSearchAnnotations()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unusedUsesInAnnotation.php', [
 			'searchAnnotations' => true,
@@ -215,7 +230,10 @@ class UnusedUsesSniffTest extends TestCase
 		self::assertSniffError($report, 22, UnusedUsesSniff::CODE_UNUSED_USE, 'Type InvalidAnnotation is not used in this file.');
 	}
 
-	public function testReportCaseInsensitiveUse(): void
+	/**
+	 * @return void
+	 */
+	public function testReportCaseInsensitiveUse()
 	{
 		$report = self::checkFile(__DIR__ . '/data/caseInsensitiveUse.php', [
 			'searchAnnotations' => true,
@@ -280,7 +298,10 @@ class UnusedUsesSniffTest extends TestCase
 		self::assertNoSniffError($report, 120);
 	}
 
-	public function testIgnoredAnnotationsAreNotUsed(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoredAnnotationsAreNotUsed()
 	{
 		$report = self::checkFile(__DIR__ . '/data/caseInsensitiveUse.php', [
 			'searchAnnotations' => true,
@@ -291,7 +312,10 @@ class UnusedUsesSniffTest extends TestCase
 		self::assertSniffError($report, 8, UnusedUsesSniff::CODE_UNUSED_USE, 'Type Ignore is not used in this file.');
 	}
 
-	public function testIgnoredAnnotations(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoredAnnotations()
 	{
 		$report = self::checkFile(__DIR__ . '/data/caseInsensitiveUse.php', [
 			'searchAnnotations' => true,
@@ -341,13 +365,19 @@ class UnusedUsesSniffTest extends TestCase
 		);
 	}
 
-	public function testUsedTrait(): void
+	/**
+	 * @return void
+	 */
+	public function testUsedTrait()
 	{
 		$report = self::checkFile(__DIR__ . '/data/usedTrait.php');
 		self::assertNoSniffError($report, 5);
 	}
 
-	public function testTypeWithUnderscoresInAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testTypeWithUnderscoresInAnnotation()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unusedUsesAnnotationUnderscores.php', [
 			'searchAnnotations' => true,
@@ -355,25 +385,37 @@ class UnusedUsesSniffTest extends TestCase
 		self::assertNoSniffError($report, 5);
 	}
 
-	public function testMatchingCaseOfUseAndClassConstant(): void
+	/**
+	 * @return void
+	 */
+	public function testMatchingCaseOfUseAndClassConstant()
 	{
 		$report = self::checkFile(__DIR__ . '/data/matchingCaseOfUseAndClassConstant.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testMatchingCaseOfUseAndPhpFunction(): void
+	/**
+	 * @return void
+	 */
+	public function testMatchingCaseOfUseAndPhpFunction()
 	{
 		$report = self::checkFile(__DIR__ . '/data/matchingCaseOfUseAndPhpFunction.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testFixableUnusedUses(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableUnusedUses()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fixableUnusedUses.php', [], [UnusedUsesSniff::CODE_UNUSED_USE]);
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testNoUsesWithSearchInAnnotationsEnabledNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoUsesWithSearchInAnnotationsEnabledNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/noUses.php', [
 			'searchAnnotations' => true,
@@ -381,7 +423,10 @@ class UnusedUsesSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testUseAfterOpeningTag(): void
+	/**
+	 * @return void
+	 */
+	public function testUseAfterOpeningTag()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unusedUsesUseAfterOpen.php', [
 			'searchAnnotations' => true,
@@ -389,7 +434,10 @@ class UnusedUsesSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testUsesInAttributes(): void
+	/**
+	 * @return void
+	 */
+	public function testUsesInAttributes()
 	{
 		$report = self::checkFile(__DIR__ . '/data/usesInAttributes.php');
 		self::assertNoSniffErrorInFile($report);

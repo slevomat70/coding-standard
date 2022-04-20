@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ForbiddenAnnotationsSniffTest extends TestCase
 {
 
-	public function testNoForbiddenAnnotations(): void
+	/**
+	 * @return void
+	 */
+	public function testNoForbiddenAnnotations()
 	{
 		$report = self::checkFile(__DIR__ . '/data/noForbiddenAnnotations.php', [
 			'forbiddenAnnotations' => ['@see', '@throws'],
@@ -15,7 +18,10 @@ class ForbiddenAnnotationsSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testForbiddenAnnotations(): void
+	/**
+	 * @return void
+	 */
+	public function testForbiddenAnnotations()
 	{
 		$report = self::checkFile(__DIR__ . '/data/forbiddenAnnotations.php', [
 			'forbiddenAnnotations' => ['@see', '@throws', '@Route'],

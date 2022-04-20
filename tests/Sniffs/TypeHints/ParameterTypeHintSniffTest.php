@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ParameterTypeHintSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/parameterTypeHintNoErrors.php', [
 			'enableMixedTypeHint' => true,
@@ -17,7 +20,10 @@ class ParameterTypeHintSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/parameterTypeHintErrors.php', [
 			'enableObjectTypeHint' => true,
@@ -81,7 +87,10 @@ class ParameterTypeHintSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testWithUnionNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithUnionNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/parameterTypeHintWithUnionNoErrors.php', [
 			'enableObjectTypeHint' => true,
@@ -92,7 +101,10 @@ class ParameterTypeHintSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testWithUnionErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithUnionErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/parameterTypeHintWithUnionErrors.php', [
 			'enableObjectTypeHint' => true,

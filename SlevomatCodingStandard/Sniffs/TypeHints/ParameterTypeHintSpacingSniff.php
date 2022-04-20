@@ -18,11 +18,11 @@ use const T_WHITESPACE;
 class ParameterTypeHintSpacingSniff implements Sniff
 {
 
-	public const CODE_NO_SPACE_BETWEEN_TYPE_HINT_AND_PARAMETER = 'NoSpaceBetweenTypeHintAndParameter';
+	const CODE_NO_SPACE_BETWEEN_TYPE_HINT_AND_PARAMETER = 'NoSpaceBetweenTypeHintAndParameter';
 
-	public const CODE_MULTIPLE_SPACES_BETWEEN_TYPE_HINT_AND_PARAMETER = 'MultipleSpacesBetweenTypeHintAndParameter';
+	const CODE_MULTIPLE_SPACES_BETWEEN_TYPE_HINT_AND_PARAMETER = 'MultipleSpacesBetweenTypeHintAndParameter';
 
-	public const CODE_WHITESPACE_AFTER_NULLABILITY_SYMBOL = 'WhitespaceAfterNullabilitySymbol';
+	const CODE_WHITESPACE_AFTER_NULLABILITY_SYMBOL = 'WhitespaceAfterNullabilitySymbol';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -35,8 +35,10 @@ class ParameterTypeHintSpacingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $functionPointer): void
+	public function process(File $phpcsFile, $functionPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

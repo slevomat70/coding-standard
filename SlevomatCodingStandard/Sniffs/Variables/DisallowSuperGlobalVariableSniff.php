@@ -10,9 +10,9 @@ use const T_VARIABLE;
 class DisallowSuperGlobalVariableSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_SUPER_GLOBAL_VARIABLE = 'DisallowedSuperGlobalVariable';
+	const CODE_DISALLOWED_SUPER_GLOBAL_VARIABLE = 'DisallowedSuperGlobalVariable';
 
-	private const SUPER_GLOBALS = [
+	const SUPER_GLOBALS = [
 		'$GLOBALS',
 		'$_SERVER',
 		'$_GET',
@@ -37,8 +37,10 @@ class DisallowSuperGlobalVariableSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $variablePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $variablePointer): void
+	public function process(File $phpcsFile, $variablePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

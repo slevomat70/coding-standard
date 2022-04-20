@@ -16,8 +16,8 @@ use const T_WHITESPACE;
 class UselessConstantTypeHintSniff implements Sniff
 {
 
-	public const CODE_USELESS_DOC_COMMENT = 'UselessDocComment';
-	public const CODE_USELESS_VAR_ANNOTATION = 'UselessVarAnnotation';
+	const CODE_USELESS_DOC_COMMENT = 'UselessDocComment';
+	const CODE_USELESS_VAR_ANNOTATION = 'UselessVarAnnotation';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -32,8 +32,10 @@ class UselessConstantTypeHintSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $constantPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $constantPointer): void
+	public function process(File $phpcsFile, $constantPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

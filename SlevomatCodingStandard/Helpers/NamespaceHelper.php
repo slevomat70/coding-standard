@@ -27,12 +27,13 @@ use const T_NS_SEPARATOR;
 class NamespaceHelper
 {
 
-	public const NAMESPACE_SEPARATOR = '\\';
+	const NAMESPACE_SEPARATOR = '\\';
 
 	/**
 	 * @return int[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
-	public static function getAllNamespacesPointers(File $phpcsFile): array
+	public static function getAllNamespacesPointers($phpcsFile): array
 	{
 		$lazyValue = static function () use ($phpcsFile): array {
 			return TokenHelper::findNextAll($phpcsFile, T_NAMESPACE, 0);
@@ -41,17 +42,27 @@ class NamespaceHelper
 		return SniffLocalCache::getAndSetIfNotCached($phpcsFile, 'namespacePointers', $lazyValue);
 	}
 
-	public static function isFullyQualifiedName(string $typeName): bool
+	/**
+	 * @param string $typeName
+	 */
+	public static function isFullyQualifiedName($typeName): bool
 	{
 		return StringHelper::startsWith($typeName, self::NAMESPACE_SEPARATOR);
 	}
 
-	public static function isFullyQualifiedPointer(File $phpcsFile, int $pointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	public static function isFullyQualifiedPointer($phpcsFile, $pointer): bool
 	{
 		return in_array($phpcsFile->getTokens()[$pointer]['code'], [T_NS_SEPARATOR, T_NAME_FULLY_QUALIFIED], true);
 	}
 
-	public static function getFullyQualifiedTypeName(string $typeName): string
+	/**
+	 * @param string $typeName
+	 */
+	public static function getFullyQualifiedTypeName($typeName): string
 	{
 		if (self::isFullyQualifiedName($typeName)) {
 			return $typeName;
@@ -60,7 +71,10 @@ class NamespaceHelper
 		return sprintf('%s%s', self::NAMESPACE_SEPARATOR, $typeName);
 	}
 
-	public static function hasNamespace(string $typeName): bool
+	/**
+	 * @param string $typeName
+	 */
+	public static function hasNamespace($typeName): bool
 	{
 		$parts = self::getNameParts($typeName);
 
@@ -69,20 +83,28 @@ class NamespaceHelper
 
 	/**
 	 * @return string[]
+	 * @param string $name
 	 */
-	public static function getNameParts(string $name): array
+	public static function getNameParts($name): array
 	{
 		$name = self::normalizeToCanonicalName($name);
 
 		return explode(self::NAMESPACE_SEPARATOR, $name);
 	}
 
-	public static function getLastNamePart(string $name): string
+	/**
+	 * @param string $name
+	 */
+	public static function getLastNamePart($name): string
 	{
 		return array_slice(self::getNameParts($name), -1)[0];
 	}
 
-	public static function getName(File $phpcsFile, int $namespacePointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $namespacePointer
+	 */
+	public static function getName($phpcsFile, $namespacePointer): string
 	{
 		/** @var int $namespaceNameStartPointer */
 		$namespaceNameStartPointer = TokenHelper::findNextEffective($phpcsFile, $namespacePointer + 1);
@@ -95,7 +117,12 @@ class NamespaceHelper
 		return TokenHelper::getContent($phpcsFile, $namespaceNameStartPointer, $namespaceNameEndPointer);
 	}
 
-	public static function findCurrentNamespacePointer(File $phpcsFile, int $pointer): ?int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @return int|null
+	 */
+	public static function findCurrentNamespacePointer($phpcsFile, $pointer)
 	{
 		$allNamespacesPointers = array_reverse(self::getAllNamespacesPointers($phpcsFile));
 		foreach ($allNamespacesPointers as $namespacesPointer) {
@@ -107,7 +134,12 @@ class NamespaceHelper
 		return null;
 	}
 
-	public static function findCurrentNamespaceName(File $phpcsFile, int $anyPointer): ?string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $anyPointer
+	 * @return string|null
+	 */
+	public static function findCurrentNamespaceName($phpcsFile, $anyPointer)
 	{
 		$namespacePointer = self::findCurrentNamespacePointer($phpcsFile, $anyPointer);
 		if ($namespacePointer === null) {
@@ -117,23 +149,36 @@ class NamespaceHelper
 		return self::getName($phpcsFile, $namespacePointer);
 	}
 
-	public static function getUnqualifiedNameFromFullyQualifiedName(string $name): string
+	/**
+	 * @param string $name
+	 */
+	public static function getUnqualifiedNameFromFullyQualifiedName($name): string
 	{
 		$parts = self::getNameParts($name);
 		return $parts[count($parts) - 1];
 	}
 
-	public static function isQualifiedName(string $name): bool
+	/**
+	 * @param string $name
+	 */
+	public static function isQualifiedName($name): bool
 	{
 		return strpos($name, self::NAMESPACE_SEPARATOR) !== false;
 	}
 
-	public static function normalizeToCanonicalName(string $fullyQualifiedName): string
+	/**
+	 * @param string $fullyQualifiedName
+	 */
+	public static function normalizeToCanonicalName($fullyQualifiedName): string
 	{
 		return ltrim($fullyQualifiedName, self::NAMESPACE_SEPARATOR);
 	}
 
-	public static function isTypeInNamespace(string $typeName, string $namespace): bool
+	/**
+	 * @param string $typeName
+	 * @param string $namespace
+	 */
+	public static function isTypeInNamespace($typeName, $namespace): bool
 	{
 		return StringHelper::startsWith(
 			self::normalizeToCanonicalName($typeName) . '\\',
@@ -141,12 +186,23 @@ class NamespaceHelper
 		);
 	}
 
-	public static function resolveClassName(File $phpcsFile, string $nameAsReferencedInFile, int $currentPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param string $nameAsReferencedInFile
+	 * @param int $currentPointer
+	 */
+	public static function resolveClassName($phpcsFile, $nameAsReferencedInFile, $currentPointer): string
 	{
 		return self::resolveName($phpcsFile, $nameAsReferencedInFile, ReferencedName::TYPE_CLASS, $currentPointer);
 	}
 
-	public static function resolveName(File $phpcsFile, string $nameAsReferencedInFile, string $type, int $currentPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param string $nameAsReferencedInFile
+	 * @param string $type
+	 * @param int $currentPointer
+	 */
+	public static function resolveName($phpcsFile, $nameAsReferencedInFile, $type, $currentPointer): string
 	{
 		if (self::isFullyQualifiedName($nameAsReferencedInFile)) {
 			return $nameAsReferencedInFile;

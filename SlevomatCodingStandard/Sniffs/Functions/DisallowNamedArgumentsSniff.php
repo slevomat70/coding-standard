@@ -10,7 +10,7 @@ use const T_PARAM_NAME;
 class DisallowNamedArgumentsSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_NAMED_ARGUMENT = 'DisallowedNamedArgument';
+	const CODE_DISALLOWED_NAMED_ARGUMENT = 'DisallowedNamedArgument';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -25,8 +25,10 @@ class DisallowNamedArgumentsSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $argumentNamePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $argumentNamePointer): void
+	public function process(File $phpcsFile, $argumentNamePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

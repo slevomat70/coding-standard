@@ -15,7 +15,11 @@ use const T_FINALLY;
 class CatchHelper
 {
 
-	public static function getTryEndPointer(File $phpcsFile, int $catchPointer): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $catchPointer
+	 */
+	public static function getTryEndPointer($phpcsFile, $catchPointer): int
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -38,8 +42,9 @@ class CatchHelper
 	/**
 	 * @param array<string, array<int, int|string>|int|string> $catchToken
 	 * @return string[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
-	public static function findCatchedTypesInCatch(File $phpcsFile, array $catchToken): array
+	public static function findCatchedTypesInCatch($phpcsFile, $catchToken): array
 	{
 		/** @var int $catchParenthesisOpenerPointer */
 		$catchParenthesisOpenerPointer = $catchToken['parenthesis_opener'];

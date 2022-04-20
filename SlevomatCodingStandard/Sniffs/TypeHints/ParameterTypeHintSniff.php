@@ -48,17 +48,17 @@ use const T_VARIABLE;
 class ParameterTypeHintSniff implements Sniff
 {
 
-	public const CODE_MISSING_ANY_TYPE_HINT = 'MissingAnyTypeHint';
+	const CODE_MISSING_ANY_TYPE_HINT = 'MissingAnyTypeHint';
 
-	public const CODE_MISSING_NATIVE_TYPE_HINT = 'MissingNativeTypeHint';
+	const CODE_MISSING_NATIVE_TYPE_HINT = 'MissingNativeTypeHint';
 
-	public const CODE_MISSING_TRAVERSABLE_TYPE_HINT_SPECIFICATION = 'MissingTraversableTypeHintSpecification';
+	const CODE_MISSING_TRAVERSABLE_TYPE_HINT_SPECIFICATION = 'MissingTraversableTypeHintSpecification';
 
-	public const CODE_USELESS_ANNOTATION = 'UselessAnnotation';
+	const CODE_USELESS_ANNOTATION = 'UselessAnnotation';
 
-	public const CODE_USELESS_SUPPRESS = 'UselessSuppress';
+	const CODE_USELESS_SUPPRESS = 'UselessSuppress';
 
-	private const NAME = 'SlevomatCodingStandard.TypeHints.ParameterTypeHint';
+	const NAME = 'SlevomatCodingStandard.TypeHints.ParameterTypeHint';
 
 	/** @var bool|null */
 	public $enableObjectTypeHint = null;
@@ -88,8 +88,10 @@ class ParameterTypeHintSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $functionPointer): void
+	public function process(File $phpcsFile, $functionPointer)
 	{
 		$this->enableObjectTypeHint = SniffSettingsHelper::isEnabledByPhpVersion($this->enableObjectTypeHint, 70200);
 		$this->enableMixedTypeHint = SniffSettingsHelper::isEnabledByPhpVersion($this->enableMixedTypeHint, 80000);
@@ -122,6 +124,7 @@ class ParameterTypeHintSniff implements Sniff
 	 * @param (TypeHint|null)[] $parametersTypeHints
 	 * @param ParameterAnnotation[] $parametersAnnotations
 	 * @param ParameterAnnotation[] $prefixedParametersAnnotations
+	 * @return void
 	 */
 	private function checkTypeHints(
 		File $phpcsFile,
@@ -129,7 +132,7 @@ class ParameterTypeHintSniff implements Sniff
 		array $parametersTypeHints,
 		array $parametersAnnotations,
 		array $prefixedParametersAnnotations
-	): void
+	)
 	{
 		$suppressNameAnyTypeHint = self::getSniffName(self::CODE_MISSING_ANY_TYPE_HINT);
 		$isSuppressedAnyTypeHint = SuppressHelper::isSniffSuppressed($phpcsFile, $functionPointer, $suppressNameAnyTypeHint);
@@ -140,7 +143,7 @@ class ParameterTypeHintSniff implements Sniff
 		$suppressedErrors = 0;
 
 		$parametersWithoutTypeHint = array_keys(
-			array_filter($parametersTypeHints, static function (?TypeHint $parameterTypeHint = null): bool {
+			array_filter($parametersTypeHints, static function ($parameterTypeHint = null): bool {
 				return $parameterTypeHint === null;
 			})
 		);
@@ -380,6 +383,7 @@ class ParameterTypeHintSniff implements Sniff
 	 * @param (TypeHint|null)[] $parametersTypeHints
 	 * @param ParameterAnnotation[] $parametersAnnotations
 	 * @param ParameterAnnotation[] $prefixedParametersAnnotations
+	 * @return void
 	 */
 	private function checkTraversableTypeHintSpecification(
 		File $phpcsFile,
@@ -387,7 +391,7 @@ class ParameterTypeHintSniff implements Sniff
 		array $parametersTypeHints,
 		array $parametersAnnotations,
 		array $prefixedParametersAnnotations
-	): void
+	)
 	{
 		$suppressName = self::getSniffName(self::CODE_MISSING_TRAVERSABLE_TYPE_HINT_SPECIFICATION);
 		$isSniffSuppressed = SuppressHelper::isSniffSuppressed($phpcsFile, $functionPointer, $suppressName);
@@ -490,13 +494,14 @@ class ParameterTypeHintSniff implements Sniff
 	/**
 	 * @param (TypeHint|null)[] $parametersTypeHints
 	 * @param ParameterAnnotation[] $parametersAnnotations
+	 * @return void
 	 */
 	private function checkUselessAnnotations(
 		File $phpcsFile,
 		int $functionPointer,
 		array $parametersTypeHints,
 		array $parametersAnnotations
-	): void
+	)
 	{
 		$suppressName = self::getSniffName(self::CODE_USELESS_ANNOTATION);
 		$isSniffSuppressed = SuppressHelper::isSniffSuppressed($phpcsFile, $functionPointer, $suppressName);
@@ -567,7 +572,10 @@ class ParameterTypeHintSniff implements Sniff
 		}
 	}
 
-	private function reportUselessSuppress(File $phpcsFile, int $pointer, string $suppressName): void
+	/**
+	 * @return void
+	 */
+	private function reportUselessSuppress(File $phpcsFile, int $pointer, string $suppressName)
 	{
 		$fix = $phpcsFile->addFixableError(
 			sprintf('Useless %s %s', SuppressHelper::ANNOTATION, $suppressName),

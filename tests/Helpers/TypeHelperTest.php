@@ -27,8 +27,10 @@ class TypeHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataValidTypeNames
+	 * @param string $typeName
+	 * @return void
 	 */
-	public function testValidTypeName(string $typeName): void
+	public function testValidTypeName($typeName)
 	{
 		self::assertTrue(TypeHelper::isTypeName($typeName));
 	}
@@ -50,8 +52,10 @@ class TypeHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataNotValidTypeNames
+	 * @param string $typeName
+	 * @return void
 	 */
-	public function testNotValidTypeName(string $typeName): void
+	public function testNotValidTypeName($typeName)
 	{
 		self::assertFalse(TypeHelper::isTypeName($typeName));
 	}

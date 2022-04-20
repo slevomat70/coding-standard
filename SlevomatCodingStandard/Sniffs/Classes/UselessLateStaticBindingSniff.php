@@ -18,7 +18,7 @@ use const T_TRAIT;
 class UselessLateStaticBindingSniff implements Sniff
 {
 
-	public const CODE_USELESS_LATE_STATIC_BINDING = 'UselessLateStaticBinding';
+	const CODE_USELESS_LATE_STATIC_BINDING = 'UselessLateStaticBinding';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -33,8 +33,10 @@ class UselessLateStaticBindingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $staticPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $staticPointer): void
+	public function process(File $phpcsFile, $staticPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

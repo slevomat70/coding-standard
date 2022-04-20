@@ -33,7 +33,10 @@ final class SniffLocalCache
 		return self::$cache[$fixerLoops][$internalKey] ?? null;
 	}
 
-	private static function setIfNotCached(int $fixerLoops, string $internalKey, Closure $lazyValue): void
+	/**
+	 * @return void
+	 */
+	private static function setIfNotCached(int $fixerLoops, string $internalKey, Closure $lazyValue)
 	{
 		if (array_key_exists($fixerLoops, self::$cache) && array_key_exists($internalKey, self::$cache[$fixerLoops])) {
 			return;

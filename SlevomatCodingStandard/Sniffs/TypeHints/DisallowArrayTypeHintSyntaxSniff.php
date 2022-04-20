@@ -32,7 +32,7 @@ use const T_FUNCTION;
 class DisallowArrayTypeHintSyntaxSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_ARRAY_TYPE_HINT_SYNTAX = 'DisallowedArrayTypeHintSyntax';
+	const CODE_DISALLOWED_ARRAY_TYPE_HINT_SYNTAX = 'DisallowedArrayTypeHintSyntax';
 
 	/** @var string[] */
 	public $traversableTypeHints = [];
@@ -53,8 +53,10 @@ class DisallowArrayTypeHintSyntaxSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $docCommentOpenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $docCommentOpenPointer): void
+	public function process(File $phpcsFile, $docCommentOpenPointer)
 	{
 		$annotations = AnnotationHelper::getAnnotations($phpcsFile, $docCommentOpenPointer);
 
@@ -140,8 +142,9 @@ class DisallowArrayTypeHintSyntaxSniff implements Sniff
 
 	/**
 	 * @return ArrayTypeNode[]
+	 * @param \PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode
 	 */
-	public function getArrayTypeNodes(TypeNode $typeNode): array
+	public function getArrayTypeNodes($typeNode): array
 	{
 		$arrayTypeNodes = AnnotationTypeHelper::getArrayTypeNodes($typeNode);
 
@@ -176,8 +179,9 @@ class DisallowArrayTypeHintSyntaxSniff implements Sniff
 
 	/**
 	 * @param UnionTypeNode[] $unionTypeNodes
+	 * @return \PHPStan\PhpDocParser\Ast\Type\UnionTypeNode|null
 	 */
-	private function findUnionTypeThatContainsArrayType(ArrayTypeNode $arrayTypeNode, array $unionTypeNodes): ?UnionTypeNode
+	private function findUnionTypeThatContainsArrayType(ArrayTypeNode $arrayTypeNode, array $unionTypeNodes)
 	{
 		foreach ($unionTypeNodes as $unionTypeNode) {
 			if (in_array($arrayTypeNode, $unionTypeNode->types, true)) {
@@ -188,7 +192,10 @@ class DisallowArrayTypeHintSyntaxSniff implements Sniff
 		return null;
 	}
 
-	private function findGenericIdentifier(File $phpcsFile, TypeNode $typeNode, Annotation $annotation): ?string
+	/**
+	 * @return string|null
+	 */
+	private function findGenericIdentifier(File $phpcsFile, TypeNode $typeNode, Annotation $annotation)
 	{
 		if (!$typeNode instanceof UnionTypeNode) {
 			if (!$annotation instanceof ParameterAnnotation && !$annotation instanceof ReturnAnnotation) {

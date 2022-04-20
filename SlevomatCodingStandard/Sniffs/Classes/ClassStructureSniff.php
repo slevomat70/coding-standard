@@ -43,49 +43,49 @@ use const T_WHITESPACE;
 class ClassStructureSniff implements Sniff
 {
 
-	public const CODE_INCORRECT_GROUP_ORDER = 'IncorrectGroupOrder';
+	const CODE_INCORRECT_GROUP_ORDER = 'IncorrectGroupOrder';
 
-	private const GROUP_USES = 'uses';
-	private const GROUP_PUBLIC_CONSTANTS = 'public constants';
-	private const GROUP_PROTECTED_CONSTANTS = 'protected constants';
-	private const GROUP_PRIVATE_CONSTANTS = 'private constants';
-	private const GROUP_PUBLIC_PROPERTIES = 'public properties';
-	private const GROUP_PUBLIC_STATIC_PROPERTIES = 'public static properties';
-	private const GROUP_PROTECTED_PROPERTIES = 'protected properties';
-	private const GROUP_PROTECTED_STATIC_PROPERTIES = 'protected static properties';
-	private const GROUP_PRIVATE_PROPERTIES = 'private properties';
-	private const GROUP_PRIVATE_STATIC_PROPERTIES = 'private static properties';
-	private const GROUP_CONSTRUCTOR = 'constructor';
-	private const GROUP_STATIC_CONSTRUCTORS = 'static constructors';
-	private const GROUP_DESTRUCTOR = 'destructor';
-	private const GROUP_MAGIC_METHODS = 'magic methods';
-	private const GROUP_PUBLIC_METHODS = 'public methods';
-	private const GROUP_PUBLIC_ABSTRACT_METHODS = 'public abstract methods';
-	private const GROUP_PUBLIC_FINAL_METHODS = 'public final methods';
-	private const GROUP_PUBLIC_STATIC_METHODS = 'public static methods';
-	private const GROUP_PUBLIC_STATIC_ABSTRACT_METHODS = 'public static abstract methods';
-	private const GROUP_PUBLIC_STATIC_FINAL_METHODS = 'public static final methods';
-	private const GROUP_PROTECTED_METHODS = 'protected methods';
-	private const GROUP_PROTECTED_ABSTRACT_METHODS = 'protected abstract methods';
-	private const GROUP_PROTECTED_FINAL_METHODS = 'protected final methods';
-	private const GROUP_PROTECTED_STATIC_METHODS = 'protected static methods';
-	private const GROUP_PROTECTED_STATIC_ABSTRACT_METHODS = 'protected static abstract methods';
-	private const GROUP_PROTECTED_STATIC_FINAL_METHODS = 'protected static final methods';
-	private const GROUP_PRIVATE_METHODS = 'private methods';
-	private const GROUP_PRIVATE_STATIC_METHODS = 'private static methods';
+	const GROUP_USES = 'uses';
+	const GROUP_PUBLIC_CONSTANTS = 'public constants';
+	const GROUP_PROTECTED_CONSTANTS = 'protected constants';
+	const GROUP_PRIVATE_CONSTANTS = 'private constants';
+	const GROUP_PUBLIC_PROPERTIES = 'public properties';
+	const GROUP_PUBLIC_STATIC_PROPERTIES = 'public static properties';
+	const GROUP_PROTECTED_PROPERTIES = 'protected properties';
+	const GROUP_PROTECTED_STATIC_PROPERTIES = 'protected static properties';
+	const GROUP_PRIVATE_PROPERTIES = 'private properties';
+	const GROUP_PRIVATE_STATIC_PROPERTIES = 'private static properties';
+	const GROUP_CONSTRUCTOR = 'constructor';
+	const GROUP_STATIC_CONSTRUCTORS = 'static constructors';
+	const GROUP_DESTRUCTOR = 'destructor';
+	const GROUP_MAGIC_METHODS = 'magic methods';
+	const GROUP_PUBLIC_METHODS = 'public methods';
+	const GROUP_PUBLIC_ABSTRACT_METHODS = 'public abstract methods';
+	const GROUP_PUBLIC_FINAL_METHODS = 'public final methods';
+	const GROUP_PUBLIC_STATIC_METHODS = 'public static methods';
+	const GROUP_PUBLIC_STATIC_ABSTRACT_METHODS = 'public static abstract methods';
+	const GROUP_PUBLIC_STATIC_FINAL_METHODS = 'public static final methods';
+	const GROUP_PROTECTED_METHODS = 'protected methods';
+	const GROUP_PROTECTED_ABSTRACT_METHODS = 'protected abstract methods';
+	const GROUP_PROTECTED_FINAL_METHODS = 'protected final methods';
+	const GROUP_PROTECTED_STATIC_METHODS = 'protected static methods';
+	const GROUP_PROTECTED_STATIC_ABSTRACT_METHODS = 'protected static abstract methods';
+	const GROUP_PROTECTED_STATIC_FINAL_METHODS = 'protected static final methods';
+	const GROUP_PRIVATE_METHODS = 'private methods';
+	const GROUP_PRIVATE_STATIC_METHODS = 'private static methods';
 
-	private const GROUP_SHORTCUT_CONSTANTS = 'constants';
-	private const GROUP_SHORTCUT_PROPERTIES = 'properties';
-	private const GROUP_SHORTCUT_STATIC_PROPERTIES = 'static properties';
-	private const GROUP_SHORTCUT_METHODS = 'methods';
-	private const GROUP_SHORTCUT_PUBLIC_METHODS = 'all public methods';
-	private const GROUP_SHORTCUT_PROTECTED_METHODS = 'all protected methods';
-	private const GROUP_SHORTCUT_PRIVATE_METHODS = 'all private methods';
-	private const GROUP_SHORTCUT_STATIC_METHODS = 'static methods';
-	private const GROUP_SHORTCUT_ABSTRACT_METHODS = 'abstract methods';
-	private const GROUP_SHORTCUT_FINAL_METHODS = 'final methods';
+	const GROUP_SHORTCUT_CONSTANTS = 'constants';
+	const GROUP_SHORTCUT_PROPERTIES = 'properties';
+	const GROUP_SHORTCUT_STATIC_PROPERTIES = 'static properties';
+	const GROUP_SHORTCUT_METHODS = 'methods';
+	const GROUP_SHORTCUT_PUBLIC_METHODS = 'all public methods';
+	const GROUP_SHORTCUT_PROTECTED_METHODS = 'all protected methods';
+	const GROUP_SHORTCUT_PRIVATE_METHODS = 'all private methods';
+	const GROUP_SHORTCUT_STATIC_METHODS = 'static methods';
+	const GROUP_SHORTCUT_ABSTRACT_METHODS = 'abstract methods';
+	const GROUP_SHORTCUT_FINAL_METHODS = 'final methods';
 
-	private const SHORTCUTS = [
+	const SHORTCUTS = [
 		self::GROUP_SHORTCUT_CONSTANTS => [
 			self::GROUP_PUBLIC_CONSTANTS,
 			self::GROUP_PROTECTED_CONSTANTS,
@@ -157,7 +157,7 @@ class ClassStructureSniff implements Sniff
 		],
 	];
 
-	private const SPECIAL_METHODS = [
+	const SPECIAL_METHODS = [
 		'__construct' => self::GROUP_CONSTRUCTOR,
 		'__destruct' => self::GROUP_DESTRUCTOR,
 		'__call' => self::GROUP_MAGIC_METHODS,
@@ -197,6 +197,7 @@ class ClassStructureSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
 	public function process(File $phpcsFile, $pointer): int
 	{
@@ -215,7 +216,7 @@ class ClassStructureSniff implements Sniff
 				break;
 			}
 
-			[$groupFirstMemberPointer, $groupLastMemberPointer, $group] = $nextGroup;
+			list($groupFirstMemberPointer, $groupLastMemberPointer, $group) = $nextGroup;
 
 			if ($groupsOrder[$group] >= ($groupsOrder[$expectedGroup] ?? 0)) {
 				$groupsFirstMembers[$group] = $groupFirstMemberPointer;
@@ -261,9 +262,9 @@ class ClassStructureSniff implements Sniff
 
 	/**
 	 * @param array{scope_closer: int, level: int} $rootScopeToken
-	 * @return array{int, int, string}|null
+	 * @return mixed[]|null
 	 */
-	private function findNextGroup(File $phpcsFile, int $pointer, array $rootScopeToken): ?array
+	private function findNextGroup(File $phpcsFile, int $pointer, array $rootScopeToken)
 	{
 		$tokens = $phpcsFile->getTokens();
 		$groupTokenTypes = [T_USE, T_CONST, T_VARIABLE, T_FUNCTION];
@@ -457,12 +458,15 @@ class ClassStructureSniff implements Sniff
 		return ClassHelper::getName($phpcsFile, $classPointer);
 	}
 
+	/**
+	 * @return void
+	 */
 	private function fixIncorrectGroupOrder(
 		File $file,
 		int $groupFirstMemberPointer,
 		int $groupLastMemberPointer,
 		int $nextGroupMemberPointer
-	): void
+	)
 	{
 		$tokens = $file->getTokens();
 
@@ -498,7 +502,10 @@ class ClassStructureSniff implements Sniff
 		return $previousMemberEndPointer;
 	}
 
-	private function findGroupStartPointer(File $phpcsFile, int $memberPointer, ?int $previousMemberEndPointer = null): int
+	/**
+	 * @param int|null $previousMemberEndPointer
+	 */
+	private function findGroupStartPointer(File $phpcsFile, int $memberPointer, $previousMemberEndPointer = null): int
 	{
 		$startPointer = DocCommentHelper::findDocCommentOpenPointer($phpcsFile, $memberPointer - 1);
 		if ($startPointer === null) {

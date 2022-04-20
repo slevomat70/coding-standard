@@ -15,7 +15,7 @@ use const T_OPEN_SHORT_ARRAY;
 class TrailingArrayCommaSniff implements Sniff
 {
 
-	public const CODE_MISSING_TRAILING_COMMA = 'MissingTrailingComma';
+	const CODE_MISSING_TRAILING_COMMA = 'MissingTrailingComma';
 
 	/** @var bool|null */
 	public $enableAfterHeredoc = null;
@@ -33,8 +33,10 @@ class TrailingArrayCommaSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $stackPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $stackPointer): void
+	public function process(File $phpcsFile, $stackPointer)
 	{
 		$this->enableAfterHeredoc = SniffSettingsHelper::isEnabledByPhpVersion($this->enableAfterHeredoc, 70300);
 

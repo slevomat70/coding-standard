@@ -22,10 +22,10 @@ use const T_OPEN_SHORT_ARRAY;
 class StrictCallSniff implements Sniff
 {
 
-	public const CODE_STRICT_PARAMETER_MISSING = 'StrictParameterMissing';
-	public const CODE_NON_STRICT_COMPARISON = 'NonStrictComparison';
+	const CODE_STRICT_PARAMETER_MISSING = 'StrictParameterMissing';
+	const CODE_NON_STRICT_COMPARISON = 'NonStrictComparison';
 
-	private const FUNCTIONS = [
+	const FUNCTIONS = [
 		'in_array' => 3,
 		'array_search' => 3,
 		'base64_decode' => 2,
@@ -43,8 +43,10 @@ class StrictCallSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $stringPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $stringPointer): void
+	public function process(File $phpcsFile, $stringPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

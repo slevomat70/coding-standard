@@ -13,7 +13,7 @@ use const T_FINAL;
 class RequireAbstractOrFinalSniff implements Sniff
 {
 
-	public const CODE_NO_ABSTRACT_OR_FINAL = 'ClassNeitherAbstractNorFinal';
+	const CODE_NO_ABSTRACT_OR_FINAL = 'ClassNeitherAbstractNorFinal';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -28,8 +28,10 @@ class RequireAbstractOrFinalSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $classPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $classPointer): void
+	public function process(File $phpcsFile, $classPointer)
 	{
 		$previousPointer = TokenHelper::findPreviousEffective($phpcsFile, $classPointer - 1);
 

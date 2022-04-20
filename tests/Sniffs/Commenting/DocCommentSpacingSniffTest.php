@@ -7,19 +7,28 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class DocCommentSpacingSniffTest extends TestCase
 {
 
-	public function testEmptyDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testEmptyDocComment()
 	{
 		$report = self::checkFile(__DIR__ . '/data/docCommentSpacingEmptyDocComment.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testInlineDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testInlineDocComment()
 	{
 		$report = self::checkFile(__DIR__ . '/data/docCommentSpacingInlineDocComment.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDocCommentAtTheBeginningOfFile(): void
+	/**
+	 * @return void
+	 */
+	public function testDocCommentAtTheBeginningOfFile()
 	{
 		$report = self::checkFile(__DIR__ . '/data/docCommentSpacingDocCommentAtTheBeginningOfFile.php');
 
@@ -30,19 +39,28 @@ class DocCommentSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testOneLineDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testOneLineDocComment()
 	{
 		$report = self::checkFile(__DIR__ . '/data/docCommentSpacingOneLineDocComment.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/docCommentSpacingDefaultSettingsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/docCommentSpacingDefaultSettingsErrors.php');
 
@@ -64,7 +82,10 @@ class DocCommentSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/docCommentSpacingModifiedSettingsNoErrors.php', [
 			'linesCountBeforeFirstContent' => 1,
@@ -75,7 +96,10 @@ class DocCommentSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/docCommentSpacingModifiedSettingsErrors.php', [
 			'linesCountBeforeFirstContent' => 1,
@@ -104,7 +128,10 @@ class DocCommentSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testAnnotationsGroupsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotationsGroupsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/docCommentSpacingAnnotationsGroupsNoErrors.php', [
 			'linesCountBetweenAnnotationsGroups' => 1,
@@ -126,7 +153,10 @@ class DocCommentSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testAnnotationsGroupsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotationsGroupsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/docCommentSpacingAnnotationsGroupsErrors.php', [
 			'linesCountBetweenAnnotationsGroups' => 1,

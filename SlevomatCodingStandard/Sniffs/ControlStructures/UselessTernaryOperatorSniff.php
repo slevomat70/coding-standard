@@ -16,7 +16,7 @@ use const T_TRUE;
 class UselessTernaryOperatorSniff implements Sniff
 {
 
-	public const CODE_USELESS_TERNARY_OPERATOR = 'UselessTernaryOperator';
+	const CODE_USELESS_TERNARY_OPERATOR = 'UselessTernaryOperator';
 
 	/** @var bool */
 	public $assumeAllConditionExpressionsAreAlreadyBoolean = false;
@@ -34,8 +34,10 @@ class UselessTernaryOperatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $inlineThenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $inlineThenPointer): void
+	public function process(File $phpcsFile, $inlineThenPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

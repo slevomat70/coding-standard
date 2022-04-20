@@ -41,13 +41,25 @@ abstract class AbstractPropertyAndConstantSpacing implements Sniff
 	/** @var int */
 	public $maxLinesCountBeforeWithoutComment = 1;
 
-	abstract protected function isNextMemberValid(File $phpcsFile, int $pointer): bool;
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	abstract protected function isNextMemberValid($phpcsFile, $pointer): bool;
 
-	abstract protected function addError(File $phpcsFile, int $pointer, int $min, int $max, int $found): bool;
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @param int $min
+	 * @param int $max
+	 * @param int $found
+	 */
+	abstract protected function addError($phpcsFile, $pointer, $min, $max, $found): bool;
 
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
 	public function process(File $phpcsFile, $pointer): int
 	{

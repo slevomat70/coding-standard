@@ -11,7 +11,7 @@ use const T_VARIABLE;
 class DisallowNonCapturingCatchSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_NON_CAPTURING_CATCH = 'DisallowedNonCapturingCatch';
+	const CODE_DISALLOWED_NON_CAPTURING_CATCH = 'DisallowedNonCapturingCatch';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -26,8 +26,10 @@ class DisallowNonCapturingCatchSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $catchPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $catchPointer): void
+	public function process(File $phpcsFile, $catchPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

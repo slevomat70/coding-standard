@@ -65,7 +65,7 @@ use const T_YIELD;
 class UnusedVariableSniff implements Sniff
 {
 
-	public const CODE_UNUSED_VARIABLE = 'UnusedVariable';
+	const CODE_UNUSED_VARIABLE = 'UnusedVariable';
 
 	/** @var bool */
 	public $ignoreUnusedValuesWhenOnlyKeysAreUsedInForeach = false;
@@ -83,8 +83,10 @@ class UnusedVariableSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $variablePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $variablePointer): void
+	public function process(File $phpcsFile, $variablePointer)
 	{
 		if (!$this->isAssignment($phpcsFile, $variablePointer)) {
 			return;
@@ -652,7 +654,10 @@ class UnusedVariableSniff implements Sniff
 		);
 	}
 
-	private function findNestedParenthesisWithOwner(File $phpcsFile, int $pointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findNestedParenthesisWithOwner(File $phpcsFile, int $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -669,7 +674,10 @@ class UnusedVariableSniff implements Sniff
 		return null;
 	}
 
-	private function findOpenerOfNestedParentheses(File $phpcsFile, int $pointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findOpenerOfNestedParentheses(File $phpcsFile, int $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -680,7 +688,10 @@ class UnusedVariableSniff implements Sniff
 		return array_reverse(array_keys($tokens[$pointer]['nested_parenthesis']))[0];
 	}
 
-	private function findOwnerOfNestedParentheses(File $phpcsFile, int $pointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findOwnerOfNestedParentheses(File $phpcsFile, int $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

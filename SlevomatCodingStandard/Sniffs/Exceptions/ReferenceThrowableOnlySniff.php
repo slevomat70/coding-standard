@@ -27,9 +27,9 @@ use const T_OPEN_TAG;
 class ReferenceThrowableOnlySniff implements Sniff
 {
 
-	public const CODE_REFERENCED_GENERAL_EXCEPTION = 'ReferencedGeneralException';
+	const CODE_REFERENCED_GENERAL_EXCEPTION = 'ReferencedGeneralException';
 
-	private const NAME = 'SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly';
+	const NAME = 'SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -44,8 +44,10 @@ class ReferenceThrowableOnlySniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $openTagPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $openTagPointer): void
+	public function process(File $phpcsFile, $openTagPointer)
 	{
 		if (TokenHelper::findPrevious($phpcsFile, T_OPEN_TAG, $openTagPointer - 1) !== null) {
 			return;

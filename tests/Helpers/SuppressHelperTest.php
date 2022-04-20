@@ -7,12 +7,15 @@ use PHP_CodeSniffer\Files\File;
 class SuppressHelperTest extends TestCase
 {
 
-	private const CHECK_NAME = 'Sniff.Sniff.Sniff.check';
+	const CHECK_NAME = 'Sniff.Sniff.Sniff.check';
 
 	/** @var File */
 	private $testedCodeSnifferFile;
 
-	public function testClassIsSuppressed(): void
+	/**
+	 * @return void
+	 */
+	public function testClassIsSuppressed()
 	{
 		self::assertTrue(
 			SuppressHelper::isSniffSuppressed(
@@ -23,7 +26,10 @@ class SuppressHelperTest extends TestCase
 		);
 	}
 
-	public function testClassIsNotSuppressed(): void
+	/**
+	 * @return void
+	 */
+	public function testClassIsNotSuppressed()
 	{
 		self::assertFalse(
 			SuppressHelper::isSniffSuppressed(
@@ -34,7 +40,10 @@ class SuppressHelperTest extends TestCase
 		);
 	}
 
-	public function testConstantIsSuppressed(): void
+	/**
+	 * @return void
+	 */
+	public function testConstantIsSuppressed()
 	{
 		self::assertTrue(
 			SuppressHelper::isSniffSuppressed(
@@ -45,7 +54,10 @@ class SuppressHelperTest extends TestCase
 		);
 	}
 
-	public function testConstantIsNotSuppressed(): void
+	/**
+	 * @return void
+	 */
+	public function testConstantIsNotSuppressed()
 	{
 		self::assertFalse(
 			SuppressHelper::isSniffSuppressed(
@@ -56,7 +68,10 @@ class SuppressHelperTest extends TestCase
 		);
 	}
 
-	public function testPropertyIsSuppressed(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyIsSuppressed()
 	{
 		self::assertTrue(
 			SuppressHelper::isSniffSuppressed(
@@ -67,7 +82,10 @@ class SuppressHelperTest extends TestCase
 		);
 	}
 
-	public function testPropertyIsNotSuppressed(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyIsNotSuppressed()
 	{
 		self::assertFalse(
 			SuppressHelper::isSniffSuppressed(
@@ -92,8 +110,10 @@ class SuppressHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataFunctionIsSuppressed
+	 * @param string $name
+	 * @return void
 	 */
-	public function testFunctionIsSuppressed(string $name): void
+	public function testFunctionIsSuppressed($name)
 	{
 		self::assertTrue(
 			SuppressHelper::isSniffSuppressed(
@@ -118,8 +138,10 @@ class SuppressHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataFunctionIsNotSuppressed
+	 * @param string $name
+	 * @return void
 	 */
-	public function testFunctionIsNotSuppressed(string $name): void
+	public function testFunctionIsNotSuppressed($name)
 	{
 		self::assertFalse(
 			SuppressHelper::isSniffSuppressed(

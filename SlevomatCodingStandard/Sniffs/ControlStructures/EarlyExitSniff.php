@@ -34,9 +34,9 @@ use const T_WHITESPACE;
 class EarlyExitSniff implements Sniff
 {
 
-	public const CODE_EARLY_EXIT_NOT_USED = 'EarlyExitNotUsed';
-	public const CODE_USELESS_ELSEIF = 'UselessElseIf';
-	public const CODE_USELESS_ELSE = 'UselessElse';
+	const CODE_EARLY_EXIT_NOT_USED = 'EarlyExitNotUsed';
+	const CODE_USELESS_ELSEIF = 'UselessElseIf';
+	const CODE_USELESS_ELSE = 'UselessElse';
 
 	/** @var bool */
 	public $ignoreStandaloneIfInScope = false;
@@ -62,8 +62,10 @@ class EarlyExitSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $pointer): void
+	public function process(File $phpcsFile, $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -76,7 +78,10 @@ class EarlyExitSniff implements Sniff
 		}
 	}
 
-	private function processElse(File $phpcsFile, int $elsePointer): void
+	/**
+	 * @return void
+	 */
+	private function processElse(File $phpcsFile, int $elsePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -217,7 +222,10 @@ class EarlyExitSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function processElseIf(File $phpcsFile, int $elseIfPointer): void
+	/**
+	 * @return void
+	 */
+	private function processElseIf(File $phpcsFile, int $elseIfPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -279,7 +287,10 @@ class EarlyExitSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function processIf(File $phpcsFile, int $ifPointer): void
+	/**
+	 * @return void
+	 */
+	private function processIf(File $phpcsFile, int $ifPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -418,7 +429,10 @@ class EarlyExitSniff implements Sniff
 		return 'return';
 	}
 
-	private function findEarlyExitInScope(File $phpcsFile, int $startPointer, int $endPointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findEarlyExitInScope(File $phpcsFile, int $startPointer, int $endPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

@@ -67,17 +67,19 @@ use const T_WHITESPACE;
 class YodaHelper
 {
 
-	private const DYNAMISM_VARIABLE = 999;
+	const DYNAMISM_VARIABLE = 999;
 
-	private const DYNAMISM_CONSTANT = 1;
+	const DYNAMISM_CONSTANT = 1;
 
-	private const DYNAMISM_FUNCTION_CALL = 998;
+	const DYNAMISM_FUNCTION_CALL = 998;
 
 	/**
 	 * @param array<int, array<string, array<int, int|string>|int|string>> $leftSideTokens
 	 * @param array<int, array<string, array<int, int|string>|int|string>> $rightSideTokens
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public static function fix(File $phpcsFile, array $leftSideTokens, array $rightSideTokens): void
+	public static function fix($phpcsFile, $leftSideTokens, $rightSideTokens)
 	{
 		$phpcsFile->fixer->beginChangeset();
 		self::replace($phpcsFile, $leftSideTokens, $rightSideTokens);
@@ -88,8 +90,9 @@ class YodaHelper
 	/**
 	 * @param array<int, array<string, array<int, int|string>|int|string>> $tokens
 	 * @return array<int, array<string, array<int, int|string>|int|string>>
+	 * @param int $comparisonTokenPointer
 	 */
-	public static function getLeftSideTokens(array $tokens, int $comparisonTokenPointer): array
+	public static function getLeftSideTokens($tokens, $comparisonTokenPointer): array
 	{
 		$parenthesisDepth = 0;
 		$shortArrayDepth = 0;
@@ -134,8 +137,9 @@ class YodaHelper
 	/**
 	 * @param array<int, array<string, array<int, int|string>|int|string>> $tokens
 	 * @return array<int, array<string, array<int, int|string>|int|string>>
+	 * @param int $comparisonTokenPointer
 	 */
-	public static function getRightSideTokens(array $tokens, int $comparisonTokenPointer): array
+	public static function getRightSideTokens($tokens, $comparisonTokenPointer): array
 	{
 		$parenthesisDepth = 0;
 		$shortArrayDepth = 0;
@@ -180,8 +184,9 @@ class YodaHelper
 	/**
 	 * @param array<int, array<string, array<int, int|string>|int|string>> $tokens
 	 * @param array<int, array<string, array<int, int|string>|int|string>> $sideTokens
+	 * @return int|null
 	 */
-	public static function getDynamismForTokens(array $tokens, array $sideTokens): ?int
+	public static function getDynamismForTokens($tokens, $sideTokens)
 	{
 		$sideTokens = array_values(array_filter($sideTokens, static function (array $token): bool {
 			return !in_array(
@@ -248,7 +253,7 @@ class YodaHelper
 	 * @param array<int, array<string, array<int, int|string>|int|string>> $tokens
 	 * @return array<int, array<string, array<int, int|string>|int|string>>
 	 */
-	public static function trimWhitespaceTokens(array $tokens): array
+	public static function trimWhitespaceTokens($tokens): array
 	{
 		foreach ($tokens as $pointer => $token) {
 			if ($token['code'] !== T_WHITESPACE) {
@@ -272,8 +277,9 @@ class YodaHelper
 	/**
 	 * @param array<int, array<string, array<int, int|string>|int|string>> $oldTokens
 	 * @param array<int, array<string, array<int, int|string>|int|string>> $newTokens
+	 * @return void
 	 */
-	private static function replace(File $phpcsFile, array $oldTokens, array $newTokens): void
+	private static function replace(File $phpcsFile, array $oldTokens, array $newTokens)
 	{
 		reset($oldTokens);
 		/** @var int $firstOldPointer */

@@ -32,7 +32,11 @@ use const T_VAR;
 class PropertyHelper
 {
 
-	public static function isProperty(File $phpcsFile, int $variablePointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $variablePointer
+	 */
+	public static function isProperty($phpcsFile, $variablePointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -71,7 +75,12 @@ class PropertyHelper
 		return in_array($conditionCode, Tokens::$ooScopeTokens, true);
 	}
 
-	public static function findTypeHint(File $phpcsFile, int $propertyPointer): ?TypeHint
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $propertyPointer
+	 * @return \SlevomatCodingStandard\Helpers\TypeHint|null
+	 */
+	public static function findTypeHint($phpcsFile, $propertyPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -112,7 +121,11 @@ class PropertyHelper
 		return new TypeHint($typeHint, $nullable, $typeHintStartPointer, $typeHintEndPointer);
 	}
 
-	public static function getFullyQualifiedName(File $phpcsFile, int $propertyPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $propertyPointer
+	 */
+	public static function getFullyQualifiedName($phpcsFile, $propertyPointer): string
 	{
 		$propertyToken = $phpcsFile->getTokens()[$propertyPointer];
 		$propertyName = $propertyToken['content'];

@@ -28,7 +28,7 @@ use const T_TRAIT;
 class TypeNameMatchesFileNameSniff implements Sniff
 {
 
-	public const CODE_NO_MATCH_BETWEEN_TYPE_NAME_AND_FILE_NAME = 'NoMatchBetweenTypeNameAndFileName';
+	const CODE_NO_MATCH_BETWEEN_TYPE_NAME_AND_FILE_NAME = 'NoMatchBetweenTypeNameAndFileName';
 
 	/** @var array<string, string> */
 	public $rootNamespaces = [];
@@ -72,8 +72,10 @@ class TypeNameMatchesFileNameSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $typePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $typePointer): void
+	public function process(File $phpcsFile, $typePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

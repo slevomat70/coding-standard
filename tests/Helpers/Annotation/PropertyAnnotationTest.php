@@ -11,7 +11,10 @@ use SlevomatCodingStandard\Helpers\TestCase;
 class PropertyAnnotationTest extends TestCase
 {
 
-	public function testAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotation()
 	{
 		$annotation = new PropertyAnnotation(
 			'@property',
@@ -34,14 +37,20 @@ class PropertyAnnotationTest extends TestCase
 		self::assertSame('@property string $property Description', $annotation->export());
 	}
 
-	public function testUnsupportedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testUnsupportedAnnotation()
 	{
 		self::expectException(InvalidArgumentException::class);
 		self::expectExceptionMessage('Unsupported annotation @var.');
 		new PropertyAnnotation('@var', 1, 1, null, null);
 	}
 
-	public function testGetContentNodeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetContentNodeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @property annotation.');
@@ -49,7 +58,10 @@ class PropertyAnnotationTest extends TestCase
 		$annotation->getContentNode();
 	}
 
-	public function testGetDescriptionWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetDescriptionWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @property annotation.');
@@ -57,7 +69,10 @@ class PropertyAnnotationTest extends TestCase
 		$annotation->getDescription();
 	}
 
-	public function testGetPropertyNameWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetPropertyNameWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @property-read annotation.');
@@ -65,7 +80,10 @@ class PropertyAnnotationTest extends TestCase
 		$annotation->getPropertyName();
 	}
 
-	public function testGetTypeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetTypeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @property-write annotation.');

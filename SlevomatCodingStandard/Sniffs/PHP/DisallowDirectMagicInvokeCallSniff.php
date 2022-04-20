@@ -13,7 +13,7 @@ use const T_STRING;
 class DisallowDirectMagicInvokeCallSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_DIRECT_MAGIC_INVOKE_CALL = 'DisallowDirectMagicInvokeCall';
+	const CODE_DISALLOWED_DIRECT_MAGIC_INVOKE_CALL = 'DisallowDirectMagicInvokeCall';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -28,8 +28,10 @@ class DisallowDirectMagicInvokeCallSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $stringPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $stringPointer): void
+	public function process(File $phpcsFile, $stringPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

@@ -16,7 +16,10 @@ class AnnotationHelperTest extends TestCase
 	/** @var File */
 	private $testedCodeSnifferFile;
 
-	public function testClassWithAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testClassWithAnnotation()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),
@@ -32,7 +35,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertSame('https://www.slevomat.cz', $annotations[0]->getContent());
 	}
 
-	public function testClassWithoutAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testClassWithoutAnnotation()
 	{
 		self::assertCount(
 			0,
@@ -44,7 +50,10 @@ class AnnotationHelperTest extends TestCase
 		);
 	}
 
-	public function testConstantWithAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testConstantWithAnnotation()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),
@@ -63,7 +72,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertSame('bool', (string) $annotations[0]->getType());
 	}
 
-	public function testConstantWithoutAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testConstantWithoutAnnotation()
 	{
 		self::assertCount(
 			0,
@@ -75,7 +87,10 @@ class AnnotationHelperTest extends TestCase
 		);
 	}
 
-	public function testPropertyWithAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyWithAnnotation()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),
@@ -94,7 +109,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertSame('(null | int | float)', (string) $annotations[0]->getType());
 	}
 
-	public function testPropertyWithoutAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyWithoutAnnotation()
 	{
 		self::assertCount(
 			0,
@@ -106,7 +124,10 @@ class AnnotationHelperTest extends TestCase
 		);
 	}
 
-	public function testReturnAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testReturnAnnotation()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),
@@ -125,7 +146,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertSame('(string | null)', (string) $annotations[0]->getType());
 	}
 
-	public function testFunctionWithAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionWithAnnotation()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),
@@ -154,7 +178,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertSame('(int | null)', (string) $annotations[1]->getType());
 	}
 
-	public function testFunctionWithParametrizedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionWithParametrizedAnnotation()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),
@@ -169,7 +196,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertNull($annotations[0]->getContent());
 	}
 
-	public function testFunctionWithParametrizedAnnotationContainingParenthesis(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionWithParametrizedAnnotationContainingParenthesis()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),
@@ -184,7 +214,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertNull($annotations[0]->getContent());
 	}
 
-	public function testFunctionWithMultiLineParametrizedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionWithMultiLineParametrizedAnnotation()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),
@@ -202,7 +235,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertNull($annotations[0]->getContent());
 	}
 
-	public function testFunctionWithParametrizedAnnotationWithoutParameters(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionWithParametrizedAnnotationWithoutParameters()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),
@@ -217,7 +253,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertNull($annotations[0]->getContent());
 	}
 
-	public function testInlineDocCommentWithParametrizedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testInlineDocCommentWithParametrizedAnnotation()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),
@@ -232,7 +271,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertNull($annotations[0]->getContent());
 	}
 
-	public function testWordPressAnnotations(): void
+	/**
+	 * @return void
+	 */
+	public function testWordPressAnnotations()
 	{
 		$annotations = AnnotationHelper::getAnnotations(
 			$this->getTestedCodeSnifferFile(),
@@ -253,7 +295,10 @@ class AnnotationHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionWithoutAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionWithoutAnnotation()
 	{
 		self::assertCount(
 			0,
@@ -265,7 +310,10 @@ class AnnotationHelperTest extends TestCase
 		);
 	}
 
-	public function testMultiLineIndentedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testMultiLineIndentedAnnotation()
 	{
 		$annotations = AnnotationHelper::getAnnotations(
 			$this->getTestedCodeSnifferFile(),
@@ -286,7 +334,10 @@ class AnnotationHelperTest extends TestCase
 		self::assertSame(71, $this->getLineByPointer($xAnnotations[0]->getEndPointer()));
 	}
 
-	public function testAnnotationWithDash(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotationWithDash()
 	{
 		$annotations = AnnotationHelper::getAnnotationsByName(
 			$this->getTestedCodeSnifferFile(),

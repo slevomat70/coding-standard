@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireAbstractOrFinalSniffTest extends TestCase
 {
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireAbstractOrFinalErrors.php');
 

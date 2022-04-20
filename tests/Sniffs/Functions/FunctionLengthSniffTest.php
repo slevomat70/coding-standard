@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class FunctionLengthSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/functionLengthNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/functionLengthErrors.php');
 
@@ -22,7 +28,10 @@ class FunctionLengthSniffTest extends TestCase
 		self::assertSniffError($report, 3, FunctionLengthSniff::CODE_FUNCTION_LENGTH, 'Currently using 21 lines');
 	}
 
-	public function testWithComments(): void
+	/**
+	 * @return void
+	 */
+	public function testWithComments()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/functionLengthErrors.php',
@@ -36,7 +45,10 @@ class FunctionLengthSniffTest extends TestCase
 		self::assertSniffError($report, 3, FunctionLengthSniff::CODE_FUNCTION_LENGTH, 'Currently using 24 lines');
 	}
 
-	public function testWithWhitespace(): void
+	/**
+	 * @return void
+	 */
+	public function testWithWhitespace()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/functionLengthErrors.php',

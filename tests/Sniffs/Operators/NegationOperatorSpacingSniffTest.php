@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class NegationOperatorSpacingSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/negationOperatorSpacingNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/negationOperatorSpacingErrors.php');
 
@@ -22,14 +28,20 @@ class NegationOperatorSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testRequireSpaceNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testRequireSpaceNoErrors()
 	{
 		self::assertNoSniffErrorInFile(
 			self::checkFile(__DIR__ . '/data/negationOperatorSpacingRequireSpaceNoErrors.php', ['spacesCount' => 1])
 		);
 	}
 
-	public function testRequireSpaceErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testRequireSpaceErrors()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/negationOperatorSpacingRequireSpaceErrors.php',

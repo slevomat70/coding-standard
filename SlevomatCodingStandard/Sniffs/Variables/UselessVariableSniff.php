@@ -46,7 +46,7 @@ use const T_XOR_EQUAL;
 class UselessVariableSniff implements Sniff
 {
 
-	public const CODE_USELESS_VARIABLE = 'UselessVariable';
+	const CODE_USELESS_VARIABLE = 'UselessVariable';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -61,8 +61,10 @@ class UselessVariableSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $returnPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $returnPointer): void
+	public function process(File $phpcsFile, $returnPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -199,7 +201,10 @@ class UselessVariableSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function findPreviousVariablePointer(File $phpcsFile, int $pointer, string $variableName): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findPreviousVariablePointer(File $phpcsFile, int $pointer, string $variableName)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -254,7 +259,10 @@ class UselessVariableSniff implements Sniff
 		], true);
 	}
 
-	private function findFunctionPointer(File $phpcsFile, int $pointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findFunctionPointer(File $phpcsFile, int $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

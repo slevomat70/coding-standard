@@ -14,7 +14,7 @@ use const T_STRING;
 class DisallowLateStaticBindingForConstantsSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_LATE_STATIC_BINDING_FOR_CONSTANT = 'DisallowedLateStaticBindingForConstant';
+	const CODE_DISALLOWED_LATE_STATIC_BINDING_FOR_CONSTANT = 'DisallowedLateStaticBindingForConstant';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -29,8 +29,10 @@ class DisallowLateStaticBindingForConstantsSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $staticPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $staticPointer): void
+	public function process(File $phpcsFile, $staticPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

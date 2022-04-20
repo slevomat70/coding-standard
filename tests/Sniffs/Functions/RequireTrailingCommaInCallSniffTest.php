@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireTrailingCommaInCallSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireTrailingCommaInCallNoErrors.php', [
 			'enable' => true,
@@ -15,7 +18,10 @@ class RequireTrailingCommaInCallSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireTrailingCommaInCallErrors.php', [
 			'enable' => true,
@@ -43,7 +49,10 @@ class RequireTrailingCommaInCallSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testShouldNotReportIfSniffIsDisabled(): void
+	/**
+	 * @return void
+	 */
+	public function testShouldNotReportIfSniffIsDisabled()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireTrailingCommaInCallErrors.php', [
 			'enable' => false,

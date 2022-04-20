@@ -18,7 +18,10 @@ class TokenPointerOutOfBoundsException extends Exception
 	/** @var int */
 	private $lastTokenPointer;
 
-	public function __construct(int $pointer, int $lastTokenPointer, ?Throwable $previous = null)
+	/**
+	 * @param \Throwable|null $previous
+	 */
+	public function __construct(int $pointer, int $lastTokenPointer, $previous = null)
 	{
 		parent::__construct(
 			sprintf(

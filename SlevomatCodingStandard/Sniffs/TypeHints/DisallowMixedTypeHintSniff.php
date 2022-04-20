@@ -15,9 +15,9 @@ use const T_DOC_COMMENT_OPEN_TAG;
 class DisallowMixedTypeHintSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_MIXED_TYPE_HINT = 'DisallowedMixedTypeHint';
+	const CODE_DISALLOWED_MIXED_TYPE_HINT = 'DisallowedMixedTypeHint';
 
-	private const NAME = 'SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint';
+	const NAME = 'SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -32,8 +32,10 @@ class DisallowMixedTypeHintSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $docCommentOpenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $docCommentOpenPointer): void
+	public function process(File $phpcsFile, $docCommentOpenPointer)
 	{
 		if (SuppressHelper::isSniffSuppressed(
 			$phpcsFile,

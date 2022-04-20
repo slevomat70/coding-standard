@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class DuplicateSpacesSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/duplicateSpacesNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/duplicateSpacesErrors.php');
 
@@ -32,7 +38,10 @@ class DuplicateSpacesSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testIgnoreSpacesBeforeAssignmentNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoreSpacesBeforeAssignmentNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/duplicateSpacesIgnoreSpacesBeforeAssignmentNoErrors.php', [
 			'ignoreSpacesBeforeAssignment' => true,
@@ -40,7 +49,10 @@ class DuplicateSpacesSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIgnoreSpacesInAnnotationNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoreSpacesInAnnotationNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/duplicateSpacesIgnoreSpacesInAnnotationNoErrors.php', [
 			'ignoreSpacesInAnnotation' => true,
@@ -48,7 +60,10 @@ class DuplicateSpacesSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIgnoreSpacesInAnnotationErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoreSpacesInAnnotationErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/duplicateSpacesIgnoreSpacesInAnnotationErrors.php', [
 			'ignoreSpacesInAnnotation' => true,
@@ -61,7 +76,10 @@ class DuplicateSpacesSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testIgnoreSpacesInCommentNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoreSpacesInCommentNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/duplicateSpacesIgnoreSpacesInCommentNoErrors.php', [
 			'ignoreSpacesInComment' => true,
@@ -69,7 +87,10 @@ class DuplicateSpacesSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIgnoreSpacesInCommentErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoreSpacesInCommentErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/duplicateSpacesIgnoreSpacesInCommentErrors.php', [
 			'ignoreSpacesInComment' => true,
@@ -82,7 +103,10 @@ class DuplicateSpacesSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testIgnoreSpacesInParametersNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoreSpacesInParametersNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/duplicateSpacesIgnoreSpacesInParametersNoErrors.php', [
 			'ignoreSpacesInParameters' => true,
@@ -90,7 +114,10 @@ class DuplicateSpacesSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIgnoreSpacesInParametersErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoreSpacesInParametersErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/duplicateSpacesIgnoreSpacesInParametersErrors.php', [
 			'ignoreSpacesInParameters' => true,

@@ -21,7 +21,7 @@ use const T_VARIABLE;
 class DisallowTrailingCommaInCallSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_TRAILING_COMMA = 'DisallowedTrailingComma';
+	const CODE_DISALLOWED_TRAILING_COMMA = 'DisallowedTrailingComma';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -36,8 +36,10 @@ class DisallowTrailingCommaInCallSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $parenthesisOpenerPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $parenthesisOpenerPointer): void
+	public function process(File $phpcsFile, $parenthesisOpenerPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

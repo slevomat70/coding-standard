@@ -19,7 +19,7 @@ use const T_VARIABLE;
 class ConstantSpacingSniff extends AbstractPropertyAndConstantSpacing
 {
 
-	public const CODE_INCORRECT_COUNT_OF_BLANK_LINES_AFTER_CONSTANT = 'IncorrectCountOfBlankLinesAfterConstant';
+	const CODE_INCORRECT_COUNT_OF_BLANK_LINES_AFTER_CONSTANT = 'IncorrectCountOfBlankLinesAfterConstant';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -32,6 +32,7 @@ class ConstantSpacingSniff extends AbstractPropertyAndConstantSpacing
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $constantPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
 	public function process(File $phpcsFile, $constantPointer): int
 	{
@@ -50,7 +51,11 @@ class ConstantSpacingSniff extends AbstractPropertyAndConstantSpacing
 		return parent::process($phpcsFile, $constantPointer);
 	}
 
-	protected function isNextMemberValid(File $phpcsFile, int $pointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	protected function isNextMemberValid($phpcsFile, $pointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -63,7 +68,14 @@ class ConstantSpacingSniff extends AbstractPropertyAndConstantSpacing
 		return $tokens[$nextPointer]['code'] === T_CONST;
 	}
 
-	protected function addError(File $phpcsFile, int $pointer, int $minExpectedLines, int $maxExpectedLines, int $found): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @param int $minExpectedLines
+	 * @param int $maxExpectedLines
+	 * @param int $found
+	 */
+	protected function addError($phpcsFile, $pointer, $minExpectedLines, $maxExpectedLines, $found): bool
 	{
 		if ($minExpectedLines === $maxExpectedLines) {
 			$errorMessage = $minExpectedLines === 1

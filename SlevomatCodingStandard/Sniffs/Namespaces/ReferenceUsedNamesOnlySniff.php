@@ -52,18 +52,18 @@ use const T_WHITESPACE;
 class ReferenceUsedNamesOnlySniff implements Sniff
 {
 
-	public const CODE_REFERENCE_VIA_FULLY_QUALIFIED_NAME = 'ReferenceViaFullyQualifiedName';
+	const CODE_REFERENCE_VIA_FULLY_QUALIFIED_NAME = 'ReferenceViaFullyQualifiedName';
 
-	public const CODE_REFERENCE_VIA_FULLY_QUALIFIED_NAME_WITHOUT_NAMESPACE = 'ReferenceViaFullyQualifiedNameWithoutNamespace';
+	const CODE_REFERENCE_VIA_FULLY_QUALIFIED_NAME_WITHOUT_NAMESPACE = 'ReferenceViaFullyQualifiedNameWithoutNamespace';
 
-	public const CODE_REFERENCE_VIA_FALLBACK_GLOBAL_NAME = 'ReferenceViaFallbackGlobalName';
+	const CODE_REFERENCE_VIA_FALLBACK_GLOBAL_NAME = 'ReferenceViaFallbackGlobalName';
 
-	public const CODE_PARTIAL_USE = 'PartialUse';
+	const CODE_PARTIAL_USE = 'PartialUse';
 
-	private const SOURCE_CODE = 1;
-	private const SOURCE_ANNOTATION = 2;
-	private const SOURCE_ANNOTATION_CONSTANT_FETCH = 3;
-	private const SOURCE_ATTRIBUTE = 4;
+	const SOURCE_CODE = 1;
+	const SOURCE_ANNOTATION = 2;
+	const SOURCE_ANNOTATION_CONSTANT_FETCH = 3;
+	const SOURCE_ATTRIBUTE = 4;
 
 	/** @var bool */
 	public $searchAnnotations = false;
@@ -133,8 +133,10 @@ class ReferenceUsedNamesOnlySniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $openTagPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $openTagPointer): void
+	public function process(File $phpcsFile, $openTagPointer)
 	{
 		if (TokenHelper::findPrevious($phpcsFile, T_OPEN_TAG, $openTagPointer - 1) !== null) {
 			return;

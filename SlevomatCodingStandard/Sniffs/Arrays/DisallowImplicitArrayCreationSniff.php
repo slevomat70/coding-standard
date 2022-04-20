@@ -29,7 +29,7 @@ use const T_VARIABLE;
 class DisallowImplicitArrayCreationSniff implements Sniff
 {
 
-	public const CODE_IMPLICIT_ARRAY_CREATION_USED = 'ImplicitArrayCreationUsed';
+	const CODE_IMPLICIT_ARRAY_CREATION_USED = 'ImplicitArrayCreationUsed';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -44,8 +44,10 @@ class DisallowImplicitArrayCreationSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $bracketOpenerPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $bracketOpenerPointer): void
+	public function process(File $phpcsFile, $bracketOpenerPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

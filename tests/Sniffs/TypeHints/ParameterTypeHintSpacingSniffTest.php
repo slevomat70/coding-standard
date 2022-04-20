@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ParameterTypeHintSpacingSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/parameterTypeHintSpacingNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/parameterTypeHintSpacingErrors.php');
 
@@ -94,7 +100,10 @@ class ParameterTypeHintSpacingSniffTest extends TestCase
 		);
 	}
 
-	public function testFixableParameterTypeHintSpacingNoSpaceBetweenTypeHintAndParameter(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableParameterTypeHintSpacingNoSpaceBetweenTypeHintAndParameter()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableParameterTypeHintSpacingNoSpaceBetweenTypeHintAndParameter.php',
@@ -104,7 +113,10 @@ class ParameterTypeHintSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableParameterTypeHintSpacingMultipleSpacesBetweenTypeHintAndParameter(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableParameterTypeHintSpacingMultipleSpacesBetweenTypeHintAndParameter()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableParameterTypeHintSpacingMultipleSpacesBetweenTypeHintAndParameter.php',
@@ -114,7 +126,10 @@ class ParameterTypeHintSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableParameterTypeHintSpacingWhitespaceAfterNullabilitySymbol(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableParameterTypeHintSpacingWhitespaceAfterNullabilitySymbol()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableParameterTypeHintSpacingWhitespaceAfterNullabilitySymbol.php',

@@ -14,7 +14,7 @@ use const T_SWITCH;
 class DisallowContinueWithoutIntegerOperandInSwitchSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_CONTINUE_WITHOUT_INTEGER_OPERAND_IN_SWITCH = 'DisallowedContinueWithoutIntegerOperandInSwitch';
+	const CODE_DISALLOWED_CONTINUE_WITHOUT_INTEGER_OPERAND_IN_SWITCH = 'DisallowedContinueWithoutIntegerOperandInSwitch';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -29,8 +29,10 @@ class DisallowContinueWithoutIntegerOperandInSwitchSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $continuePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $continuePointer): void
+	public function process(File $phpcsFile, $continuePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

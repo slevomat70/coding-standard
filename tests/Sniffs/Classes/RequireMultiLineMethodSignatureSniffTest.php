@@ -8,7 +8,10 @@ use Throwable;
 final class RequireMultiLineMethodSignatureSniffTest extends TestCase
 {
 
-	public function testThrowExceptionForInvalidPattern(): void
+	/**
+	 * @return void
+	 */
+	public function testThrowExceptionForInvalidPattern()
 	{
 		$this->expectException(Throwable::class);
 
@@ -23,13 +26,19 @@ final class RequireMultiLineMethodSignatureSniffTest extends TestCase
 		);
 	}
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineMethodSignatureNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineMethodSignatureErrors.php');
 		self::assertSame(4, $report->getErrorCount());
@@ -42,7 +51,10 @@ final class RequireMultiLineMethodSignatureSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testForAllMethods(): void
+	/**
+	 * @return void
+	 */
+	public function testForAllMethods()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineMethodSignatureAllMethodsErrors.php', ['minLineLength' => 0]);
 		self::assertSame(1, $report->getErrorCount());
@@ -52,7 +64,10 @@ final class RequireMultiLineMethodSignatureSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testIncludedMethodPatterns(): void
+	/**
+	 * @return void
+	 */
+	public function testIncludedMethodPatterns()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineMethodSignatureIncludedMethodsErrors.php', [
 			'maxLineLength' => 0,
@@ -66,7 +81,10 @@ final class RequireMultiLineMethodSignatureSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testExcludedMethodPatterns(): void
+	/**
+	 * @return void
+	 */
+	public function testExcludedMethodPatterns()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineMethodSignatureExcludedMethodsErrors.php', [
 			'maxLineLength' => 0,

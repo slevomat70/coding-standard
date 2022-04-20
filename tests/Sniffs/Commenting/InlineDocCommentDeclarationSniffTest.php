@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class InlineDocCommentDeclarationSniffTest extends TestCase
 {
 
-	public function testNoInvalidInlineDocCommentDeclarations(): void
+	/**
+	 * @return void
+	 */
+	public function testNoInvalidInlineDocCommentDeclarations()
 	{
 		$report = self::checkFile(__DIR__ . '/data/noInvalidInlineDocCommentDeclarations.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testInvalidInlineDocCommentDeclarations(): void
+	/**
+	 * @return void
+	 */
+	public function testInvalidInlineDocCommentDeclarations()
 	{
 		$report = self::checkFile(__DIR__ . '/data/invalidInlineDocCommentDeclarations.php');
 
@@ -171,7 +177,10 @@ class InlineDocCommentDeclarationSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testNoErrorsWithDocCommentAboveReturnAllowed(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWithDocCommentAboveReturnAllowed()
 	{
 		$report = self::checkFile(__DIR__ . '/data/inlineDocDocommentDeclarationWithDocCommentAboveReturnAllowedNoErrors.php', [
 			'allowDocCommentAboveReturn' => true,
@@ -179,7 +188,10 @@ class InlineDocCommentDeclarationSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrorsWithDocCommentAboveReturnAllowed(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithDocCommentAboveReturnAllowed()
 	{
 		$report = self::checkFile(__DIR__ . '/data/inlineDocDocommentDeclarationWithDocCommentAboveReturnAllowedErrors.php', [
 			'allowDocCommentAboveReturn' => true,
@@ -192,7 +204,10 @@ class InlineDocCommentDeclarationSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testNoErrorsWithDocCommentAboveNonAssigmentAllowed(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWithDocCommentAboveNonAssigmentAllowed()
 	{
 		$report = self::checkFile(__DIR__ . '/data/inlineDocDocommentDeclarationWithDocCommentAboveNonAssigmentAllowedNoErrors.php', [
 			'allowAboveNonAssignment' => true,
@@ -200,7 +215,10 @@ class InlineDocCommentDeclarationSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrorsWithDocCommentAboveNonAssigmentAllowed(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithDocCommentAboveNonAssigmentAllowed()
 	{
 		$report = self::checkFile(__DIR__ . '/data/inlineDocDocommentDeclarationWithDocCommentAboveNonAssigmentAllowedErrors.php', [
 			'allowAboveNonAssignment' => true,

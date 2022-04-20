@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ReferenceThrowableOnlySniffTest extends TestCase
 {
 
-	public function testExceptionReferences(): void
+	/**
+	 * @return void
+	 */
+	public function testExceptionReferences()
 	{
 		$report = self::checkFile(__DIR__ . '/data/exceptionReferences.php');
 		self::assertNoSniffError($report, 5);
@@ -27,7 +30,10 @@ class ReferenceThrowableOnlySniffTest extends TestCase
 		self::assertNoSniffError($report, 45);
 	}
 
-	public function testExceptionReferencesWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testExceptionReferencesWithoutNamespace()
 	{
 		$report = self::checkFile(__DIR__ . '/data/exceptionReferencesWithoutNamespace.php');
 		self::assertNoSniffError($report, 3);
@@ -44,7 +50,10 @@ class ReferenceThrowableOnlySniffTest extends TestCase
 		self::assertSniffError($report, 32, ReferenceThrowableOnlySniff::CODE_REFERENCED_GENERAL_EXCEPTION);
 	}
 
-	public function testExceptionReferencesUnionTypes71(): void
+	/**
+	 * @return void
+	 */
+	public function testExceptionReferencesUnionTypes71()
 	{
 		$report = self::checkFile(__DIR__ . '/data/exceptionReferences71.php');
 		self::assertNoSniffError($report, 5);
@@ -57,7 +66,10 @@ class ReferenceThrowableOnlySniffTest extends TestCase
 		self::assertSniffError($report, 27, ReferenceThrowableOnlySniff::CODE_REFERENCED_GENERAL_EXCEPTION);
 	}
 
-	public function testFixableExceptionReference(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableExceptionReference()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableExceptionReference.php',
@@ -67,7 +79,10 @@ class ReferenceThrowableOnlySniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableExceptionReferenceWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableExceptionReferenceWithoutNamespace()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableExceptionReferenceWithoutNamespace.php',
@@ -77,7 +92,10 @@ class ReferenceThrowableOnlySniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableExceptionReference71(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableExceptionReference71()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableExceptionReference71.php',
@@ -87,7 +105,10 @@ class ReferenceThrowableOnlySniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableExceptionReferenceWithoutNamespace71(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableExceptionReferenceWithoutNamespace71()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableExceptionReferenceWithoutNamespace71.php',

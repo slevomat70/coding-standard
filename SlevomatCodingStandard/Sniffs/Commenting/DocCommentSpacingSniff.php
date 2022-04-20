@@ -41,14 +41,14 @@ use const T_DOC_COMMENT_WHITESPACE;
 class DocCommentSpacingSniff implements Sniff
 {
 
-	public const CODE_INCORRECT_LINES_COUNT_BEFORE_FIRST_CONTENT = 'IncorrectLinesCountBeforeFirstContent';
-	public const CODE_INCORRECT_LINES_COUNT_BETWEEN_DESCRIPTION_AND_ANNOTATIONS = 'IncorrectLinesCountBetweenDescriptionAndAnnotations';
-	public const CODE_INCORRECT_LINES_COUNT_BETWEEN_DIFFERENT_ANNOTATIONS_TYPES = 'IncorrectLinesCountBetweenDifferentAnnotationsTypes';
-	public const CODE_INCORRECT_LINES_COUNT_BETWEEN_ANNOTATIONS_GROUPS = 'IncorrectLinesCountBetweenAnnotationsGroups';
-	public const CODE_INCORRECT_LINES_COUNT_AFTER_LAST_CONTENT = 'IncorrectLinesCountAfterLastContent';
-	public const CODE_INCORRECT_ANNOTATIONS_GROUP = 'IncorrectAnnotationsGroup';
-	public const CODE_INCORRECT_ORDER_OF_ANNOTATIONS_GROUPS = 'IncorrectOrderOfAnnotationsGroup';
-	public const CODE_INCORRECT_ORDER_OF_ANNOTATIONS_IN_GROUP = 'IncorrectOrderOfAnnotationsInGroup';
+	const CODE_INCORRECT_LINES_COUNT_BEFORE_FIRST_CONTENT = 'IncorrectLinesCountBeforeFirstContent';
+	const CODE_INCORRECT_LINES_COUNT_BETWEEN_DESCRIPTION_AND_ANNOTATIONS = 'IncorrectLinesCountBetweenDescriptionAndAnnotations';
+	const CODE_INCORRECT_LINES_COUNT_BETWEEN_DIFFERENT_ANNOTATIONS_TYPES = 'IncorrectLinesCountBetweenDifferentAnnotationsTypes';
+	const CODE_INCORRECT_LINES_COUNT_BETWEEN_ANNOTATIONS_GROUPS = 'IncorrectLinesCountBetweenAnnotationsGroups';
+	const CODE_INCORRECT_LINES_COUNT_AFTER_LAST_CONTENT = 'IncorrectLinesCountAfterLastContent';
+	const CODE_INCORRECT_ANNOTATIONS_GROUP = 'IncorrectAnnotationsGroup';
+	const CODE_INCORRECT_ORDER_OF_ANNOTATIONS_GROUPS = 'IncorrectOrderOfAnnotationsGroup';
+	const CODE_INCORRECT_ORDER_OF_ANNOTATIONS_IN_GROUP = 'IncorrectOrderOfAnnotationsInGroup';
 
 	/** @var int */
 	public $linesCountBeforeFirstContent = 0;
@@ -84,8 +84,10 @@ class DocCommentSpacingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $docCommentOpenerPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $docCommentOpenerPointer): void
+	public function process(File $phpcsFile, $docCommentOpenerPointer)
 	{
 		if (DocCommentHelper::isInline($phpcsFile, $docCommentOpenerPointer)) {
 			return;
@@ -158,7 +160,10 @@ class DocCommentSpacingSniff implements Sniff
 		);
 	}
 
-	private function checkLinesBeforeFirstContent(File $phpcsFile, int $docCommentOpenerPointer, int $firstContentStartPointer): void
+	/**
+	 * @return void
+	 */
+	private function checkLinesBeforeFirstContent(File $phpcsFile, int $docCommentOpenerPointer, int $firstContentStartPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -204,13 +209,17 @@ class DocCommentSpacingSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation|null $firstAnnotation
+	 * @return void
+	 */
 	private function checkLinesBetweenDescriptionAndFirstAnnotation(
 		File $phpcsFile,
 		int $docCommentOpenerPointer,
 		int $firstContentStartPointer,
 		int $firstContentEndPointer,
-		?Annotation $firstAnnotation
-	): void
+		$firstAnnotation
+	)
 	{
 		if ($firstAnnotation === null) {
 			return;
@@ -277,8 +286,9 @@ class DocCommentSpacingSniff implements Sniff
 
 	/**
 	 * @param Annotation[] $annotations
+	 * @return void
 	 */
-	private function checkLinesBetweenDifferentAnnotationsTypes(File $phpcsFile, int $docCommentOpenerPointer, array $annotations): void
+	private function checkLinesBetweenDifferentAnnotationsTypes(File $phpcsFile, int $docCommentOpenerPointer, array $annotations)
 	{
 		$requiredLinesCountBetweenDifferentAnnotationsTypes = SniffSettingsHelper::normalizeInteger(
 			$this->linesCountBetweenDifferentAnnotationsTypes
@@ -351,8 +361,9 @@ class DocCommentSpacingSniff implements Sniff
 
 	/**
 	 * @param Annotation[] $annotations
+	 * @return void
 	 */
-	private function checkAnnotationsGroups(File $phpcsFile, int $docCommentOpenerPointer, array $annotations): void
+	private function checkAnnotationsGroups(File $phpcsFile, int $docCommentOpenerPointer, array $annotations)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -384,8 +395,9 @@ class DocCommentSpacingSniff implements Sniff
 
 	/**
 	 * @param Annotation[][] $annotationsGroups
+	 * @return void
 	 */
-	private function checkLinesBetweenAnnotationsGroups(File $phpcsFile, int $docCommentOpenerPointer, array $annotationsGroups): void
+	private function checkLinesBetweenAnnotationsGroups(File $phpcsFile, int $docCommentOpenerPointer, array $annotationsGroups)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -452,13 +464,14 @@ class DocCommentSpacingSniff implements Sniff
 	/**
 	 * @param Annotation[][] $annotationsGroups
 	 * @param Annotation[] $annotations
+	 * @return void
 	 */
 	private function checkAnnotationsGroupsOrder(
 		File $phpcsFile,
 		int $docCommentOpenerPointer,
 		array $annotationsGroups,
 		array $annotations
-	): void
+	)
 	{
 		$equals = static function (array $firstAnnotationsGroup, array $secondAnnotationsGroup): bool {
 			$getAnnotationsPointers = static function (Annotation $annotation): int {
@@ -729,12 +742,15 @@ class DocCommentSpacingSniff implements Sniff
 		return $this->isAnnotationNameInAnnotationNamespace($annotationName, $annotation->getName());
 	}
 
+	/**
+	 * @return void
+	 */
 	private function checkLinesAfterLastContent(
 		File $phpcsFile,
 		int $docCommentOpenerPointer,
 		int $docCommentCloserPointer,
 		int $lastContentEndPointer
-	): void
+	)
 	{
 		$whitespaceAfterLastContent = TokenHelper::getContent($phpcsFile, $lastContentEndPointer + 1, $docCommentCloserPointer);
 

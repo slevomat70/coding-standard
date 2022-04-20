@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ModernClassNameReferenceSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/modernClassNameReferenceNoErrors.php', [
 			'enableOnObjects' => false,
@@ -15,7 +18,10 @@ class ModernClassNameReferenceSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/modernClassNameReferenceErrors.php', [
 			'enableOnObjects' => false,
@@ -88,7 +94,10 @@ class ModernClassNameReferenceSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testEnabledOnObjectsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testEnabledOnObjectsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/modernClassNameReferenceEnabledOnObjectsErrors.php', [
 			'enableOnObjects' => true,

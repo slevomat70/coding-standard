@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class PropertySpacingSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/propertySpacingNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/propertySpacingErrors.php');
 
@@ -36,7 +42,10 @@ class PropertySpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testZeroBlankLinesErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testZeroBlankLinesErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/propertySpacingZeroBlankLinesErrors.php', [
 			'minLinesCountBeforeWithComment' => 0,

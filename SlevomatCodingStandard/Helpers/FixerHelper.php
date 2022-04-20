@@ -12,7 +12,12 @@ use const T_WHITESPACE;
 class FixerHelper
 {
 
-	public static function cleanWhitespaceBefore(File $phpcsFile, int $pointer): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @return void
+	 */
+	public static function cleanWhitespaceBefore($phpcsFile, $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -25,7 +30,12 @@ class FixerHelper
 		}
 	}
 
-	public static function cleanWhitespaceAfter(File $phpcsFile, int $pointer): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @return void
+	 */
+	public static function cleanWhitespaceAfter($phpcsFile, $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

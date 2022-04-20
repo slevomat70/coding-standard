@@ -12,7 +12,10 @@ use SlevomatCodingStandard\Helpers\TestCase;
 class MethodAnnotationTest extends TestCase
 {
 
-	public function testAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotation()
 	{
 		$annotation = new MethodAnnotation(
 			'@method',
@@ -42,14 +45,20 @@ class MethodAnnotationTest extends TestCase
 		self::assertSame('@method string method(int $p) Description', $annotation->export());
 	}
 
-	public function testUnsupportedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testUnsupportedAnnotation()
 	{
 		self::expectException(InvalidArgumentException::class);
 		self::expectExceptionMessage('Unsupported annotation @var.');
 		new MethodAnnotation('@var', 1, 1, null, null);
 	}
 
-	public function testGetContentNodeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetContentNodeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @method annotation.');
@@ -57,7 +66,10 @@ class MethodAnnotationTest extends TestCase
 		$annotation->getContentNode();
 	}
 
-	public function testGetDescriptionWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetDescriptionWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @method annotation.');
@@ -65,7 +77,10 @@ class MethodAnnotationTest extends TestCase
 		$annotation->getDescription();
 	}
 
-	public function testGetMethodNameWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetMethodNameWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @method annotation.');
@@ -73,7 +88,10 @@ class MethodAnnotationTest extends TestCase
 		$annotation->getMethodName();
 	}
 
-	public function testGetMethodReturnTypeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetMethodReturnTypeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @method annotation.');
@@ -81,7 +99,10 @@ class MethodAnnotationTest extends TestCase
 		$annotation->getMethodReturnType();
 	}
 
-	public function testGetMethodParametersWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetMethodParametersWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @method annotation.');

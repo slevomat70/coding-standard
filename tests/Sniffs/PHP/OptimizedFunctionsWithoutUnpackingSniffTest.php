@@ -7,19 +7,28 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class OptimizedFunctionsWithoutUnpackingSniffTest extends TestCase
 {
 
-	public function testNoErrorsNamespaced(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsNamespaced()
 	{
 		$report = self::checkFile(__DIR__ . '/data/optimizedFunctionsWithoutUnpackingNamespacedNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNoErrorsNotNamespaced(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsNotNamespaced()
 	{
 		$report = self::checkFile(__DIR__ . '/data/optimizedFunctionsWithoutUnpackingNamespacedNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrorsNamespaced(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsNamespaced()
 	{
 		$report = self::checkFile(__DIR__ . '/data/optimizedFunctionsWithoutUnpackingNamespacedErrors.php');
 
@@ -39,7 +48,10 @@ class OptimizedFunctionsWithoutUnpackingSniffTest extends TestCase
 		self::assertSniffError($report, 34, OptimizedFunctionsWithoutUnpackingSniff::CODE_UNPACKING_USED);
 	}
 
-	public function testErrorsNotNamespaced(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsNotNamespaced()
 	{
 		$report = self::checkFile(__DIR__ . '/data/optimizedFunctionsWithoutUnpackingNotNamespacedErrors.php');
 

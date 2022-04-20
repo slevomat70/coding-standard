@@ -8,7 +8,10 @@ use Throwable;
 class NullTokenPointerException extends Exception
 {
 
-	public function __construct(?Throwable $previous = null)
+	/**
+	 * @param \Throwable|null $previous
+	 */
+	public function __construct($previous = null)
 	{
 		parent::__construct('', 0, $previous);
 	}

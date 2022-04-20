@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ClassConstantVisibilitySniffTest extends TestCase
 {
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/classWithConstants.php');
 
@@ -42,19 +45,28 @@ class ClassConstantVisibilitySniffTest extends TestCase
 		self::assertNoSniffError($report, 27);
 	}
 
-	public function testNoClassConstants(): void
+	/**
+	 * @return void
+	 */
+	public function testNoClassConstants()
 	{
 		$report = self::checkFile(__DIR__ . '/data/noClassConstants.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNoClassConstantsWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testNoClassConstantsWithNamespace()
 	{
 		$report = self::checkFile(__DIR__ . '/data/noClassConstantsWithNamespace.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testFixableEnabled(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableEnabled()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableMissingClassConstantVisibility.php',
@@ -64,7 +76,10 @@ class ClassConstantVisibilitySniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableDisabled(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableDisabled()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableMissingClassConstantVisibilityFixableDisabled.php',

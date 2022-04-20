@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UselessParenthesesSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessParenthesesNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessParenthesesErrors.php');
 
@@ -26,7 +32,10 @@ class UselessParenthesesSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testNoErrorsWithIgnoredComplexTernaryConditions(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWithIgnoredComplexTernaryConditions()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessParenthesesNoErrorsWithIgnoredComplexTernaryConditions.php', [
 			'ignoreComplexTernaryConditions' => true,

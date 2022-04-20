@@ -18,7 +18,7 @@ use const T_VARIABLE;
 class StaticClosureSniff implements Sniff
 {
 
-	public const CODE_CLOSURE_NOT_STATIC = 'ClosureNotStatic';
+	const CODE_CLOSURE_NOT_STATIC = 'ClosureNotStatic';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -34,8 +34,10 @@ class StaticClosureSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $closurePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $closurePointer): void
+	public function process(File $phpcsFile, $closurePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

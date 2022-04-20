@@ -38,7 +38,7 @@ use const T_WHITESPACE;
 class RequireExplicitAssertionSniff implements Sniff
 {
 
-	public const CODE_REQUIRED_EXPLICIT_ASSERTION = 'RequiredExplicitAssertion';
+	const CODE_REQUIRED_EXPLICIT_ASSERTION = 'RequiredExplicitAssertion';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -53,8 +53,10 @@ class RequireExplicitAssertionSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $docCommentOpenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $docCommentOpenPointer): void
+	public function process(File $phpcsFile, $docCommentOpenPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

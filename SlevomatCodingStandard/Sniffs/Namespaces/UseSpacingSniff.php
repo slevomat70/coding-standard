@@ -23,10 +23,10 @@ use const T_WHITESPACE;
 class UseSpacingSniff implements Sniff
 {
 
-	public const CODE_INCORRECT_LINES_COUNT_BEFORE_FIRST_USE = 'IncorrectLinesCountBeforeFirstUse';
-	public const CODE_INCORRECT_LINES_COUNT_BETWEEN_SAME_TYPES_OF_USE = 'IncorrectLinesCountBetweenSameTypeOfUse';
-	public const CODE_INCORRECT_LINES_COUNT_BETWEEN_DIFFERENT_TYPES_OF_USE = 'IncorrectLinesCountBetweenDifferentTypeOfUse';
-	public const CODE_INCORRECT_LINES_COUNT_AFTER_LAST_USE = 'IncorrectLinesCountAfterLastUse';
+	const CODE_INCORRECT_LINES_COUNT_BEFORE_FIRST_USE = 'IncorrectLinesCountBeforeFirstUse';
+	const CODE_INCORRECT_LINES_COUNT_BETWEEN_SAME_TYPES_OF_USE = 'IncorrectLinesCountBetweenSameTypeOfUse';
+	const CODE_INCORRECT_LINES_COUNT_BETWEEN_DIFFERENT_TYPES_OF_USE = 'IncorrectLinesCountBetweenDifferentTypeOfUse';
+	const CODE_INCORRECT_LINES_COUNT_AFTER_LAST_USE = 'IncorrectLinesCountAfterLastUse';
 
 	/** @var int */
 	public $linesCountBeforeFirstUse = 1;
@@ -50,8 +50,10 @@ class UseSpacingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $openTagPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $openTagPointer): void
+	public function process(File $phpcsFile, $openTagPointer)
 	{
 		if (TokenHelper::findPrevious($phpcsFile, T_OPEN_TAG, $openTagPointer - 1) !== null) {
 			return;
@@ -73,7 +75,10 @@ class UseSpacingSniff implements Sniff
 		}
 	}
 
-	private function checkLinesBeforeFirstUse(File $phpcsFile, UseStatement $firstUse): void
+	/**
+	 * @return void
+	 */
+	private function checkLinesBeforeFirstUse(File $phpcsFile, UseStatement $firstUse)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -129,7 +134,10 @@ class UseSpacingSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function checkLinesAfterLastUse(File $phpcsFile, UseStatement $lastUse): void
+	/**
+	 * @return void
+	 */
+	private function checkLinesAfterLastUse(File $phpcsFile, UseStatement $lastUse)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -194,8 +202,9 @@ class UseSpacingSniff implements Sniff
 
 	/**
 	 * @param UseStatement[] $useStatements
+	 * @return void
 	 */
-	private function checkLinesBetweenSameTypesOfUse(File $phpcsFile, array $useStatements): void
+	private function checkLinesBetweenSameTypesOfUse(File $phpcsFile, array $useStatements)
 	{
 		if (count($useStatements) === 1) {
 			return;
@@ -268,8 +277,9 @@ class UseSpacingSniff implements Sniff
 
 	/**
 	 * @param UseStatement[] $useStatements
+	 * @return void
 	 */
-	private function checkLinesBetweenDifferentTypesOfUse(File $phpcsFile, array $useStatements): void
+	private function checkLinesBetweenDifferentTypesOfUse(File $phpcsFile, array $useStatements)
 	{
 		if (count($useStatements) === 1) {
 			return;

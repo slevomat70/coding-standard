@@ -79,8 +79,11 @@ class PropertyHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataIsProperty
+	 * @param string $variableName
+	 * @param bool $isProperty
+	 * @return void
 	 */
-	public function testIsProperty(string $variableName, bool $isProperty): void
+	public function testIsProperty($variableName, $isProperty)
 	{
 		$phpcsFile = $this->getTestedCodeSnifferFile();
 
@@ -154,8 +157,12 @@ class PropertyHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataFindTypeHint
+	 * @param string $propertyName
+	 * @param string|null $typeHint
+	 * @param bool|null $isNullable
+	 * @return void
 	 */
-	public function testFindTypeHint(string $propertyName, ?string $typeHint, ?bool $isNullable): void
+	public function testFindTypeHint($propertyName, $typeHint, $isNullable)
 	{
 		$phpcsFile = $this->getTestedCodeSnifferFile();
 
@@ -171,7 +178,10 @@ class PropertyHelperTest extends TestCase
 		}
 	}
 
-	public function testNameWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testNameWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/propertyWithNamespace.php');
 		self::assertSame(
@@ -180,7 +190,10 @@ class PropertyHelperTest extends TestCase
 		);
 	}
 
-	public function testNameWithoutsNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testNameWithoutsNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/propertyWithoutNamespace.php');
 		self::assertSame(
@@ -189,7 +202,10 @@ class PropertyHelperTest extends TestCase
 		);
 	}
 
-	public function testNameInAnonymousClass(): void
+	/**
+	 * @return void
+	 */
+	public function testNameInAnonymousClass()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/propertyInAnonymousClass.php');
 		self::assertSame(

@@ -18,7 +18,11 @@ class TypeAliasAnnotation extends Annotation
 	/** @var TypeAliasTagValueNode|null */
 	private $contentNode;
 
-	public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?TypeAliasTagValueNode $contentNode)
+	/**
+	 * @param string|null $content
+	 * @param \PHPStan\PhpDocParser\Ast\PhpDoc\TypeAliasTagValueNode|null $contentNode
+	 */
+	public function __construct(string $name, int $startPointer, int $endPointer, $content, $contentNode)
 	{
 		if (!in_array(
 			$name,

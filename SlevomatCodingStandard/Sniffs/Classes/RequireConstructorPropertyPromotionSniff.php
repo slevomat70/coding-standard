@@ -45,7 +45,7 @@ use const T_WHITESPACE;
 class RequireConstructorPropertyPromotionSniff implements Sniff
 {
 
-	public const CODE_REQUIRED_CONSTRUCTOR_PROPERTY_PROMOTION = 'RequiredConstructorPropertyPromotion';
+	const CODE_REQUIRED_CONSTRUCTOR_PROPERTY_PROMOTION = 'RequiredConstructorPropertyPromotion';
 
 	/** @var bool|null */
 	public $enable = null;
@@ -61,8 +61,10 @@ class RequireConstructorPropertyPromotionSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $functionPointer): void
+	public function process(File $phpcsFile, $functionPointer)
 	{
 		$this->enable = SniffSettingsHelper::isEnabledByPhpVersion($this->enable, 80000);
 
@@ -222,7 +224,10 @@ class RequireConstructorPropertyPromotionSniff implements Sniff
 		}
 	}
 
-	private function getAssignment(File $phpcsFile, int $constructorPointer, string $parameterName): ?int
+	/**
+	 * @return int|null
+	 */
+	private function getAssignment(File $phpcsFile, int $constructorPointer, string $parameterName)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -339,7 +344,11 @@ class RequireConstructorPropertyPromotionSniff implements Sniff
 		return $tokens[$previousPointer]['code'] === T_ATTRIBUTE_END;
 	}
 
-	private function areTypeHintEqual(?TypeHint $parameterTypeHint, ?TypeHint $propertyTypeHint): bool
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $parameterTypeHint
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $propertyTypeHint
+	 */
+	private function areTypeHintEqual($parameterTypeHint, $propertyTypeHint): bool
 	{
 		if ($parameterTypeHint === null && $propertyTypeHint === null) {
 			return true;

@@ -28,8 +28,11 @@ class StringHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataStartsWith
+	 * @param string $haystack
+	 * @param string $needle
+	 * @return void
 	 */
-	public function testStartsWith(string $haystack, string $needle): void
+	public function testStartsWith($haystack, $needle)
 	{
 		self::assertTrue(StringHelper::startsWith($haystack, $needle));
 	}
@@ -61,8 +64,11 @@ class StringHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataNotStartsWith
+	 * @param string $haystack
+	 * @param string $needle
+	 * @return void
 	 */
-	public function testNotStartsWith(string $haystack, string $needle): void
+	public function testNotStartsWith($haystack, $needle)
 	{
 		self::assertFalse(StringHelper::startsWith($haystack, $needle));
 	}
@@ -90,8 +96,11 @@ class StringHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataEndsWith
+	 * @param string $haystack
+	 * @param string $needle
+	 * @return void
 	 */
-	public function testEndsWith(string $haystack, string $needle): void
+	public function testEndsWith($haystack, $needle)
 	{
 		self::assertTrue(StringHelper::endsWith($haystack, $needle));
 	}
@@ -123,8 +132,11 @@ class StringHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataNotEndsWith
+	 * @param string $haystack
+	 * @param string $needle
+	 * @return void
 	 */
-	public function testNotEndsWith(string $haystack, string $needle): void
+	public function testNotEndsWith($haystack, $needle)
 	{
 		self::assertFalse(StringHelper::endsWith($haystack, $needle));
 	}

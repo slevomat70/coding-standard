@@ -29,7 +29,7 @@ class SniffSettingsHelper
 	 * @param string[] $settings
 	 * @return string[]
 	 */
-	public static function normalizeArray(array $settings): array
+	public static function normalizeArray($settings): array
 	{
 		$settings = array_map(static function (string $value): string {
 			return trim($value);
@@ -44,7 +44,7 @@ class SniffSettingsHelper
 	 * @param array<int|string, int|string> $settings
 	 * @return array<int|string, int|string>
 	 */
-	public static function normalizeAssociativeArray(array $settings): array
+	public static function normalizeAssociativeArray($settings): array
 	{
 		$normalizedSettings = [];
 		foreach ($settings as $key => $value) {
@@ -63,13 +63,20 @@ class SniffSettingsHelper
 		return $normalizedSettings;
 	}
 
-	public static function isValidRegularExpression(string $expression): bool
+	/**
+	 * @param string $expression
+	 */
+	public static function isValidRegularExpression($expression): bool
 	{
 		return preg_match('~^(?:\(.*\)|\{.*\}|\[.*\])[a-z]*\z~i', $expression) !== 0
 			|| preg_match('~^([^a-z\s\\\\]).*\\1[a-z]*\z~i', $expression) !== 0;
 	}
 
-	public static function isEnabledByPhpVersion(?bool $value, int $phpVersionLimit): bool
+	/**
+	 * @param bool|null $value
+	 * @param int $phpVersionLimit
+	 */
+	public static function isEnabledByPhpVersion($value, $phpVersionLimit): bool
 	{
 		if ($value !== null) {
 			return $value;

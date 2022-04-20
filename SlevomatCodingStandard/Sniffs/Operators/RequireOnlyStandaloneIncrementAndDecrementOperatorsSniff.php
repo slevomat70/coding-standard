@@ -22,10 +22,10 @@ use const T_WHILE;
 class RequireOnlyStandaloneIncrementAndDecrementOperatorsSniff implements Sniff
 {
 
-	public const CODE_PRE_INCREMENT_OPERATOR_NOT_USED_STANDALONE = 'PreIncrementOperatorNotUsedStandalone';
-	public const CODE_POST_INCREMENT_OPERATOR_NOT_USED_STANDALONE = 'PostIncrementOperatorNotUsedStandalone';
-	public const CODE_PRE_DECREMENT_OPERATOR_NOT_USED_STANDALONE = 'PreDecrementOperatorNotUsedAsStandalone';
-	public const CODE_POST_DECREMENT_OPERATOR_NOT_USED_STANDALONE = 'PostDecrementOperatorNotUsedStandalone';
+	const CODE_PRE_INCREMENT_OPERATOR_NOT_USED_STANDALONE = 'PreIncrementOperatorNotUsedStandalone';
+	const CODE_POST_INCREMENT_OPERATOR_NOT_USED_STANDALONE = 'PostIncrementOperatorNotUsedStandalone';
+	const CODE_PRE_DECREMENT_OPERATOR_NOT_USED_STANDALONE = 'PreDecrementOperatorNotUsedAsStandalone';
+	const CODE_POST_DECREMENT_OPERATOR_NOT_USED_STANDALONE = 'PostDecrementOperatorNotUsedStandalone';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -41,8 +41,10 @@ class RequireOnlyStandaloneIncrementAndDecrementOperatorsSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $operatorPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $operatorPointer): void
+	public function process(File $phpcsFile, $operatorPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

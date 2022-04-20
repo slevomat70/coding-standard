@@ -11,7 +11,7 @@ use const T_NS_SEPARATOR;
 class RequireOneNamespaceInFileSniff implements Sniff
 {
 
-	public const CODE_MORE_NAMESPACES_IN_FILE = 'MoreNamespacesInFile';
+	const CODE_MORE_NAMESPACES_IN_FILE = 'MoreNamespacesInFile';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -26,8 +26,10 @@ class RequireOneNamespaceInFileSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $namespacePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $namespacePointer): void
+	public function process(File $phpcsFile, $namespacePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

@@ -18,7 +18,7 @@ use const T_OPEN_PARENTHESIS;
 class RequireMultiLineConditionSniff extends AbstractLineCondition
 {
 
-	public const CODE_REQUIRED_MULTI_LINE_CONDITION = 'RequiredMultiLineCondition';
+	const CODE_REQUIRED_MULTI_LINE_CONDITION = 'RequiredMultiLineCondition';
 
 	/** @var int */
 	public $minLineLength = 121;
@@ -32,8 +32,10 @@ class RequireMultiLineConditionSniff extends AbstractLineCondition
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $controlStructurePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $controlStructurePointer): void
+	public function process(File $phpcsFile, $controlStructurePointer)
 	{
 		if ($this->shouldBeSkipped($phpcsFile, $controlStructurePointer)) {
 			return;

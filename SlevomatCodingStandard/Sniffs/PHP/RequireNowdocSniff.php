@@ -14,7 +14,7 @@ use const T_START_HEREDOC;
 class RequireNowdocSniff implements Sniff
 {
 
-	public const CODE_REQUIRED_NOWDOC = 'RequiredNowdoc';
+	const CODE_REQUIRED_NOWDOC = 'RequiredNowdoc';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -29,8 +29,10 @@ class RequireNowdocSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $heredocStartPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $heredocStartPointer): void
+	public function process(File $phpcsFile, $heredocStartPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

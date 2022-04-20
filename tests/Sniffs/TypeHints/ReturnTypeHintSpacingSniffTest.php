@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ReturnTypeHintSpacingSniffTest extends TestCase
 {
 
-	public function testCorrectSpacing(): void
+	/**
+	 * @return void
+	 */
+	public function testCorrectSpacing()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnTypeHintsCorrect.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIncorrectSpacing(): void
+	/**
+	 * @return void
+	 */
+	public function testIncorrectSpacing()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnTypeHintsIncorrect.php');
 		self::assertSniffError($report, 3, ReturnTypeHintSpacingSniff::CODE_NO_SPACE_BETWEEN_COLON_AND_TYPE_HINT);
@@ -52,7 +58,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertSniffError($report, 141, ReturnTypeHintSpacingSniff::CODE_NO_SPACE_BETWEEN_COLON_AND_TYPE_HINT);
 	}
 
-	public function testIncorrectSpacingInInterface(): void
+	/**
+	 * @return void
+	 */
+	public function testIncorrectSpacingInInterface()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnTypeHintsIncorrect.php');
 		self::assertSniffError($report, 46, ReturnTypeHintSpacingSniff::CODE_NO_SPACE_BETWEEN_COLON_AND_TYPE_HINT);
@@ -75,13 +84,19 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertSniffError($report, 68, ReturnTypeHintSpacingSniff::CODE_MULTIPLE_SPACES_BETWEEN_COLON_AND_TYPE_HINT);
 	}
 
-	public function testCorrectSpacingWithNullable(): void
+	/**
+	 * @return void
+	 */
+	public function testCorrectSpacingWithNullable()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnNullableTypeHintsCorrect.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIncorrectSpacingWithNullable(): void
+	/**
+	 * @return void
+	 */
+	public function testIncorrectSpacingWithNullable()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnNullableTypeHintsIncorrect.php');
 
@@ -153,7 +168,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertSniffError($report, 140, ReturnTypeHintSpacingSniff::CODE_WHITESPACE_AFTER_NULLABILITY_SYMBOL);
 	}
 
-	public function testReturnTypeHintsArrayIncorrect(): void
+	/**
+	 * @return void
+	 */
+	public function testReturnTypeHintsArrayIncorrect()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnTypeHintsArrayIncorrect.php');
 
@@ -162,7 +180,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertSniffError($report, 6, ReturnTypeHintSpacingSniff::CODE_WHITESPACE_BEFORE_COLON);
 	}
 
-	public function testCorrectSpacingWithSpaceBeforeColon(): void
+	/**
+	 * @return void
+	 */
+	public function testCorrectSpacingWithSpaceBeforeColon()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnTypeHintsCorrectSpaceBeforeColon.php', [
 			'spacesCountBeforeColon' => 1,
@@ -170,7 +191,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIncorrectSpacingWithSpaceBeforeColon(): void
+	/**
+	 * @return void
+	 */
+	public function testIncorrectSpacingWithSpaceBeforeColon()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnTypeHintsIncorrectSpaceBeforeColon.php', [
 			'spacesCountBeforeColon' => 1,
@@ -208,7 +232,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertSniffError($report, 98, ReturnTypeHintSpacingSniff::CODE_INCORRECT_SPACES_BEFORE_COLON, $message);
 	}
 
-	public function testFixableReturnTypeHintNoSpaceBetweenColonAndType(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableReturnTypeHintNoSpaceBetweenColonAndType()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableReturnTypeHintNoSpaceBetweenColonAndType.php',
@@ -218,7 +245,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableReturnTypeHintMultipleSpacesBetweenColonAndType(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableReturnTypeHintMultipleSpacesBetweenColonAndType()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableReturnTypeHintMultipleSpacesBetweenColonAndType.php',
@@ -228,7 +258,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableReturnTypeHintNoSpaceBetweenColonAndNullabilitySymbol(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableReturnTypeHintNoSpaceBetweenColonAndNullabilitySymbol()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableReturnTypeHintNoSpaceBetweenColonAndNullabilitySymbol.php',
@@ -238,7 +271,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableReturnTypeHintMultipleSpacesBetweenColonAndNullabilitySymbol(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableReturnTypeHintMultipleSpacesBetweenColonAndNullabilitySymbol()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableReturnTypeHintMultipleSpacesBetweenColonAndNullabilitySymbol.php',
@@ -248,7 +284,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableReturnTypeHintWhitespaceAfterNullabilitySymbol(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableReturnTypeHintWhitespaceAfterNullabilitySymbol()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableReturnTypeHintWhitespaceAfterNullabilitySymbol.php',
@@ -258,7 +297,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableReturnTypeHintWhitespaceBeforeColon(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableReturnTypeHintWhitespaceBeforeColon()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableReturnTypeHintWhitespaceBeforeColon.php',
@@ -268,7 +310,10 @@ class ReturnTypeHintSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableReturnTypeHintWhitespaceBeforeColonWithSpace(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableReturnTypeHintWhitespaceBeforeColonWithSpace()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableReturnTypeHintWhitespaceBeforeColonWithSpace.php',

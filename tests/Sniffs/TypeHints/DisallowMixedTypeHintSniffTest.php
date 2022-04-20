@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class DisallowMixedTypeHintSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/disallowMixedTypeHintNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/disallowMixedTypeHintErrors.php');
 

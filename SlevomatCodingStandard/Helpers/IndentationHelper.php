@@ -21,26 +21,37 @@ use const T_START_NOWDOC;
 class IndentationHelper
 {
 
-	public const DEFAULT_INDENTATION_WIDTH = 4;
+	const DEFAULT_INDENTATION_WIDTH = 4;
 
-	public const TAB_INDENT = "\t";
-	public const SPACES_INDENT = '    ';
+	const TAB_INDENT = "\t";
+	const SPACES_INDENT = '    ';
 
-	public static function getIndentation(File $phpcsFile, int $pointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	public static function getIndentation($phpcsFile, $pointer): string
 	{
 		$firstPointerOnLine = TokenHelper::findFirstTokenOnLine($phpcsFile, $pointer);
 
 		return TokenHelper::getContent($phpcsFile, $firstPointerOnLine, $pointer - 1);
 	}
 
-	public static function addIndentation(string $identation, int $level = 1): string
+	/**
+	 * @param string $identation
+	 * @param int $level
+	 */
+	public static function addIndentation($identation, $level = 1): string
 	{
 		$whitespace = self::getOneIndentationLevel($identation);
 
 		return $identation . str_repeat($whitespace, $level);
 	}
 
-	public static function getOneIndentationLevel(string $identation): string
+	/**
+	 * @param string $identation
+	 */
+	public static function getOneIndentationLevel($identation): string
 	{
 		return $identation === ''
 			? self::TAB_INDENT
@@ -49,8 +60,10 @@ class IndentationHelper
 
 	/**
 	 * @param int[] $codePointers
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param string $defaultIndentation
 	 */
-	public static function fixIndentation(File $phpcsFile, array $codePointers, string $defaultIndentation): string
+	public static function fixIndentation($phpcsFile, $codePointers, $defaultIndentation): string
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -92,7 +105,11 @@ class IndentationHelper
 		return rtrim($code);
 	}
 
-	public static function convertTabsToSpaces(File $phpcsFile, string $code): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param string $code
+	 */
+	public static function convertTabsToSpaces($phpcsFile, $code): string
 	{
 		return preg_replace_callback('~^(\t+)~', static function (array $matches) use ($phpcsFile): string {
 			$indentation = str_repeat(

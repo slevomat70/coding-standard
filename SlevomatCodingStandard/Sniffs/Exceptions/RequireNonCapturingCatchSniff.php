@@ -23,7 +23,7 @@ use const T_WHITESPACE;
 class RequireNonCapturingCatchSniff implements Sniff
 {
 
-	public const CODE_NON_CAPTURING_CATCH_REQUIRED = 'NonCapturingCatchRequired';
+	const CODE_NON_CAPTURING_CATCH_REQUIRED = 'NonCapturingCatchRequired';
 
 	/** @var bool|null */
 	public $enable = null;
@@ -41,8 +41,10 @@ class RequireNonCapturingCatchSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $catchPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $catchPointer): void
+	public function process(File $phpcsFile, $catchPointer)
 	{
 		$this->enable = SniffSettingsHelper::isEnabledByPhpVersion($this->enable, 80000);
 

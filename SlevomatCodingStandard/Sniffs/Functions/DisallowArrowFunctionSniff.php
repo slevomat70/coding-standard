@@ -9,7 +9,7 @@ use const T_FN;
 class DisallowArrowFunctionSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_ARROW_FUNCTION = 'DisallowedArrowFunction';
+	const CODE_DISALLOWED_ARROW_FUNCTION = 'DisallowedArrowFunction';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -24,8 +24,10 @@ class DisallowArrowFunctionSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $arrowFunctionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $arrowFunctionPointer): void
+	public function process(File $phpcsFile, $arrowFunctionPointer)
 	{
 		$phpcsFile->addError('Use of arrow function is disallowed.', $arrowFunctionPointer, self::CODE_DISALLOWED_ARROW_FUNCTION);
 	}

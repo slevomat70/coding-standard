@@ -11,7 +11,7 @@ use const T_COMMA;
 class RequireTrailingCommaInDeclarationSniff implements Sniff
 {
 
-	public const CODE_MISSING_TRAILING_COMMA = 'MissingTrailingComma';
+	const CODE_MISSING_TRAILING_COMMA = 'MissingTrailingComma';
 
 	/** @var bool|null */
 	public $enable = null;
@@ -27,8 +27,10 @@ class RequireTrailingCommaInDeclarationSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $functionPointer): void
+	public function process(File $phpcsFile, $functionPointer)
 	{
 		$this->enable = SniffSettingsHelper::isEnabledByPhpVersion($this->enable, 80000);
 

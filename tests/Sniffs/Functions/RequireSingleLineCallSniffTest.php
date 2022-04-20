@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireSingleLineCallSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineCallNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineCallErrors.php');
 
@@ -47,7 +53,10 @@ class RequireSingleLineCallSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testForAllCallsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testForAllCallsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineCallAllCallsErrors.php', [
 			'maxLineLength' => 0,
@@ -60,7 +69,10 @@ class RequireSingleLineCallSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testWithComplexParametersEnabledErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithComplexParametersEnabledErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineCallWithComplexParametersEnabledErrors.php', [
 			'ignoreWithComplexParameter' => false,

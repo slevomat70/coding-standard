@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class NamespaceDeclarationSniffTest extends TestCase
 {
 
-	public function testInvalidWhitespaceAfterNamespaceNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testInvalidWhitespaceAfterNamespaceNoErrors()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/namespaceDeclarationInvalidWhitespaceAfterNamespaceNoErrors.php',
@@ -17,7 +20,10 @@ class NamespaceDeclarationSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testInvalidWhitespaceAfterNamespaceErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testInvalidWhitespaceAfterNamespaceErrors()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/namespaceDeclarationInvalidWhitespaceAfterNamespaceErrors.php',
@@ -49,7 +55,10 @@ class NamespaceDeclarationSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testDisallowedContentBetweenNamespaceNameAndSemicolonNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDisallowedContentBetweenNamespaceNameAndSemicolonNoErrors()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/namespaceDeclarationDisallowedContentBetweenNamespaceNameAndSemicolonNoErrors.php',
@@ -59,7 +68,10 @@ class NamespaceDeclarationSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDisallowedContentBetweenNamespaceNameAndSemicolonErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDisallowedContentBetweenNamespaceNameAndSemicolonErrors()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/namespaceDeclarationDisallowedContentBetweenNamespaceNameAndSemicolonErrors.php',
@@ -76,7 +88,10 @@ class NamespaceDeclarationSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testDisallowedBracketedSyntaxNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDisallowedBracketedSyntaxNoErrors()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/namespaceDeclarationDisallowedBracketedSyntaxNoErrors.php',
@@ -86,7 +101,10 @@ class NamespaceDeclarationSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDisallowedBracketedSyntaxErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDisallowedBracketedSyntaxErrors()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/namespaceDeclarationDisallowedBracketedSyntaxErrors.php',

@@ -11,9 +11,9 @@ use function strtolower;
 class UseStatement
 {
 
-	public const TYPE_CLASS = ReferencedName::TYPE_CLASS;
-	public const TYPE_FUNCTION = ReferencedName::TYPE_FUNCTION;
-	public const TYPE_CONSTANT = ReferencedName::TYPE_CONSTANT;
+	const TYPE_CLASS = ReferencedName::TYPE_CLASS;
+	const TYPE_FUNCTION = ReferencedName::TYPE_FUNCTION;
+	const TYPE_CONSTANT = ReferencedName::TYPE_CONSTANT;
 
 	/** @var string */
 	private $nameAsReferencedInFile;
@@ -33,12 +33,15 @@ class UseStatement
 	/** @var string|null */
 	private $alias;
 
+	/**
+	 * @param string|null $alias
+	 */
 	public function __construct(
 		string $nameAsReferencedInFile,
 		string $fullyQualifiedClassName,
 		int $usePointer,
 		string $type,
-		?string $alias
+		$alias
 	)
 	{
 		$this->nameAsReferencedInFile = $nameAsReferencedInFile;
@@ -74,7 +77,10 @@ class UseStatement
 		return $this->type;
 	}
 
-	public function getAlias(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getAlias()
 	{
 		return $this->alias;
 	}
@@ -94,12 +100,19 @@ class UseStatement
 		return $this->type === self::TYPE_FUNCTION;
 	}
 
-	public function hasSameType(self $that): bool
+	/**
+	 * @param $this $that
+	 */
+	public function hasSameType($that): bool
 	{
 		return $this->type === $that->type;
 	}
 
-	public static function getUniqueId(string $type, string $name): string
+	/**
+	 * @param string $type
+	 * @param string $name
+	 */
+	public static function getUniqueId($type, $name): string
 	{
 		$normalizedName = self::normalizedNameAsReferencedInFile($type, $name);
 
@@ -110,7 +123,11 @@ class UseStatement
 		return sprintf('%s %s', $type, $normalizedName);
 	}
 
-	public static function normalizedNameAsReferencedInFile(string $type, string $name): string
+	/**
+	 * @param string $type
+	 * @param string $name
+	 */
+	public static function normalizedNameAsReferencedInFile($type, $name): string
 	{
 		if ($type === self::TYPE_CONSTANT) {
 			return $name;
@@ -119,7 +136,11 @@ class UseStatement
 		return strtolower($name);
 	}
 
-	public static function getTypeName(string $type): ?string
+	/**
+	 * @param string $type
+	 * @return string|null
+	 */
+	public static function getTypeName($type)
 	{
 		if ($type === self::TYPE_CONSTANT) {
 			return 'const';

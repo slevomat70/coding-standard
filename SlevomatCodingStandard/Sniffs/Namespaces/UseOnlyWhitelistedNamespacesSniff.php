@@ -13,7 +13,7 @@ use const T_USE;
 class UseOnlyWhitelistedNamespacesSniff implements Sniff
 {
 
-	public const CODE_NON_FULLY_QUALIFIED = 'NonFullyQualified';
+	const CODE_NON_FULLY_QUALIFIED = 'NonFullyQualified';
 
 	/** @var bool */
 	public $allowUseFromRootNamespace = false;
@@ -37,8 +37,10 @@ class UseOnlyWhitelistedNamespacesSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $usePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $usePointer): void
+	public function process(File $phpcsFile, $usePointer)
 	{
 		if (
 			UseStatementHelper::isAnonymousFunctionUse($phpcsFile, $usePointer)

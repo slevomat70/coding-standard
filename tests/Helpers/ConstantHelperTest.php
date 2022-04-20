@@ -5,7 +5,10 @@ namespace SlevomatCodingStandard\Helpers;
 class ConstantHelperTest extends TestCase
 {
 
-	public function testNameWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testNameWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/constantWithNamespace.php');
 
@@ -14,7 +17,10 @@ class ConstantHelperTest extends TestCase
 		self::assertSame('FOO', ConstantHelper::getName($phpcsFile, $constantPointer));
 	}
 
-	public function testNameWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testNameWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/constantWithoutNamespace.php');
 
@@ -23,13 +29,19 @@ class ConstantHelperTest extends TestCase
 		self::assertSame('FOO', ConstantHelper::getName($phpcsFile, $constantPointer));
 	}
 
-	public function testGetAllNames(): void
+	/**
+	 * @return void
+	 */
+	public function testGetAllNames()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/constantNames.php');
 		self::assertSame(['FOO', 'BOO'], ConstantHelper::getAllNames($phpcsFile));
 	}
 
-	public function testGetAllNamesNoNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testGetAllNamesNoNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/constantWithoutNamespace.php');
 		self::assertSame(['FOO'], ConstantHelper::getAllNames($phpcsFile));

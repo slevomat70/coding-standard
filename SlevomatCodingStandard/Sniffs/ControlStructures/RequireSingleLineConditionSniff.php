@@ -12,7 +12,7 @@ use function strlen;
 class RequireSingleLineConditionSniff extends AbstractLineCondition
 {
 
-	public const CODE_REQUIRED_SINGLE_LINE_CONDITION = 'RequiredSingleLineCondition';
+	const CODE_REQUIRED_SINGLE_LINE_CONDITION = 'RequiredSingleLineCondition';
 
 	/** @var int */
 	public $maxLineLength = 120;
@@ -23,8 +23,10 @@ class RequireSingleLineConditionSniff extends AbstractLineCondition
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $controlStructurePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $controlStructurePointer): void
+	public function process(File $phpcsFile, $controlStructurePointer)
 	{
 		if ($this->shouldBeSkipped($phpcsFile, $controlStructurePointer)) {
 			return;

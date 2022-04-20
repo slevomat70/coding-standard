@@ -8,9 +8,9 @@ namespace SlevomatCodingStandard\Helpers;
 class ReferencedName
 {
 
-	public const TYPE_CLASS = 'class';
-	public const TYPE_FUNCTION = 'function';
-	public const TYPE_CONSTANT = 'constant';
+	const TYPE_CLASS = 'class';
+	const TYPE_FUNCTION = 'function';
+	const TYPE_CONSTANT = 'constant';
 
 	/** @var string */
 	private $nameAsReferencedInFile;
@@ -67,7 +67,10 @@ class ReferencedName
 		return $this->type === self::TYPE_FUNCTION;
 	}
 
-	public function hasSameUseStatementType(UseStatement $useStatement): bool
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\UseStatement $useStatement
+	 */
+	public function hasSameUseStatementType($useStatement): bool
 	{
 		return $this->getType() === $useStatement->getType();
 	}

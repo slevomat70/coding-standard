@@ -9,7 +9,7 @@ use const T_EMPTY;
 class DisallowEmptySniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_EMPTY = 'DisallowedEmpty';
+	const CODE_DISALLOWED_EMPTY = 'DisallowedEmpty';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -24,8 +24,10 @@ class DisallowEmptySniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $emptyPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $emptyPointer): void
+	public function process(File $phpcsFile, $emptyPointer)
 	{
 		$phpcsFile->addError('Use of empty() is disallowed.', $emptyPointer, self::CODE_DISALLOWED_EMPTY);
 	}

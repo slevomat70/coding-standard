@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireArrowFunctionSniffTest extends TestCase
 {
 
-	public function testDisallowNestedNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDisallowNestedNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireArrowFunctionDisallowNestedNoErrors.php', [
 			'allowNested' => false,
@@ -16,7 +19,10 @@ class RequireArrowFunctionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDisallowNestedErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDisallowNestedErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireArrowFunctionDisallowNestedErrors.php', [
 			'allowNested' => false,
@@ -33,7 +39,10 @@ class RequireArrowFunctionSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testAllowNestedNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testAllowNestedNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireArrowFunctionAllowNestedNoErrors.php', [
 			'allowNested' => true,
@@ -42,7 +51,10 @@ class RequireArrowFunctionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testAllowNestedErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testAllowNestedErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireArrowFunctionAllowNestedErrors.php', [
 			'allowNested' => true,
@@ -58,7 +70,10 @@ class RequireArrowFunctionSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testShouldNotReportIfSniffIsDisabled(): void
+	/**
+	 * @return void
+	 */
+	public function testShouldNotReportIfSniffIsDisabled()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireArrowFunctionAllowNestedErrors.php', [
 			'allowNested' => true,

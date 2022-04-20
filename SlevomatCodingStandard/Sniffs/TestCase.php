@@ -32,8 +32,9 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 	 * @param (string|int|bool|array<int|string, (string|int|bool|null)>)[] $sniffProperties
 	 * @param string[] $codesToCheck
 	 * @param string[] $cliArgs
+	 * @param string $filePath
 	 */
-	protected static function checkFile(string $filePath, array $sniffProperties = [], array $codesToCheck = [], array $cliArgs = []): File
+	protected static function checkFile($filePath, $sniffProperties = [], $codesToCheck = [], $cliArgs = []): File
 	{
 		if (defined('PHP_CODESNIFFER_CBF') === false) {
 			define('PHP_CODESNIFFER_CBF', false);
@@ -70,13 +71,24 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 		return $file;
 	}
 
-	protected static function assertNoSniffErrorInFile(File $phpcsFile): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
+	 */
+	protected static function assertNoSniffErrorInFile($phpcsFile)
 	{
 		$errors = $phpcsFile->getErrors();
 		self::assertEmpty($errors, sprintf('No errors expected, but %d errors found.', count($errors)));
 	}
 
-	protected static function assertSniffError(File $phpcsFile, int $line, string $code, ?string $message = null): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $line
+	 * @param string $code
+	 * @param string|null $message
+	 * @return void
+	 */
+	protected static function assertSniffError($phpcsFile, $line, $code, $message = null)
 	{
 		$errors = $phpcsFile->getErrors();
 		self::assertTrue(isset($errors[$line]), sprintf('Expected error on line %s, but none found.', $line));
@@ -101,7 +113,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 		);
 	}
 
-	protected static function assertNoSniffError(File $phpcsFile, int $line): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $line
+	 * @return void
+	 */
+	protected static function assertNoSniffError($phpcsFile, $line)
 	{
 		$errors = $phpcsFile->getErrors();
 		self::assertFalse(
@@ -116,7 +133,11 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 		);
 	}
 
-	protected static function assertAllFixedInFile(File $phpcsFile): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
+	 */
+	protected static function assertAllFixedInFile($phpcsFile)
 	{
 		$phpcsFile->disableCaching();
 		$phpcsFile->fixer->fixFile();
@@ -162,8 +183,9 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
 	/**
 	 * @param (string|int)[][][] $errorsOnLine
+	 * @param string|null $message
 	 */
-	private static function hasError(array $errorsOnLine, string $sniffCode, ?string $message): bool
+	private static function hasError(array $errorsOnLine, string $sniffCode, $message): bool
 	{
 		$hasError = false;
 

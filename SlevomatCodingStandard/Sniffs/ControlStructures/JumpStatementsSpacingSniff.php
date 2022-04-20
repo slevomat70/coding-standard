@@ -55,8 +55,10 @@ class JumpStatementsSpacingSniff extends AbstractControlStructureSpacing
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $jumpStatementPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $jumpStatementPointer): void
+	public function process(File $phpcsFile, $jumpStatementPointer)
 	{
 		if ($this->isOneOfYieldSpecialCases($phpcsFile, $jumpStatementPointer)) {
 			return;
@@ -94,7 +96,11 @@ class JumpStatementsSpacingSniff extends AbstractControlStructureSpacing
 		return SniffSettingsHelper::normalizeInteger($this->linesCountBefore);
 	}
 
-	protected function getLinesCountBeforeFirst(File $phpcsFile, int $jumpStatementPointer): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $jumpStatementPointer
+	 */
+	protected function getLinesCountBeforeFirst($phpcsFile, $jumpStatementPointer): int
 	{
 		if (
 			$this->linesCountBeforeWhenFirstInCaseOrDefault !== null
@@ -113,8 +119,11 @@ class JumpStatementsSpacingSniff extends AbstractControlStructureSpacing
 
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $jumpStatementPointer
+	 * @param int $jumpStatementEndPointer
 	 */
-	protected function getLinesCountAfterLast(File $phpcsFile, int $jumpStatementPointer, int $jumpStatementEndPointer): int
+	protected function getLinesCountAfterLast($phpcsFile, $jumpStatementPointer, $jumpStatementEndPointer): int
 	{
 		if (
 			$this->linesCountAfterWhenLastInLastCaseOrDefault !== null
@@ -133,7 +142,12 @@ class JumpStatementsSpacingSniff extends AbstractControlStructureSpacing
 		return SniffSettingsHelper::normalizeInteger($this->linesCountAfterLast);
 	}
 
-	protected function checkLinesBefore(File $phpcsFile, int $jumpStatementPointer): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $jumpStatementPointer
+	 * @return void
+	 */
+	protected function checkLinesBefore($phpcsFile, $jumpStatementPointer)
 	{
 		if (
 			$this->allowSingleLineYieldStacking
@@ -149,7 +163,12 @@ class JumpStatementsSpacingSniff extends AbstractControlStructureSpacing
 		parent::checkLinesBefore($phpcsFile, $jumpStatementPointer);
 	}
 
-	protected function checkLinesAfter(File $phpcsFile, int $jumpStatementPointer): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $jumpStatementPointer
+	 * @return void
+	 */
+	protected function checkLinesAfter($phpcsFile, $jumpStatementPointer)
 	{
 		if (
 			$this->allowSingleLineYieldStacking

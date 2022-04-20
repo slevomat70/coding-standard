@@ -21,7 +21,7 @@ use const T_SEMICOLON;
 class NewWithParenthesesSniff implements Sniff
 {
 
-	public const CODE_MISSING_PARENTHESES = 'MissingParentheses';
+	const CODE_MISSING_PARENTHESES = 'MissingParentheses';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -36,8 +36,10 @@ class NewWithParenthesesSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $newPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $newPointer): void
+	public function process(File $phpcsFile, $newPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 		/** @var int $nextPointer */

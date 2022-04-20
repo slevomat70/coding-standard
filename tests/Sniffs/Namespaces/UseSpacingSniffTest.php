@@ -7,31 +7,46 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UseSpacingSniffTest extends TestCase
 {
 
-	public function testNoUseNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoUseNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingNoUse.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testOneUseNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testOneUseNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingOneUse.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingWithDefaultSettingsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsWithCommentsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsWithCommentsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingWithDefaultSettingsWithCommentsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsWithCommentsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsWithCommentsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingWithDefaultSettingsWithCommentsErrors.php');
 
@@ -45,7 +60,10 @@ class UseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testDefaultSettingsWithComments2Errors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsWithComments2Errors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingWithDefaultSettingsWithComments2Errors.php');
 
@@ -56,13 +74,19 @@ class UseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testDefaultSettingsWithInlineCommentsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsWithInlineCommentsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingWithDefaultSettingsWithInlineCommentsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsWithInlineCommentsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsWithInlineCommentsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingWithDefaultSettingsWithInlineCommentsErrors.php');
 
@@ -76,7 +100,10 @@ class UseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testDefaultSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingWithDefaultSettingsErrors.php');
 
@@ -88,13 +115,19 @@ class UseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testAfterOpenTagNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testAfterOpenTagNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingAfterOpenTagNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testAfterOpenTagErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testAfterOpenTagErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingAfterOpenTagErrors.php');
 
@@ -105,7 +138,10 @@ class UseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingWithModifiedSettingsNoErrors.php', [
 			'linesCountBeforeFirstUse' => 0,
@@ -115,7 +151,10 @@ class UseSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingWithModifiedSettingsErrors.php', [
 			'linesCountBeforeFirstUse' => 0,
@@ -133,7 +172,10 @@ class UseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testMultipleUseTypesErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testMultipleUseTypesErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingMultipleUseTypesErrors.php', [
 			'linesCountBeforeFirstUse' => 1,
@@ -151,7 +193,10 @@ class UseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testNoLineBeforeUse(): void
+	/**
+	 * @return void
+	 */
+	public function testNoLineBeforeUse()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingNoLineBeforeUse.php');
 
@@ -160,7 +205,10 @@ class UseSpacingSniffTest extends TestCase
 		self::assertSniffError($report, 3, UseSpacingSniff::CODE_INCORRECT_LINES_COUNT_BEFORE_FIRST_USE);
 	}
 
-	public function testNoLineAfterUse(): void
+	/**
+	 * @return void
+	 */
+	public function testNoLineAfterUse()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingNoLineAfterUse.php');
 
@@ -169,13 +217,19 @@ class UseSpacingSniffTest extends TestCase
 		self::assertSniffError($report, 3, UseSpacingSniff::CODE_INCORRECT_LINES_COUNT_AFTER_LAST_USE);
 	}
 
-	public function testNoCodeAfterUse(): void
+	/**
+	 * @return void
+	 */
+	public function testNoCodeAfterUse()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingNoCodeAfterUse.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testSameUseTypesErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testSameUseTypesErrors()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/useSpacingSameUseTypesErrors.php',
@@ -192,7 +246,10 @@ class UseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testMoreNamespaces(): void
+	/**
+	 * @return void
+	 */
+	public function testMoreNamespaces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/useSpacingMoreNamespacesErrors.php');
 

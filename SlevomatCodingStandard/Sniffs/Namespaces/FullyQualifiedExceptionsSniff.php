@@ -20,7 +20,7 @@ use const T_OPEN_TAG;
 class FullyQualifiedExceptionsSniff implements Sniff
 {
 
-	public const CODE_NON_FULLY_QUALIFIED_EXCEPTION = 'NonFullyQualifiedException';
+	const CODE_NON_FULLY_QUALIFIED_EXCEPTION = 'NonFullyQualifiedException';
 
 	/** @var string[] */
 	public $specialExceptionNames = [];
@@ -47,8 +47,10 @@ class FullyQualifiedExceptionsSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $openTagPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $openTagPointer): void
+	public function process(File $phpcsFile, $openTagPointer)
 	{
 		if (TokenHelper::findPrevious($phpcsFile, T_OPEN_TAG, $openTagPointer - 1) !== null) {
 			return;

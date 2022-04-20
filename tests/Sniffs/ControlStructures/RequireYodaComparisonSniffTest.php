@@ -8,13 +8,19 @@ use function range;
 class RequireYodaComparisonSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireYodaComparisonNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireYodaComparisonErrors.php');
 		foreach (range(3, 37) as $lineNumber) {
@@ -24,7 +30,10 @@ class RequireYodaComparisonSniffTest extends TestCase
 		self::assertSniffError($report, 41, RequireYodaComparisonSniff::CODE_REQUIRED_YODA_COMPARISON);
 	}
 
-	public function testFixable(): void
+	/**
+	 * @return void
+	 */
+	public function testFixable()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableRequireYodaComparisons.php',
@@ -34,7 +43,10 @@ class RequireYodaComparisonSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testAlwaysVariableOnRight(): void
+	/**
+	 * @return void
+	 */
+	public function testAlwaysVariableOnRight()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireYodaComparisonsAlwaysVariableOnRightErrors.php', [
 			'alwaysVariableOnRight' => true,

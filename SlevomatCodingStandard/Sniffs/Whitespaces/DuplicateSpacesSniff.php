@@ -28,7 +28,7 @@ use const T_WHITESPACE;
 class DuplicateSpacesSniff implements Sniff
 {
 
-	public const CODE_DUPLICATE_SPACES = 'DuplicateSpaces';
+	const CODE_DUPLICATE_SPACES = 'DuplicateSpaces';
 
 	/** @var bool */
 	public $ignoreSpacesBeforeAssignment = false;
@@ -57,8 +57,10 @@ class DuplicateSpacesSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $whitespacePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $whitespacePointer): void
+	public function process(File $phpcsFile, $whitespacePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -125,7 +127,7 @@ class DuplicateSpacesSniff implements Sniff
 		$tabWidth = $phpcsFile->config->tabWidth;
 
 		$fix = false;
-		foreach ($matches[0] as [$match, $offset]) {
+		foreach ($matches[0] as list($match, $offset)) {
 			$firstPointerOnLine = TokenHelper::findFirstNonWhitespaceOnLine($phpcsFile, $whitespacePointer - 1);
 			$indendation = IndentationHelper::getIndentation($phpcsFile, $firstPointerOnLine);
 			$indendationWithoutTabs = str_replace(

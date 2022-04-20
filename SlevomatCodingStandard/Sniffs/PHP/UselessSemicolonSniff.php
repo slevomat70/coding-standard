@@ -23,7 +23,7 @@ use const T_WHITESPACE;
 class UselessSemicolonSniff implements Sniff
 {
 
-	public const CODE_USELESS_SEMICOLON = 'UselessSemicolon';
+	const CODE_USELESS_SEMICOLON = 'UselessSemicolon';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -38,15 +38,20 @@ class UselessSemicolonSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $semicolonPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $semicolonPointer): void
+	public function process(File $phpcsFile, $semicolonPointer)
 	{
 		$this->checkMultipleSemicolons($phpcsFile, $semicolonPointer);
 		$this->checkSemicolonAtTheBeginningOfScope($phpcsFile, $semicolonPointer);
 		$this->checkSemicolonAfterScope($phpcsFile, $semicolonPointer);
 	}
 
-	private function checkMultipleSemicolons(File $phpcsFile, int $semicolonPointer): void
+	/**
+	 * @return void
+	 */
+	private function checkMultipleSemicolons(File $phpcsFile, int $semicolonPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -74,7 +79,10 @@ class UselessSemicolonSniff implements Sniff
 		$this->removeUselessSemicolon($phpcsFile, $semicolonPointer);
 	}
 
-	private function checkSemicolonAtTheBeginningOfScope(File $phpcsFile, int $semicolonPointer): void
+	/**
+	 * @return void
+	 */
+	private function checkSemicolonAtTheBeginningOfScope(File $phpcsFile, int $semicolonPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -92,7 +100,10 @@ class UselessSemicolonSniff implements Sniff
 		$this->removeUselessSemicolon($phpcsFile, $semicolonPointer);
 	}
 
-	private function checkSemicolonAfterScope(File $phpcsFile, int $semicolonPointer): void
+	/**
+	 * @return void
+	 */
+	private function checkSemicolonAfterScope(File $phpcsFile, int $semicolonPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -119,7 +130,10 @@ class UselessSemicolonSniff implements Sniff
 		$this->removeUselessSemicolon($phpcsFile, $semicolonPointer);
 	}
 
-	private function removeUselessSemicolon(File $phpcsFile, int $semicolonPointer): void
+	/**
+	 * @return void
+	 */
+	private function removeUselessSemicolon(File $phpcsFile, int $semicolonPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

@@ -9,7 +9,7 @@ use const T_NULLSAFE_OBJECT_OPERATOR;
 class DisallowNullSafeObjectOperatorSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_NULL_SAFE_OBJECT_OPERATOR = 'DisallowedNullSafeObjectOperator';
+	const CODE_DISALLOWED_NULL_SAFE_OBJECT_OPERATOR = 'DisallowedNullSafeObjectOperator';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -24,8 +24,10 @@ class DisallowNullSafeObjectOperatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $operatorPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $operatorPointer): void
+	public function process(File $phpcsFile, $operatorPointer)
 	{
 		$phpcsFile->addError('Operator ?-> is disallowed.', $operatorPointer, self::CODE_DISALLOWED_NULL_SAFE_OBJECT_OPERATOR);
 	}

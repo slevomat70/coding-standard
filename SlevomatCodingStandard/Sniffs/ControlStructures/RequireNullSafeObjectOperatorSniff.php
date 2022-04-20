@@ -36,9 +36,9 @@ use const T_STRING;
 class RequireNullSafeObjectOperatorSniff implements Sniff
 {
 
-	public const CODE_REQUIRED_NULL_SAFE_OBJECT_OPERATOR = 'RequiredNullSafeObjectOperator';
+	const CODE_REQUIRED_NULL_SAFE_OBJECT_OPERATOR = 'RequiredNullSafeObjectOperator';
 
-	private const OPERATOR_REGEXP = '~(::|->|\?->)~';
+	const OPERATOR_REGEXP = '~(::|->|\?->)~';
 
 	/** @var bool|null */
 	public $enable = null;
@@ -57,6 +57,7 @@ class RequireNullSafeObjectOperatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $identicalPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
 	public function process(File $phpcsFile, $identicalPointer): int
 	{
@@ -118,13 +119,16 @@ class RequireNullSafeObjectOperatorSniff implements Sniff
 		return $identicalPointer + 1;
 	}
 
+	/**
+	 * @return void
+	 */
 	private function checkTernaryOperator(
 		File $phpcsFile,
 		int $identicalPointer,
 		int $conditionStartPointer,
 		string $identificator,
 		int $inlineThenPointer
-	): void
+	)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -169,7 +173,7 @@ class RequireNullSafeObjectOperatorSniff implements Sniff
 				return;
 			}
 
-			[$nextIdentificatorStartPointer, $nextIdentificatorEndPointer] = $nextIdentificatorPointers;
+			list($nextIdentificatorStartPointer, $nextIdentificatorEndPointer) = $nextIdentificatorPointers;
 
 			$nextIdentificator = IdentificatorHelper::getContent($phpcsFile, $nextIdentificatorStartPointer, $nextIdentificatorEndPointer);
 
@@ -211,7 +215,7 @@ class RequireNullSafeObjectOperatorSniff implements Sniff
 				return;
 			}
 
-			[$nextIdentificatorStartPointer, $nextIdentificatorEndPointer] = $nextIdentificatorPointers;
+			list($nextIdentificatorStartPointer, $nextIdentificatorEndPointer) = $nextIdentificatorPointers;
 
 			if ($nextIdentificatorEndPointer !== $inlineElseEndPointer) {
 				return;
@@ -270,7 +274,7 @@ class RequireNullSafeObjectOperatorSniff implements Sniff
 			return $nextConditionBooleanPointer;
 		}
 
-		[$nextIdentificatorStartPointer, $nextIdentificatorEndPointer] = $nextIdentificatorPointers;
+		list($nextIdentificatorStartPointer, $nextIdentificatorEndPointer) = $nextIdentificatorPointers;
 
 		$nextIdentificator = IdentificatorHelper::getContent($phpcsFile, $nextIdentificatorStartPointer, $nextIdentificatorEndPointer);
 
@@ -331,9 +335,9 @@ class RequireNullSafeObjectOperatorSniff implements Sniff
 	}
 
 	/**
-	 * @return array<int, int>|null
+	 * @return mixed[]|null
 	 */
-	private function getNextIdentificator(File $phpcsFile, int $pointerBefore): ?array
+	private function getNextIdentificator(File $phpcsFile, int $pointerBefore)
 	{
 		/** @var int $nextIdentificatorStartPointer */
 		$nextIdentificatorStartPointer = TokenHelper::findNextEffective($phpcsFile, $pointerBefore + 1);
@@ -346,7 +350,10 @@ class RequireNullSafeObjectOperatorSniff implements Sniff
 		return [$nextIdentificatorStartPointer, $nextIdentificatorEndPointer];
 	}
 
-	private function findIdentificatorStart(File $phpcsFile, int $identificatorEndPointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findIdentificatorStart(File $phpcsFile, int $identificatorEndPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -376,7 +383,10 @@ class RequireNullSafeObjectOperatorSniff implements Sniff
 		return $identificatorStartPointer;
 	}
 
-	private function findIdentificatorEnd(File $phpcsFile, int $identificatorStartPointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findIdentificatorEnd(File $phpcsFile, int $identificatorStartPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

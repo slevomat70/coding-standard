@@ -18,7 +18,11 @@ class ExtendsAnnotation extends Annotation
 	/** @var ExtendsTagValueNode|null */
 	private $contentNode;
 
-	public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?ExtendsTagValueNode $contentNode)
+	/**
+	 * @param string|null $content
+	 * @param \PHPStan\PhpDocParser\Ast\PhpDoc\ExtendsTagValueNode|null $contentNode
+	 */
+	public function __construct(string $name, int $startPointer, int $endPointer, $content, $contentNode)
 	{
 		if (!in_array($name, ['@extends', '@template-extends', '@phpstan-extends'], true)) {
 			throw new InvalidArgumentException(sprintf('Unsupported annotation %s.', $name));
@@ -46,7 +50,10 @@ class ExtendsAnnotation extends Annotation
 		return $this->getDescription() !== null;
 	}
 
-	public function getDescription(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getDescription()
 	{
 		$this->errorWhenInvalid();
 

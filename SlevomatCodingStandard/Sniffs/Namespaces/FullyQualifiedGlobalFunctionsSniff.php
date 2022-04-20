@@ -37,7 +37,10 @@ class FullyQualifiedGlobalFunctionsSniff
 		return false;
 	}
 
-	protected function isValidType(ReferencedName $name): bool
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\ReferencedName $name
+	 */
+	protected function isValidType($name): bool
 	{
 		return $name->isFunction();
 	}

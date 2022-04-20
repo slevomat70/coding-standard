@@ -23,7 +23,7 @@ use const T_VARIABLE;
 class RequireTrailingCommaInCallSniff implements Sniff
 {
 
-	public const CODE_MISSING_TRAILING_COMMA = 'MissingTrailingComma';
+	const CODE_MISSING_TRAILING_COMMA = 'MissingTrailingComma';
 
 	/** @var bool|null */
 	public $enable = null;
@@ -41,8 +41,10 @@ class RequireTrailingCommaInCallSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $parenthesisOpenerPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $parenthesisOpenerPointer): void
+	public function process(File $phpcsFile, $parenthesisOpenerPointer)
 	{
 		$this->enable = SniffSettingsHelper::isEnabledByPhpVersion($this->enable, 70300);
 

@@ -18,7 +18,7 @@ use const T_WHITESPACE;
 class RequireMultiLineMethodSignatureSniff extends AbstractMethodSignature
 {
 
-	public const CODE_REQUIRED_MULTI_LINE_SIGNATURE = 'RequiredMultiLineSignature';
+	const CODE_REQUIRED_MULTI_LINE_SIGNATURE = 'RequiredMultiLineSignature';
 
 	/** @var int */
 	public $minLineLength = 121;
@@ -38,8 +38,10 @@ class RequireMultiLineMethodSignatureSniff extends AbstractMethodSignature
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $methodPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $methodPointer): void
+	public function process(File $phpcsFile, $methodPointer)
 	{
 		if (!FunctionHelper::isMethod($phpcsFile, $methodPointer)) {
 			return;
@@ -47,7 +49,7 @@ class RequireMultiLineMethodSignatureSniff extends AbstractMethodSignature
 
 		$tokens = $phpcsFile->getTokens();
 
-		[$signatureStartPointer, $signatureEndPointer] = $this->getSignatureStartAndEndPointers($phpcsFile, $methodPointer);
+		list($signatureStartPointer, $signatureEndPointer) = $this->getSignatureStartAndEndPointers($phpcsFile, $methodPointer);
 
 		if ($tokens[$signatureStartPointer]['line'] < $tokens[$signatureEndPointer]['line']) {
 			return;

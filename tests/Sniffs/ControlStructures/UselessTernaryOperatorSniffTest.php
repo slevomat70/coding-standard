@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UselessTernaryOperatorSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessTernaryOperatorNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessTernaryOperatorErrors.php');
 
@@ -36,7 +42,10 @@ class UselessTernaryOperatorSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testErrorsWithAssumeAllConditionExpressionsAreAlreadyBooleanEnabled(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithAssumeAllConditionExpressionsAreAlreadyBooleanEnabled()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/uselessTernaryOperatorErrorsWithAssumeAllConditionExpressionsAreAlreadyBooleanEnabled.php',

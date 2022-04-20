@@ -103,8 +103,12 @@ class TokenHelper
 
 	/**
 	 * @param (int|string)|(int|string)[] $types
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $startPointer
+	 * @param int|null $endPointer
+	 * @return int|null
 	 */
-	public static function findNext(File $phpcsFile, $types, int $startPointer, ?int $endPointer = null): ?int
+	public static function findNext($phpcsFile, $types, $startPointer, $endPointer = null)
 	{
 		/** @var int|false $token */
 		$token = $phpcsFile->findNext($types, $startPointer, $endPointer, false);
@@ -114,8 +118,11 @@ class TokenHelper
 	/**
 	 * @param (int|string)|(int|string)[] $types
 	 * @return int[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $startPointer
+	 * @param int|null $endPointer
 	 */
-	public static function findNextAll(File $phpcsFile, $types, int $startPointer, ?int $endPointer = null): array
+	public static function findNextAll($phpcsFile, $types, $startPointer, $endPointer = null): array
 	{
 		$pointers = [];
 
@@ -135,8 +142,13 @@ class TokenHelper
 
 	/**
 	 * @param (int|string)|(int|string)[] $types
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param string $content
+	 * @param int $startPointer
+	 * @param int|null $endPointer
+	 * @return int|null
 	 */
-	public static function findNextContent(File $phpcsFile, $types, string $content, int $startPointer, ?int $endPointer = null): ?int
+	public static function findNextContent($phpcsFile, $types, $content, $startPointer, $endPointer = null)
 	{
 		/** @var int|false $token */
 		$token = $phpcsFile->findNext($types, $startPointer, $endPointer, false, $content);
@@ -146,8 +158,10 @@ class TokenHelper
 	/**
 	 * @param int $startPointer Search starts at this token, inclusive
 	 * @param int|null $endPointer Search ends at this token, exclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return int|null
 	 */
-	public static function findNextEffective(File $phpcsFile, int $startPointer, ?int $endPointer = null): ?int
+	public static function findNextEffective($phpcsFile, $startPointer, $endPointer = null)
 	{
 		return self::findNextExcluding($phpcsFile, self::$ineffectiveTokenCodes, $startPointer, $endPointer);
 	}
@@ -156,8 +170,10 @@ class TokenHelper
 	 * @param (int|string)|(int|string)[] $types
 	 * @param int $startPointer Search starts at this token, inclusive
 	 * @param int|null $endPointer Search ends at this token, exclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return int|null
 	 */
-	public static function findNextExcluding(File $phpcsFile, $types, int $startPointer, ?int $endPointer = null): ?int
+	public static function findNextExcluding($phpcsFile, $types, $startPointer, $endPointer = null)
 	{
 		/** @var int|false $token */
 		$token = $phpcsFile->findNext($types, $startPointer, $endPointer, true);
@@ -166,8 +182,12 @@ class TokenHelper
 
 	/**
 	 * @param (int|string)|(int|string)[] $types
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $startPointer
+	 * @param int|null $endPointer
+	 * @return int|null
 	 */
-	public static function findNextLocal(File $phpcsFile, $types, int $startPointer, ?int $endPointer = null): ?int
+	public static function findNextLocal($phpcsFile, $types, $startPointer, $endPointer = null)
 	{
 		/** @var int|false $token */
 		$token = $phpcsFile->findNext($types, $startPointer, $endPointer, false, null, true);
@@ -177,8 +197,10 @@ class TokenHelper
 	/**
 	 * @param int $startPointer Search starts at this token, inclusive
 	 * @param int|null $endPointer Search ends at this token, exclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return int|null
 	 */
-	public static function findNextAnyToken(File $phpcsFile, int $startPointer, ?int $endPointer = null): ?int
+	public static function findNextAnyToken($phpcsFile, $startPointer, $endPointer = null)
 	{
 		return self::findNextExcluding($phpcsFile, [], $startPointer, $endPointer);
 	}
@@ -187,8 +209,10 @@ class TokenHelper
 	 * @param (int|string)|(int|string)[] $types
 	 * @param int $startPointer Search starts at this token, inclusive
 	 * @param int|null $endPointer Search ends at this token, exclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return int|null
 	 */
-	public static function findPrevious(File $phpcsFile, $types, int $startPointer, ?int $endPointer = null): ?int
+	public static function findPrevious($phpcsFile, $types, $startPointer, $endPointer = null)
 	{
 		/** @var int|false $token */
 		$token = $phpcsFile->findPrevious($types, $startPointer, $endPointer, false);
@@ -197,8 +221,13 @@ class TokenHelper
 
 	/**
 	 * @param (int|string)|(int|string)[] $types
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param string $content
+	 * @param int $startPointer
+	 * @param int|null $endPointer
+	 * @return int|null
 	 */
-	public static function findPreviousContent(File $phpcsFile, $types, string $content, int $startPointer, ?int $endPointer = null): ?int
+	public static function findPreviousContent($phpcsFile, $types, $content, $startPointer, $endPointer = null)
 	{
 		/** @var int|false $token */
 		$token = $phpcsFile->findPrevious($types, $startPointer, $endPointer, false, $content);
@@ -208,8 +237,10 @@ class TokenHelper
 	/**
 	 * @param int $startPointer Search starts at this token, inclusive
 	 * @param int|null $endPointer Search ends at this token, exclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return int|null
 	 */
-	public static function findPreviousEffective(File $phpcsFile, int $startPointer, ?int $endPointer = null): ?int
+	public static function findPreviousEffective($phpcsFile, $startPointer, $endPointer = null)
 	{
 		return self::findPreviousExcluding($phpcsFile, self::$ineffectiveTokenCodes, $startPointer, $endPointer);
 	}
@@ -218,8 +249,10 @@ class TokenHelper
 	 * @param (int|string)|(int|string)[] $types
 	 * @param int $startPointer Search starts at this token, inclusive
 	 * @param int|null $endPointer Search ends at this token, exclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return int|null
 	 */
-	public static function findPreviousExcluding(File $phpcsFile, $types, int $startPointer, ?int $endPointer = null): ?int
+	public static function findPreviousExcluding($phpcsFile, $types, $startPointer, $endPointer = null)
 	{
 		/** @var int|false $token */
 		$token = $phpcsFile->findPrevious($types, $startPointer, $endPointer, true);
@@ -228,8 +261,12 @@ class TokenHelper
 
 	/**
 	 * @param (int|string)|(int|string)[] $types
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $startPointer
+	 * @param int|null $endPointer
+	 * @return int|null
 	 */
-	public static function findPreviousLocal(File $phpcsFile, $types, int $startPointer, ?int $endPointer = null): ?int
+	public static function findPreviousLocal($phpcsFile, $types, $startPointer, $endPointer = null)
 	{
 		/** @var int|false $token */
 		$token = $phpcsFile->findPrevious($types, $startPointer, $endPointer, false, null, true);
@@ -238,8 +275,9 @@ class TokenHelper
 
 	/**
 	 * @param int $pointer Search starts at this token, inclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
-	public static function findFirstTokenOnLine(File $phpcsFile, int $pointer): int
+	public static function findFirstTokenOnLine($phpcsFile, $pointer): int
 	{
 		if ($pointer === 0) {
 			return $pointer;
@@ -258,8 +296,9 @@ class TokenHelper
 
 	/**
 	 * @param int $pointer Search starts at this token, inclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
-	public static function findLastTokenOnLine(File $phpcsFile, int $pointer): int
+	public static function findLastTokenOnLine($phpcsFile, $pointer): int
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -274,8 +313,10 @@ class TokenHelper
 
 	/**
 	 * @param int $pointer Search starts at this token, inclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return int|null
 	 */
-	public static function findFirstTokenOnNextLine(File $phpcsFile, int $pointer): ?int
+	public static function findFirstTokenOnNextLine($phpcsFile, $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 		if ($pointer >= count($tokens)) {
@@ -296,8 +337,9 @@ class TokenHelper
 
 	/**
 	 * @param int $pointer Search starts at this token, inclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
-	public static function findFirstNonWhitespaceOnLine(File $phpcsFile, int $pointer): int
+	public static function findFirstNonWhitespaceOnLine($phpcsFile, $pointer): int
 	{
 		if ($pointer === 0) {
 			return $pointer;
@@ -316,8 +358,10 @@ class TokenHelper
 
 	/**
 	 * @param int $pointer Search starts at this token, inclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return int|null
 	 */
-	public static function findFirstNonWhitespaceOnNextLine(File $phpcsFile, int $pointer): ?int
+	public static function findFirstNonWhitespaceOnNextLine($phpcsFile, $pointer)
 	{
 		$newLinePointer = self::findNextContent($phpcsFile, [T_WHITESPACE, T_DOC_COMMENT_WHITESPACE], $phpcsFile->eolChar, $pointer);
 		if ($newLinePointer === null) {
@@ -336,8 +380,10 @@ class TokenHelper
 
 	/**
 	 * @param int $pointer Search starts at this token, inclusive
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return int|null
 	 */
-	public static function findFirstNonWhitespaceOnPreviousLine(File $phpcsFile, int $pointer): ?int
+	public static function findFirstNonWhitespaceOnPreviousLine($phpcsFile, $pointer)
 	{
 		$newLinePointerOnPreviousLine = self::findPreviousContent(
 			$phpcsFile,
@@ -369,7 +415,12 @@ class TokenHelper
 		return null;
 	}
 
-	public static function getContent(File $phpcsFile, int $startPointer, ?int $endPointer = null): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $startPointer
+	 * @param int|null $endPointer
+	 */
+	public static function getContent($phpcsFile, $startPointer, $endPointer = null): string
 	{
 		$tokens = $phpcsFile->getTokens();
 		$endPointer = $endPointer ?? self::getLastTokenPointer($phpcsFile);
@@ -382,7 +433,10 @@ class TokenHelper
 		return $content;
 	}
 
-	public static function getLastTokenPointer(File $phpcsFile): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 */
+	public static function getLastTokenPointer($phpcsFile): int
 	{
 		$tokenCount = count($phpcsFile->getTokens());
 		if ($tokenCount === 0) {

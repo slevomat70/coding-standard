@@ -29,7 +29,10 @@ abstract class Annotation
 
 	abstract public function export(): string;
 
-	public function __construct(string $name, int $startPointer, int $endPointer, ?string $content)
+	/**
+	 * @param string|null $content
+	 */
+	public function __construct(string $name, int $startPointer, int $endPointer, $content)
 	{
 		$this->name = $name;
 		$this->startPointer = $startPointer;
@@ -52,17 +55,26 @@ abstract class Annotation
 		return $this->endPointer;
 	}
 
-	public function getContent(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getContent()
 	{
 		return $this->content;
 	}
 
-	protected function fixDescription(string $description): string
+	/**
+	 * @param string $description
+	 */
+	protected function fixDescription($description): string
 	{
 		return substr($this->getContent(), -strlen($description));
 	}
 
-	protected function errorWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	protected function errorWhenInvalid()
 	{
 		if ($this->isInvalid()) {
 			throw new LogicException(sprintf('Invalid %s annotation.', $this->name));

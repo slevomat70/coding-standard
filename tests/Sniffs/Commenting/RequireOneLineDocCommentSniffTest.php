@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireOneLineDocCommentSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/oneLineDocCommentSniffNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/oneLineDocCommentSniffErrors.php');
 

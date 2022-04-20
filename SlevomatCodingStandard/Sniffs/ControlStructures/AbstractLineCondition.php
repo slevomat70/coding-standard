@@ -20,9 +20,9 @@ use const T_WHILE;
 abstract class AbstractLineCondition implements Sniff
 {
 
-	protected const IF_CONTROL_STRUCTURE = 'if';
-	protected const WHILE_CONTROL_STRUCTURE = 'while';
-	protected const DO_CONTROL_STRUCTURE = 'do';
+	const IF_CONTROL_STRUCTURE = 'if';
+	const WHILE_CONTROL_STRUCTURE = 'while';
+	const DO_CONTROL_STRUCTURE = 'do';
 
 	/** @var string[] */
 	public $checkedControlStructures = [
@@ -56,7 +56,11 @@ abstract class AbstractLineCondition implements Sniff
 		return $register;
 	}
 
-	protected function shouldBeSkipped(File $phpcsFile, int $controlStructurePointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $controlStructurePointer
+	 */
+	protected function shouldBeSkipped($phpcsFile, $controlStructurePointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -75,7 +79,11 @@ abstract class AbstractLineCondition implements Sniff
 		return false;
 	}
 
-	protected function getControlStructureName(File $phpcsFile, int $controlStructurePointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $controlStructurePointer
+	 */
+	protected function getControlStructureName($phpcsFile, $controlStructurePointer): string
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -84,7 +92,11 @@ abstract class AbstractLineCondition implements Sniff
 			: $tokens[$controlStructurePointer]['content'];
 	}
 
-	protected function isPartOfDo(File $phpcsFile, int $whilePointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $whilePointer
+	 */
+	protected function isPartOfDo($phpcsFile, $whilePointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -94,21 +106,34 @@ abstract class AbstractLineCondition implements Sniff
 		return $tokens[$pointerAfterParentesisCloser]['code'] !== T_OPEN_CURLY_BRACKET;
 	}
 
-	protected function getLineStart(File $phpcsFile, int $pointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	protected function getLineStart($phpcsFile, $pointer): string
 	{
 		$firstPointerOnLine = TokenHelper::findFirstTokenOnLine($phpcsFile, $pointer);
 
 		return IndentationHelper::convertTabsToSpaces($phpcsFile, TokenHelper::getContent($phpcsFile, $firstPointerOnLine, $pointer));
 	}
 
-	protected function getCondition(File $phpcsFile, int $parenthesisOpenerPointer, int $parenthesisCloserPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $parenthesisOpenerPointer
+	 * @param int $parenthesisCloserPointer
+	 */
+	protected function getCondition($phpcsFile, $parenthesisOpenerPointer, $parenthesisCloserPointer): string
 	{
 		$condition = TokenHelper::getContent($phpcsFile, $parenthesisOpenerPointer + 1, $parenthesisCloserPointer - 1);
 
 		return trim(preg_replace(sprintf('~%s[ \t]*~', $phpcsFile->eolChar), ' ', $condition));
 	}
 
-	protected function getLineEnd(File $phpcsFile, int $pointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	protected function getLineEnd($phpcsFile, $pointer): string
 	{
 		$firstPointerOnNextLine = TokenHelper::findFirstTokenOnNextLine($phpcsFile, $pointer);
 

@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ReturnTypeHintSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnTypeHintNoErrors.php', [
 			'enableMixedTypeHint' => true,
@@ -17,7 +20,10 @@ class ReturnTypeHintSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnTypeHintErrors.php', [
 			'enableObjectTypeHint' => true,
@@ -90,7 +96,10 @@ class ReturnTypeHintSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testWithUnionNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithUnionNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnTypeHintWithUnionNoErrors.php', [
 			'enableObjectTypeHint' => true,
@@ -101,7 +110,10 @@ class ReturnTypeHintSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testWithUnionErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithUnionErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/returnTypeHintWithUnionErrors.php', [
 			'enableObjectTypeHint' => true,

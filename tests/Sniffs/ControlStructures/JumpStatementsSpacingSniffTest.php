@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class JumpStatementsSpacingSniffTest extends TestCase
 {
 
-	public function testDefaultSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/jumpStatementsSpacingWithDefaultSettingsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/jumpStatementsSpacingWithDefaultSettingsErrors.php');
 
@@ -197,7 +203,10 @@ class JumpStatementsSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/jumpStatementsSpacingWithModifiedSettingsNoErrors.php', [
 			'linesCountBefore' => 0,
@@ -216,7 +225,10 @@ class JumpStatementsSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/jumpStatementsSpacingWithModifiedSettingsErrors.php', [
 			'linesCountBefore' => 0,
@@ -292,13 +304,19 @@ class JumpStatementsSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testAtTheEndOfFile(): void
+	/**
+	 * @return void
+	 */
+	public function testAtTheEndOfFile()
 	{
 		$report = self::checkFile(__DIR__ . '/data/jumpStatementsSpacingAtTheEndOfFile.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIgnoreWhenInCaseOrDefaultStatementNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoreWhenInCaseOrDefaultStatementNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/jumpStatementsWhenInCaseOrDefaultNoErrors.php', [
 			'linesCountBeforeWhenFirstInCaseOrDefault' => 0,
@@ -308,7 +326,10 @@ class JumpStatementsSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testWhenInCaseOrDefaultStatementErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWhenInCaseOrDefaultStatementErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/jumpStatementsWhenInCaseOrDefaultErrors.php', [
 			'linesCountBeforeWhenFirstInCaseOrDefault' => 0,
@@ -346,7 +367,10 @@ class JumpStatementsSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testThrowExpressionNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testThrowExpressionNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/jumpStatementsThrowExpressionNoErrors.php');
 		self::assertNoSniffErrorInFile($report);

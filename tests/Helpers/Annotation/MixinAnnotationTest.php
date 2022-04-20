@@ -11,7 +11,10 @@ use SlevomatCodingStandard\Helpers\TestCase;
 class MixinAnnotationTest extends TestCase
 {
 
-	public function testAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotation()
 	{
 		$annotation = new MixinAnnotation(
 			'@mixin',
@@ -33,14 +36,20 @@ class MixinAnnotationTest extends TestCase
 		self::assertSame('@mixin Exception Description', $annotation->export());
 	}
 
-	public function testUnsupportedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testUnsupportedAnnotation()
 	{
 		self::expectException(InvalidArgumentException::class);
 		self::expectExceptionMessage('Unsupported annotation @param.');
 		new MixinAnnotation('@param', 1, 1, null, null);
 	}
 
-	public function testGetContentNodeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetContentNodeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @mixin annotation.');
@@ -48,7 +57,10 @@ class MixinAnnotationTest extends TestCase
 		$annotation->getContentNode();
 	}
 
-	public function testGetDescriptionWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetDescriptionWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @mixin annotation.');
@@ -56,7 +68,10 @@ class MixinAnnotationTest extends TestCase
 		$annotation->getDescription();
 	}
 
-	public function testGetTypeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetTypeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @mixin annotation.');

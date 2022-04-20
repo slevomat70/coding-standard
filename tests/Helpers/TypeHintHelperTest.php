@@ -36,8 +36,11 @@ class TypeHintHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataIsSimpleTypeHint
+	 * @param string $typeHint
+	 * @param bool $isSimple
+	 * @return void
 	 */
-	public function testIsSimpleTypeHint(string $typeHint, bool $isSimple): void
+	public function testIsSimpleTypeHint($typeHint, $isSimple)
 	{
 		self::assertSame($isSimple, TypeHintHelper::isSimpleTypeHint($typeHint));
 	}
@@ -58,8 +61,11 @@ class TypeHintHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataIsSimpleIterableTypeHint
+	 * @param string $typeHint
+	 * @param bool $isSimple
+	 * @return void
 	 */
-	public function testIsSimpleIterableTypeHint(string $typeHint, bool $isSimple): void
+	public function testIsSimpleIterableTypeHint($typeHint, $isSimple)
 	{
 		self::assertSame($isSimple, TypeHintHelper::isSimpleIterableTypeHint($typeHint));
 	}
@@ -90,8 +96,11 @@ class TypeHintHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataIsSimpleUnofficialTypeHint
+	 * @param string $typeHint
+	 * @param bool $isSimple
+	 * @return void
 	 */
-	public function testIsSimpleUnofficialTypeHint(string $typeHint, bool $isSimple): void
+	public function testIsSimpleUnofficialTypeHint($typeHint, $isSimple)
 	{
 		self::assertSame($isSimple, TypeHintHelper::isSimpleUnofficialTypeHints($typeHint));
 	}
@@ -114,13 +123,19 @@ class TypeHintHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataConvertLongSimpleTypeHintToShort
+	 * @param string $long
+	 * @param string $short
+	 * @return void
 	 */
-	public function testConvertLongSimpleTypeHintToShort(string $long, string $short): void
+	public function testConvertLongSimpleTypeHintToShort($long, $short)
 	{
 		self::assertSame($short, TypeHintHelper::convertLongSimpleTypeHintToShort($long));
 	}
 
-	public function testFunctionReturnAnnotationWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionReturnAnnotationWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithNamespace.php');
 
@@ -129,7 +144,10 @@ class TypeHintHelperTest extends TestCase
 		self::assertSame('void', TypeHintHelper::getFullyQualifiedTypeHint($phpcsFile, $functionPointer, $returnAnnotation->getContent()));
 	}
 
-	public function testFunctionReturnTypeHintWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionReturnTypeHintWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithNamespace.php');
 
@@ -141,7 +159,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionParameterAnnotationWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionParameterAnnotationWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithNamespace.php');
 
@@ -156,7 +177,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionParameterTypeHintWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionParameterTypeHintWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithNamespace.php');
 
@@ -168,7 +192,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testMethodReturnAnnotationWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testMethodReturnAnnotationWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithNamespace.php');
 
@@ -180,7 +207,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testMethodReturnTypeHintWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testMethodReturnTypeHintWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithNamespace.php');
 
@@ -189,7 +219,10 @@ class TypeHintHelperTest extends TestCase
 		self::assertSame('bool', TypeHintHelper::getFullyQualifiedTypeHint($phpcsFile, $methodPointer, $returnTypeHint->getTypeHint()));
 	}
 
-	public function testMethodParameterAnnotationWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testMethodParameterAnnotationWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithNamespace.php');
 
@@ -204,7 +237,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testMethodParameterTypeHintWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testMethodParameterTypeHintWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithNamespace.php');
 
@@ -216,7 +252,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionReturnAnnotationWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionReturnAnnotationWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithoutNamespace.php');
 
@@ -225,7 +264,10 @@ class TypeHintHelperTest extends TestCase
 		self::assertSame('void', TypeHintHelper::getFullyQualifiedTypeHint($phpcsFile, $functionPointer, $returnAnnotation->getContent()));
 	}
 
-	public function testFunctionReturnTypeHintWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionReturnTypeHintWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithoutNamespace.php');
 
@@ -237,7 +279,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionParameterAnnotationWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionParameterAnnotationWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithoutNamespace.php');
 
@@ -252,7 +297,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionParameterTypeHintWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionParameterTypeHintWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithoutNamespace.php');
 
@@ -264,7 +312,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testMethodReturnAnnotationWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testMethodReturnAnnotationWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithoutNamespace.php');
 
@@ -276,7 +327,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testMethodReturnTypeHintWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testMethodReturnTypeHintWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithoutNamespace.php');
 
@@ -285,7 +339,10 @@ class TypeHintHelperTest extends TestCase
 		self::assertSame('bool', TypeHintHelper::getFullyQualifiedTypeHint($phpcsFile, $methodPointer, $returnTypeHint->getTypeHint()));
 	}
 
-	public function testMethodParameterAnnotationWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testMethodParameterAnnotationWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithoutNamespace.php');
 
@@ -300,7 +357,10 @@ class TypeHintHelperTest extends TestCase
 		);
 	}
 
-	public function testMethodParameterTypeHintWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testMethodParameterTypeHintWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintWithoutNamespace.php');
 
@@ -324,8 +384,11 @@ class TypeHintHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataIsTypeDefinedInAnnotation
+	 * @param string $typeHintName
+	 * @param bool $isTemplate
+	 * @return void
 	 */
-	public function testIsTypeDefinedInAnnotation(string $typeHintName, bool $isTemplate): void
+	public function testIsTypeDefinedInAnnotation($typeHintName, $isTemplate)
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintsDefinedInAnnotation.php');
 
@@ -349,8 +412,11 @@ class TypeHintHelperTest extends TestCase
 
 	/**
 	 * @dataProvider dataIsTypeDefinedInAnnotationWhenAnnotationIsInvalid
+	 * @param int $line
+	 * @param string $type
+	 * @return void
 	 */
-	public function testIsTypeDefinedInAnnotationWhenAnnotationIsInvalid(int $line, string $type): void
+	public function testIsTypeDefinedInAnnotationWhenAnnotationIsInvalid($line, $type)
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/typeHintsDefinedInAnnotation.php');
 

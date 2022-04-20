@@ -26,7 +26,11 @@ class PropertyAnnotation extends Annotation
 	/** @var PropertyTagValueNode|null */
 	private $contentNode;
 
-	public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?PropertyTagValueNode $contentNode)
+	/**
+	 * @param string|null $content
+	 * @param \PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode|null $contentNode
+	 */
+	public function __construct(string $name, int $startPointer, int $endPointer, $content, $contentNode)
 	{
 		if (!in_array(
 			$name,
@@ -58,7 +62,10 @@ class PropertyAnnotation extends Annotation
 		return $this->getDescription() !== null;
 	}
 
-	public function getDescription(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getDescription()
 	{
 		$this->errorWhenInvalid();
 

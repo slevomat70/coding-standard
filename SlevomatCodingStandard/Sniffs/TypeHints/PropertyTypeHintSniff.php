@@ -50,17 +50,17 @@ use const T_VARIABLE;
 class PropertyTypeHintSniff implements Sniff
 {
 
-	public const CODE_MISSING_ANY_TYPE_HINT = 'MissingAnyTypeHint';
+	const CODE_MISSING_ANY_TYPE_HINT = 'MissingAnyTypeHint';
 
-	public const CODE_MISSING_NATIVE_TYPE_HINT = 'MissingNativeTypeHint';
+	const CODE_MISSING_NATIVE_TYPE_HINT = 'MissingNativeTypeHint';
 
-	public const CODE_MISSING_TRAVERSABLE_TYPE_HINT_SPECIFICATION = 'MissingTraversableTypeHintSpecification';
+	const CODE_MISSING_TRAVERSABLE_TYPE_HINT_SPECIFICATION = 'MissingTraversableTypeHintSpecification';
 
-	public const CODE_USELESS_ANNOTATION = 'UselessAnnotation';
+	const CODE_USELESS_ANNOTATION = 'UselessAnnotation';
 
-	public const CODE_USELESS_SUPPRESS = 'UselessSuppress';
+	const CODE_USELESS_SUPPRESS = 'UselessSuppress';
 
-	private const NAME = 'SlevomatCodingStandard.TypeHints.PropertyTypeHint';
+	const NAME = 'SlevomatCodingStandard.TypeHints.PropertyTypeHint';
 
 	/** @var bool|null */
 	public $enableNativeTypeHint = null;
@@ -93,8 +93,10 @@ class PropertyTypeHintSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $visibilityPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $visibilityPointer): void
+	public function process(File $phpcsFile, $visibilityPointer)
 	{
 		$this->enableNativeTypeHint = SniffSettingsHelper::isEnabledByPhpVersion($this->enableNativeTypeHint, 70400);
 		$this->enableMixedTypeHint = $this->enableNativeTypeHint
@@ -149,14 +151,17 @@ class PropertyTypeHintSniff implements Sniff
 
 	/**
 	 * @param VariableAnnotation[] $prefixedPropertyAnnotations
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $propertyTypeHint
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\VariableAnnotation|null $propertyAnnotation
+	 * @return void
 	 */
 	private function checkTypeHint(
 		File $phpcsFile,
 		int $propertyPointer,
-		?TypeHint $propertyTypeHint,
-		?VariableAnnotation $propertyAnnotation,
+		$propertyTypeHint,
+		$propertyAnnotation,
 		array $prefixedPropertyAnnotations
-	): void
+	)
 	{
 		$suppressNameAnyTypeHint = $this->getSniffName(self::CODE_MISSING_ANY_TYPE_HINT);
 		$isSuppressedAnyTypeHint = SuppressHelper::isSniffSuppressed($phpcsFile, $propertyPointer, $suppressNameAnyTypeHint);
@@ -381,14 +386,17 @@ class PropertyTypeHintSniff implements Sniff
 
 	/**
 	 * @param VariableAnnotation[] $prefixedPropertyAnnotations
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $propertyTypeHint
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\VariableAnnotation|null $propertyAnnotation
+	 * @return void
 	 */
 	private function checkTraversableTypeHintSpecification(
 		File $phpcsFile,
 		int $propertyPointer,
-		?TypeHint $propertyTypeHint,
-		?VariableAnnotation $propertyAnnotation,
+		$propertyTypeHint,
+		$propertyAnnotation,
 		array $prefixedPropertyAnnotations
-	): void
+	)
 	{
 		$suppressName = $this->getSniffName(self::CODE_MISSING_TRAVERSABLE_TYPE_HINT_SPECIFICATION);
 		$isSuppressed = SuppressHelper::isSniffSuppressed($phpcsFile, $propertyPointer, $suppressName);
@@ -452,12 +460,17 @@ class PropertyTypeHintSniff implements Sniff
 		);
 	}
 
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $propertyTypeHint
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\VariableAnnotation|null $propertyAnnotation
+	 * @return void
+	 */
 	private function checkUselessAnnotation(
 		File $phpcsFile,
 		int $propertyPointer,
-		?TypeHint $propertyTypeHint,
-		?VariableAnnotation $propertyAnnotation
-	): void
+		$propertyTypeHint,
+		$propertyAnnotation
+	)
 	{
 		if ($propertyAnnotation === null) {
 			return;
@@ -540,7 +553,10 @@ class PropertyTypeHintSniff implements Sniff
 		return count($annotations) === 0;
 	}
 
-	private function reportUselessSuppress(File $phpcsFile, int $pointer, bool $isSuppressed, string $suppressName): void
+	/**
+	 * @return void
+	 */
+	private function reportUselessSuppress(File $phpcsFile, int $pointer, bool $isSuppressed, string $suppressName)
 	{
 		if (!$isSuppressed) {
 			return;
@@ -577,16 +593,23 @@ class PropertyTypeHintSniff implements Sniff
 		return $this->normalizedTraversableTypeHints;
 	}
 
-	private function hasAnnotation(?VariableAnnotation $propertyAnnotation): bool
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\VariableAnnotation|null $propertyAnnotation
+	 */
+	private function hasAnnotation($propertyAnnotation): bool
 	{
 		return $propertyAnnotation !== null && $propertyAnnotation->getContent() !== null && !$propertyAnnotation->isInvalid();
 	}
 
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $propertyTypeHint
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\VariableAnnotation|null $propertyAnnotation
+	 */
 	private function hasTraversableTypeHint(
 		File $phpcsFile,
 		int $propertyPointer,
-		?TypeHint $propertyTypeHint,
-		?VariableAnnotation $propertyAnnotation
+		$propertyTypeHint,
+		$propertyAnnotation
 	): bool
 	{
 		if (

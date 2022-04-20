@@ -23,7 +23,7 @@ use const T_NULL;
 class RequireNullCoalesceOperatorSniff implements Sniff
 {
 
-	public const CODE_NULL_COALESCE_OPERATOR_NOT_USED = 'NullCoalesceOperatorNotUsed';
+	const CODE_NULL_COALESCE_OPERATOR_NOT_USED = 'NullCoalesceOperatorNotUsed';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -40,8 +40,10 @@ class RequireNullCoalesceOperatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $pointer): void
+	public function process(File $phpcsFile, $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -52,7 +54,12 @@ class RequireNullCoalesceOperatorSniff implements Sniff
 		}
 	}
 
-	public function checkIsset(File $phpcsFile, int $issetPointer): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $issetPointer
+	 * @return void
+	 */
+	public function checkIsset($phpcsFile, $issetPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -113,7 +120,12 @@ class RequireNullCoalesceOperatorSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	public function checkIdenticalOperator(File $phpcsFile, int $identicalOperator): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $identicalOperator
+	 * @return void
+	 */
+	public function checkIdenticalOperator($phpcsFile, $identicalOperator)
 	{
 		$tokens = $phpcsFile->getTokens();
 

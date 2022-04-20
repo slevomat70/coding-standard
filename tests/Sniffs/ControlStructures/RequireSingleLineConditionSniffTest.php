@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireSingleLineConditionSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineConditionNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineConditionErrors.php');
 
@@ -53,7 +59,10 @@ class RequireSingleLineConditionSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testForAllConditionsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testForAllConditionsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineConditionAllConditionsErrors.php', [
 			'maxLineLength' => 0,
@@ -66,7 +75,10 @@ class RequireSingleLineConditionSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testWhenDisabledSimpleConditionsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWhenDisabledSimpleConditionsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineConditionWhenDisabledSimpleConditionsNoErrors.php', [
 			'alwaysForSimpleConditions' => false,
@@ -74,7 +86,10 @@ class RequireSingleLineConditionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNoErrorsWhenDisabledIfControlStructure(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWhenDisabledIfControlStructure()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineConditionWhenDisabledIfControlStructureNoErrors.php', [
 			'checkedControlStructures' => ['while'],
@@ -82,7 +97,10 @@ class RequireSingleLineConditionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNoErrorsWhenDisabledDoControlStructure(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWhenDisabledDoControlStructure()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineConditionWhenDisabledDoControlStructureNoErrors.php', [
 			'checkedControlStructures' => ['while'],
@@ -90,7 +108,10 @@ class RequireSingleLineConditionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNoErrorsWhenDisabledWhileControlStructure(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWhenDisabledWhileControlStructure()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireSingleLineConditionWhenDisabledWhileControlStructureNoErrors.php', [
 			'checkedControlStructures' => ['do'],

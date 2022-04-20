@@ -73,9 +73,9 @@ use const T_YIELD_FROM;
 class UselessParenthesesSniff implements Sniff
 {
 
-	public const CODE_USELESS_PARENTHESES = 'UselessParentheses';
+	const CODE_USELESS_PARENTHESES = 'UselessParentheses';
 
-	private const OPERATORS = [
+	const OPERATORS = [
 		T_POW,
 		T_MULTIPLY,
 		T_DIVIDE,
@@ -85,7 +85,7 @@ class UselessParenthesesSniff implements Sniff
 		T_STRING_CONCAT,
 	];
 
-	private const OPERATOR_GROUPS = [
+	const OPERATOR_GROUPS = [
 		T_POW => 1,
 		T_MULTIPLY => 2,
 		T_DIVIDE => 2,
@@ -111,8 +111,10 @@ class UselessParenthesesSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $parenthesisOpenerPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $parenthesisOpenerPointer): void
+	public function process(File $phpcsFile, $parenthesisOpenerPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -198,7 +200,10 @@ class UselessParenthesesSniff implements Sniff
 		$this->checkParenthesesAroundOperators($phpcsFile, $parenthesisOpenerPointer);
 	}
 
-	private function checkParenthesesAroundConditionInTernaryOperator(File $phpcsFile, int $parenthesisOpenerPointer): void
+	/**
+	 * @return void
+	 */
+	private function checkParenthesesAroundConditionInTernaryOperator(File $phpcsFile, int $parenthesisOpenerPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -277,7 +282,10 @@ class UselessParenthesesSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function checkParenthesesAroundCaseInSwitch(File $phpcsFile, int $parenthesisOpenerPointer): void
+	/**
+	 * @return void
+	 */
+	private function checkParenthesesAroundCaseInSwitch(File $phpcsFile, int $parenthesisOpenerPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -313,7 +321,10 @@ class UselessParenthesesSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function checkParenthesesAroundVariableOrFunctionCall(File $phpcsFile, int $parenthesisOpenerPointer): void
+	/**
+	 * @return void
+	 */
+	private function checkParenthesesAroundVariableOrFunctionCall(File $phpcsFile, int $parenthesisOpenerPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -415,7 +426,10 @@ class UselessParenthesesSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function checkParenthesesAroundString(File $phpcsFile, int $parenthesisOpenerPointer): void
+	/**
+	 * @return void
+	 */
+	private function checkParenthesesAroundString(File $phpcsFile, int $parenthesisOpenerPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -447,7 +461,10 @@ class UselessParenthesesSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function checkParenthesesAroundOperators(File $phpcsFile, int $parenthesisOpenerPointer): void
+	/**
+	 * @return void
+	 */
+	private function checkParenthesesAroundOperators(File $phpcsFile, int $parenthesisOpenerPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

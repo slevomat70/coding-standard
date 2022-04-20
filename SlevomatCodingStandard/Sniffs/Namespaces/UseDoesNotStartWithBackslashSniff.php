@@ -14,7 +14,7 @@ use const T_USE;
 class UseDoesNotStartWithBackslashSniff implements Sniff
 {
 
-	public const CODE_STARTS_WITH_BACKSLASH = 'UseStartsWithBackslash';
+	const CODE_STARTS_WITH_BACKSLASH = 'UseStartsWithBackslash';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -29,8 +29,10 @@ class UseDoesNotStartWithBackslashSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $usePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $usePointer): void
+	public function process(File $phpcsFile, $usePointer)
 	{
 		if (
 			UseStatementHelper::isAnonymousFunctionUse($phpcsFile, $usePointer)

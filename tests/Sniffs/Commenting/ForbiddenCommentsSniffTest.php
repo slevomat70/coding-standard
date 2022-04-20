@@ -8,7 +8,10 @@ use Throwable;
 class ForbiddenCommentsSniffTest extends TestCase
 {
 
-	public function testThrowExceptionForInvalidPattern(): void
+	/**
+	 * @return void
+	 */
+	public function testThrowExceptionForInvalidPattern()
 	{
 		$this->expectException(Throwable::class);
 
@@ -18,7 +21,10 @@ class ForbiddenCommentsSniffTest extends TestCase
 		);
 	}
 
-	public function testNoForbiddenComments(): void
+	/**
+	 * @return void
+	 */
+	public function testNoForbiddenComments()
 	{
 		$report = self::checkFile(__DIR__ . '/data/noForbiddenComments.php', [
 			'forbiddenCommentPatterns' => ['~Foo\d+~', '~Not comment\.~'],
@@ -26,7 +32,10 @@ class ForbiddenCommentsSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testForbiddenComments(): void
+	/**
+	 * @return void
+	 */
+	public function testForbiddenComments()
 	{
 		$report = self::checkFile(__DIR__ . '/data/forbiddenComments.php', [
 			'forbiddenCommentPatterns' => ['~Created by PhpStorm\.~', '~(\S+\s+)?Constructor\.~', '~(blah){3}~'],

@@ -23,8 +23,8 @@ use const T_VARIABLE;
 class ModernClassNameReferenceSniff implements Sniff
 {
 
-	public const CODE_CLASS_NAME_REFERENCED_VIA_MAGIC_CONSTANT = 'ClassNameReferencedViaMagicConstant';
-	public const CODE_CLASS_NAME_REFERENCED_VIA_FUNCTION_CALL = 'ClassNameReferencedViaFunctionCall';
+	const CODE_CLASS_NAME_REFERENCED_VIA_MAGIC_CONSTANT = 'ClassNameReferencedViaMagicConstant';
+	const CODE_CLASS_NAME_REFERENCED_VIA_FUNCTION_CALL = 'ClassNameReferencedViaFunctionCall';
 
 	/** @var bool|null */
 	public $enableOnObjects = null;
@@ -43,8 +43,10 @@ class ModernClassNameReferenceSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $pointer): void
+	public function process(File $phpcsFile, $pointer)
 	{
 		$this->enableOnObjects = SniffSettingsHelper::isEnabledByPhpVersion($this->enableOnObjects, 80000);
 
@@ -58,7 +60,10 @@ class ModernClassNameReferenceSniff implements Sniff
 		$this->checkFunctionCall($phpcsFile, $pointer);
 	}
 
-	private function checkMagicConstant(File $phpcsFile, int $pointer): void
+	/**
+	 * @return void
+	 */
+	private function checkMagicConstant(File $phpcsFile, int $pointer)
 	{
 		$fix = $phpcsFile->addFixableError(
 			'Class name referenced via magic constant.',
@@ -75,7 +80,10 @@ class ModernClassNameReferenceSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function checkFunctionCall(File $phpcsFile, int $functionPointer): void
+	/**
+	 * @return void
+	 */
+	private function checkFunctionCall(File $phpcsFile, int $functionPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

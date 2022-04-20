@@ -44,10 +44,10 @@ use const T_YIELD_FROM;
 class FunctionHelper
 {
 
-	public const LINE_INCLUDE_COMMENT = 1;
-	public const LINE_INCLUDE_WHITESPACE = 2;
+	const LINE_INCLUDE_COMMENT = 1;
+	const LINE_INCLUDE_WHITESPACE = 2;
 
-	public const SPECIAL_FUNCTIONS = [
+	const SPECIAL_FUNCTIONS = [
 		'array_key_exists',
 		'array_slice',
 		'boolval',
@@ -83,12 +83,20 @@ class FunctionHelper
 		'strval',
 	];
 
-	public static function getTypeLabel(File $phpcsFile, int $functionPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 */
+	public static function getTypeLabel($phpcsFile, $functionPointer): string
 	{
 		return self::isMethod($phpcsFile, $functionPointer) ? 'Method' : 'Function';
 	}
 
-	public static function getName(File $phpcsFile, int $functionPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 */
+	public static function getName($phpcsFile, $functionPointer): string
 	{
 		$tokens = $phpcsFile->getTokens();
 		return $tokens[TokenHelper::findNext(
@@ -99,7 +107,11 @@ class FunctionHelper
 		)]['content'];
 	}
 
-	public static function getFullyQualifiedName(File $phpcsFile, int $functionPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 */
+	public static function getFullyQualifiedName($phpcsFile, $functionPointer): string
 	{
 		$name = self::getName($phpcsFile, $functionPointer);
 		$namespace = NamespaceHelper::findCurrentNamespaceName($phpcsFile, $functionPointer);
@@ -132,12 +144,20 @@ class FunctionHelper
 			: $name;
 	}
 
-	public static function isAbstract(File $phpcsFile, int $functionPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 */
+	public static function isAbstract($phpcsFile, $functionPointer): bool
 	{
 		return !isset($phpcsFile->getTokens()[$functionPointer]['scope_opener']);
 	}
 
-	public static function isMethod(File $phpcsFile, int $functionPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 */
+	public static function isMethod($phpcsFile, $functionPointer): bool
 	{
 		$functionPointerConditions = $phpcsFile->getTokens()[$functionPointer]['conditions'];
 		if ($functionPointerConditions === []) {
@@ -147,7 +167,12 @@ class FunctionHelper
 		return in_array($lastFunctionPointerCondition, [T_CLASS, T_INTERFACE, T_TRAIT, T_ANON_CLASS], true);
 	}
 
-	public static function findClassPointer(File $phpcsFile, int $functionPointer): ?int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 * @return int|null
+	 */
+	public static function findClassPointer($phpcsFile, $functionPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -168,8 +193,10 @@ class FunctionHelper
 
 	/**
 	 * @return string[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
 	 */
-	public static function getParametersNames(File $phpcsFile, int $functionPointer): array
+	public static function getParametersNames($phpcsFile, $functionPointer): array
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -187,8 +214,10 @@ class FunctionHelper
 
 	/**
 	 * @return (TypeHint|null)[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
 	 */
-	public static function getParametersTypeHints(File $phpcsFile, int $functionPointer): array
+	public static function getParametersTypeHints($phpcsFile, $functionPointer): array
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -235,7 +264,11 @@ class FunctionHelper
 		return $parametersTypeHints;
 	}
 
-	public static function returnsValue(File $phpcsFile, int $functionPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 */
+	public static function returnsValue($phpcsFile, $functionPointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -269,7 +302,12 @@ class FunctionHelper
 		return false;
 	}
 
-	public static function findReturnTypeHint(File $phpcsFile, int $functionPointer): ?TypeHint
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 * @return \SlevomatCodingStandard\Helpers\TypeHint|null
+	 */
+	public static function findReturnTypeHint($phpcsFile, $functionPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -307,15 +345,21 @@ class FunctionHelper
 		return new TypeHint($typeHint, $nullable, $typeHintStartPointer, $typeHintEndPointer);
 	}
 
-	public static function hasReturnTypeHint(File $phpcsFile, int $functionPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 */
+	public static function hasReturnTypeHint($phpcsFile, $functionPointer): bool
 	{
 		return self::findReturnTypeHint($phpcsFile, $functionPointer) !== null;
 	}
 
 	/**
 	 * @return ParameterAnnotation[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
 	 */
-	public static function getParametersAnnotations(File $phpcsFile, int $functionPointer): array
+	public static function getParametersAnnotations($phpcsFile, $functionPointer): array
 	{
 		/** @var ParameterAnnotation[] $parametersAnnotations */
 		$parametersAnnotations = AnnotationHelper::getAnnotationsByName($phpcsFile, $functionPointer, '@param');
@@ -324,8 +368,10 @@ class FunctionHelper
 
 	/**
 	 * @return array<string, ParameterAnnotation>
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
 	 */
-	public static function getValidParametersAnnotations(File $phpcsFile, int $functionPointer): array
+	public static function getValidParametersAnnotations($phpcsFile, $functionPointer): array
 	{
 		$parametersAnnotations = [];
 		foreach (self::getParametersAnnotations($phpcsFile, $functionPointer) as $parameterAnnotation) {
@@ -345,8 +391,10 @@ class FunctionHelper
 
 	/**
 	 * @return array<string, ParameterAnnotation>
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
 	 */
-	public static function getValidPrefixedParametersAnnotations(File $phpcsFile, int $functionPointer): array
+	public static function getValidPrefixedParametersAnnotations($phpcsFile, $functionPointer): array
 	{
 		$parametersAnnotations = [];
 		foreach (AnnotationHelper::PREFIXES as $prefix) {
@@ -368,7 +416,12 @@ class FunctionHelper
 		return $parametersAnnotations;
 	}
 
-	public static function findReturnAnnotation(File $phpcsFile, int $functionPointer): ?ReturnAnnotation
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 * @return \SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation|null
+	 */
+	public static function findReturnAnnotation($phpcsFile, $functionPointer)
 	{
 		/** @var ReturnAnnotation[] $returnAnnotations */
 		$returnAnnotations = AnnotationHelper::getAnnotationsByName($phpcsFile, $functionPointer, '@return');
@@ -382,8 +435,10 @@ class FunctionHelper
 
 	/**
 	 * @return ReturnAnnotation[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
 	 */
-	public static function getValidPrefixedReturnAnnotations(File $phpcsFile, int $functionPointer): array
+	public static function getValidPrefixedReturnAnnotations($phpcsFile, $functionPointer): array
 	{
 		$returnAnnotations = [];
 
@@ -403,8 +458,9 @@ class FunctionHelper
 
 	/**
 	 * @return string[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
-	public static function getAllFunctionNames(File $phpcsFile): array
+	public static function getAllFunctionNames($phpcsFile): array
 	{
 		$previousFunctionPointer = 0;
 
@@ -423,8 +479,10 @@ class FunctionHelper
 
 	/**
 	 * @param int $flags optional bitmask of self::LINE_INCLUDE_* constants
+	 * @param \PHP_CodeSniffer\Files\File $file
+	 * @param int $functionPosition
 	 */
-	public static function getFunctionLengthInLines(File $file, int $functionPosition, int $flags = 0): int
+	public static function getFunctionLengthInLines($file, $functionPosition, $flags = 0): int
 	{
 		if (self::isAbstract($file, $functionPosition)) {
 			return 0;

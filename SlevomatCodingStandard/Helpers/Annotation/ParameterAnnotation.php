@@ -28,7 +28,11 @@ class ParameterAnnotation extends Annotation
 	/** @var ParamTagValueNode|null */
 	private $contentNode;
 
-	public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?ParamTagValueNode $contentNode)
+	/**
+	 * @param string|null $content
+	 * @param \PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode|null $contentNode
+	 */
+	public function __construct(string $name, int $startPointer, int $endPointer, $content, $contentNode)
 	{
 		if (!in_array($name, ['@param', '@psalm-param', '@phpstan-param'], true)) {
 			throw new InvalidArgumentException(sprintf('Unsupported annotation %s.', $name));
@@ -56,7 +60,10 @@ class ParameterAnnotation extends Annotation
 		return $this->getDescription() !== null;
 	}
 
-	public function getDescription(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getDescription()
 	{
 		$this->errorWhenInvalid();
 

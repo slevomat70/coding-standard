@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Helpers\TestCase;
 class GenericAnnotationTest extends TestCase
 {
 
-	public function testAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotation()
 	{
 		$annotation = new GenericAnnotation('@Something', 1, 10, 'Anything', 'Whatever');
 

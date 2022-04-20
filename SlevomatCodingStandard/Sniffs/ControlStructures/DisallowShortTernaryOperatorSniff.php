@@ -13,7 +13,7 @@ use const T_VARIABLE;
 class DisallowShortTernaryOperatorSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_SHORT_TERNARY_OPERATOR = 'DisallowedShortTernaryOperator';
+	const CODE_DISALLOWED_SHORT_TERNARY_OPERATOR = 'DisallowedShortTernaryOperator';
 
 	/** @var bool */
 	public $fixable = true;
@@ -31,8 +31,10 @@ class DisallowShortTernaryOperatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $inlineThenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $inlineThenPointer): void
+	public function process(File $phpcsFile, $inlineThenPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

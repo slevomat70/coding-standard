@@ -7,19 +7,28 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class FullyQualifiedGlobalConstantsSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalConstantsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testFileWithoutNamespaceNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testFileWithoutNamespaceNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalConstantsFileWithoutNamespaceNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalConstantsErrors.php');
 
@@ -41,7 +50,10 @@ class FullyQualifiedGlobalConstantsSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testExcludeErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testExcludeErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalConstantsIncludeExcludeErrors.php', [
 			'exclude' => ['PHP_VERSION'],
@@ -59,7 +71,10 @@ class FullyQualifiedGlobalConstantsSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testIncludeErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIncludeErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalConstantsIncludeExcludeErrors.php', [
 			'include' => ['PHP_OS'],

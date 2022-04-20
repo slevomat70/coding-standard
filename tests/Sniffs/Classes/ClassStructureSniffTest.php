@@ -8,7 +8,7 @@ use function array_merge;
 class ClassStructureSniffTest extends TestCase
 {
 
-	private const DIFFERENT_RULES = [
+	const DIFFERENT_RULES = [
 		'uses',
 		'public constants, protected constants, private constants',
 		'public static properties, protected static properties, private static properties',
@@ -21,20 +21,26 @@ class ClassStructureSniffTest extends TestCase
 		'methods',
 	];
 
-	private const RULES_FOR_FINAL_METHODS = [
+	const RULES_FOR_FINAL_METHODS = [
 		'public final methods',
 		'public static final methods',
 		'protected final methods',
 		'protected static final methods',
 	];
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/classStructureSniffNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/classStructureSniffErrors.php');
 
@@ -68,7 +74,10 @@ class ClassStructureSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testManyErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testManyErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/classStructureSniffManyErrors.php');
 
@@ -76,7 +85,10 @@ class ClassStructureSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testNoErrorsWithDifferentRules(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWithDifferentRules()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/classStructureSniffNoErrorsWithDifferentRules.php',
@@ -86,7 +98,10 @@ class ClassStructureSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrorsWithDifferentRules(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithDifferentRules()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/classStructureSniffErrorsWithDifferentRules.php',
@@ -111,7 +126,10 @@ class ClassStructureSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testErrorsWithFinalMethodsEnabled(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithFinalMethodsEnabled()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/classStructureWithFinalMethodsEnabledErrors.php',
@@ -127,7 +145,10 @@ class ClassStructureSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testErrorsWithShortcuts(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithShortcuts()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/classStructureWithShortcutsErrors.php',
@@ -157,7 +178,10 @@ class ClassStructureSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testThrowExceptionForUnsupportedGroup(): void
+	/**
+	 * @return void
+	 */
+	public function testThrowExceptionForUnsupportedGroup()
 	{
 		try {
 			self::checkFile(
@@ -170,7 +194,10 @@ class ClassStructureSniffTest extends TestCase
 		}
 	}
 
-	public function testThrowExceptionForMissingGroups(): void
+	/**
+	 * @return void
+	 */
+	public function testThrowExceptionForMissingGroups()
 	{
 		try {
 			self::checkFile(
@@ -183,7 +210,10 @@ class ClassStructureSniffTest extends TestCase
 		}
 	}
 
-	public function testThrowExceptionForMissingGroupsWithFinalMethodsEnabled(): void
+	/**
+	 * @return void
+	 */
+	public function testThrowExceptionForMissingGroupsWithFinalMethodsEnabled()
 	{
 		try {
 			self::checkFile(

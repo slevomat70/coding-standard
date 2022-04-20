@@ -17,9 +17,14 @@ use const T_DOC_COMMENT_STAR;
 class SuppressHelper
 {
 
-	public const ANNOTATION = '@phpcsSuppress';
+	const ANNOTATION = '@phpcsSuppress';
 
-	public static function isSniffSuppressed(File $phpcsFile, int $pointer, string $suppressName): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @param string $suppressName
+	 */
+	public static function isSniffSuppressed($phpcsFile, $pointer, $suppressName): bool
 	{
 		return array_reduce(
 			AnnotationHelper::getAnnotationsByName($phpcsFile, $pointer, self::ANNOTATION),
@@ -36,7 +41,13 @@ class SuppressHelper
 		);
 	}
 
-	public static function removeSuppressAnnotation(File $phpcsFile, int $pointer, string $suppressName): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @param string $suppressName
+	 * @return void
+	 */
+	public static function removeSuppressAnnotation($phpcsFile, $pointer, $suppressName)
 	{
 		$suppressAnnotation = null;
 		foreach (AnnotationHelper::getAnnotationsByName($phpcsFile, $pointer, self::ANNOTATION) as $annotation) {

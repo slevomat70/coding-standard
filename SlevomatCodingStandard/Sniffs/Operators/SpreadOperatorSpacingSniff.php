@@ -15,7 +15,7 @@ use const T_WHITESPACE;
 class SpreadOperatorSpacingSniff implements Sniff
 {
 
-	public const CODE_INCORRECT_SPACES_AFTER_OPERATOR = 'IncorrectSpacesAfterOperator';
+	const CODE_INCORRECT_SPACES_AFTER_OPERATOR = 'IncorrectSpacesAfterOperator';
 
 	/** @var int */
 	public $spacesCountAfterOperator = 0;
@@ -33,8 +33,10 @@ class SpreadOperatorSpacingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $spreadOperatorPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $spreadOperatorPointer): void
+	public function process(File $phpcsFile, $spreadOperatorPointer)
 	{
 		$pointerAfterWhitespace = TokenHelper::findNextExcluding($phpcsFile, T_WHITESPACE, $spreadOperatorPointer + 1);
 

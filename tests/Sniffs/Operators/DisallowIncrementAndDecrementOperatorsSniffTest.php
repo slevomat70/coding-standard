@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class DisallowIncrementAndDecrementOperatorsSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/disallowIncrementAndDecrementOperatorsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/disallowIncrementAndDecrementOperatorsErrors.php');
 

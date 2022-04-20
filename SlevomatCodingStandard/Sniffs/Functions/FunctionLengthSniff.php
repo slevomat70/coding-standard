@@ -15,7 +15,7 @@ use const T_FUNCTION;
 class FunctionLengthSniff implements Sniff
 {
 
-	public const CODE_FUNCTION_LENGTH = 'FunctionLength';
+	const CODE_FUNCTION_LENGTH = 'FunctionLength';
 
 	/** @var int */
 	public $maxLinesLength = 20;
@@ -37,8 +37,10 @@ class FunctionLengthSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $file
+	 * @return void
 	 */
-	public function process(File $file, $functionPointer): void
+	public function process($file, $functionPointer)
 	{
 		$flags = array_keys(array_filter([
 			FunctionHelper::LINE_INCLUDE_COMMENT => $this->includeComments,

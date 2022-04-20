@@ -26,7 +26,12 @@ use const T_VARIABLE;
 class IdentificatorHelper
 {
 
-	public static function getContent(File $phpcsFile, int $startPointer, int $endPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $startPointer
+	 * @param int $endPointer
+	 */
+	public static function getContent($phpcsFile, $startPointer, $endPointer): string
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -42,7 +47,12 @@ class IdentificatorHelper
 		return $variableContent;
 	}
 
-	public static function findStartPointer(File $phpcsFile, int $endPointer): ?int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $endPointer
+	 * @return int|null
+	 */
+	public static function findStartPointer($phpcsFile, $endPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -70,7 +80,12 @@ class IdentificatorHelper
 		return null;
 	}
 
-	public static function findEndPointer(File $phpcsFile, int $startPointer): ?int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $startPointer
+	 * @return int|null
+	 */
+	public static function findEndPointer($phpcsFile, $startPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

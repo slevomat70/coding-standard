@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class BlockControlStructureSpacingSniffTest extends TestCase
 {
 
-	public function testDefaultSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/blockControlStructureSpacingWithDefaultSettingsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/blockControlStructureSpacingWithDefaultSettingsErrors.php');
 
@@ -179,7 +185,10 @@ class BlockControlStructureSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/blockControlStructureSpacingWithModifiedSettingsNoErrors.php', [
 			'linesCountBefore' => 0,
@@ -198,7 +207,10 @@ class BlockControlStructureSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/blockControlStructureSpacingWithModifiedSettingsErrors.php', [
 			'linesCountBefore' => 0,
@@ -292,7 +304,10 @@ class BlockControlStructureSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testSwitchErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testSwitchErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/blockControlStructureSpacingSwitchErrors.php', [
 			'controlStructures' => [
@@ -363,7 +378,10 @@ class BlockControlStructureSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testThrowExceptionForUnsupportedKeyword(): void
+	/**
+	 * @return void
+	 */
+	public function testThrowExceptionForUnsupportedKeyword()
 	{
 		try {
 			self::checkFile(
@@ -376,25 +394,37 @@ class BlockControlStructureSpacingSniffTest extends TestCase
 		}
 	}
 
-	public function testIfWithoutCurlyBraces(): void
+	/**
+	 * @return void
+	 */
+	public function testIfWithoutCurlyBraces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/blockControlStructureSpacingIfWithoutCurlyBraces.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testElseWithoutCurlyBraces(): void
+	/**
+	 * @return void
+	 */
+	public function testElseWithoutCurlyBraces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/blockControlStructureSpacingElseWithoutCurlyBraces.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIfWithAlternativeSyntax(): void
+	/**
+	 * @return void
+	 */
+	public function testIfWithAlternativeSyntax()
 	{
 		$report = self::checkFile(__DIR__ . '/data/blockControlStructureSpacingIfWithAlternativeSyntax.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testAtTheEndOfFile(): void
+	/**
+	 * @return void
+	 */
+	public function testAtTheEndOfFile()
 	{
 		$report = self::checkFile(__DIR__ . '/data/blockControlStructureSpacingAtTheEndOfFile.php');
 		self::assertNoSniffErrorInFile($report);

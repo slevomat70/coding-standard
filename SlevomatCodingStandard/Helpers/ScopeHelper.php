@@ -13,7 +13,12 @@ use const T_OPEN_TAG;
 class ScopeHelper
 {
 
-	public static function isInSameScope(File $phpcsFile, int $firstPointer, int $secondPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $firstPointer
+	 * @param int $secondPointer
+	 */
+	public static function isInSameScope($phpcsFile, $firstPointer, $secondPointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -35,7 +40,11 @@ class ScopeHelper
 		return $getScope($firstPointer) === $getScope($secondPointer);
 	}
 
-	public static function getRootPointer(File $phpcsFile, int $pointer): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	public static function getRootPointer($phpcsFile, $pointer): int
 	{
 		$rootPointer = TokenHelper::findNext($phpcsFile, T_OPEN_TAG, 0);
 
@@ -52,8 +61,9 @@ class ScopeHelper
 
 	/**
 	 * @return int[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
-	public static function getAllRootPointers(File $phpcsFile): array
+	public static function getAllRootPointers($phpcsFile): array
 	{
 		$lazyValue = static function () use ($phpcsFile): array {
 			return TokenHelper::findNextAll($phpcsFile, T_OPEN_TAG, 0);

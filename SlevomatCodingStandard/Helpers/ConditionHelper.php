@@ -44,10 +44,15 @@ use const T_VARIABLE;
 class ConditionHelper
 {
 
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $conditionBoundaryStartPointer
+	 * @param int $conditionBoundaryEndPointer
+	 */
 	public static function conditionReturnsBoolean(
-		File $phpcsFile,
-		int $conditionBoundaryStartPointer,
-		int $conditionBoundaryEndPointer
+		$phpcsFile,
+		$conditionBoundaryStartPointer,
+		$conditionBoundaryEndPointer
 	): bool
 	{
 		$tokens = $phpcsFile->getTokens();
@@ -90,11 +95,17 @@ class ConditionHelper
 		return false;
 	}
 
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $conditionBoundaryStartPointer
+	 * @param int $conditionBoundaryEndPointer
+	 * @param bool $nested
+	 */
 	public static function getNegativeCondition(
-		File $phpcsFile,
-		int $conditionBoundaryStartPointer,
-		int $conditionBoundaryEndPointer,
-		bool $nested = false
+		$phpcsFile,
+		$conditionBoundaryStartPointer,
+		$conditionBoundaryEndPointer,
+		$nested = false
 	): string
 	{
 		/** @var int $conditionStartPointer */

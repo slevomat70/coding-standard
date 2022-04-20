@@ -7,19 +7,28 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class FullyQualifiedGlobalFunctionsSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalFunctionsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testFileWithoutNamespaceNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testFileWithoutNamespaceNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalFunctionsFileWithoutNamespaceNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalFunctionsErrors.php');
 
@@ -41,7 +50,10 @@ class FullyQualifiedGlobalFunctionsSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testExcludeErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testExcludeErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalFunctionsIncludeExcludeErrors.php', [
 			'exclude' => ['min'],
@@ -59,7 +71,10 @@ class FullyQualifiedGlobalFunctionsSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testIncludeErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIncludeErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalFunctionsIncludeExcludeErrors.php', [
 			'include' => ['max'],
@@ -77,7 +92,10 @@ class FullyQualifiedGlobalFunctionsSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testIncludeSpecialNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIncludeSpecialNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalFunctionsIncludeSpecialNoErrors.php', [
 			'includeSpecialFunctions' => true,
@@ -86,7 +104,10 @@ class FullyQualifiedGlobalFunctionsSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIncludeSpecialErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIncludeSpecialErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedGlobalFunctionsIncludeSpecialErrors.php', [
 			'includeSpecialFunctions' => true,

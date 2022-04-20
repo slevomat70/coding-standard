@@ -47,17 +47,17 @@ use const T_FUNCTION;
 class ReturnTypeHintSniff implements Sniff
 {
 
-	public const CODE_MISSING_ANY_TYPE_HINT = 'MissingAnyTypeHint';
+	const CODE_MISSING_ANY_TYPE_HINT = 'MissingAnyTypeHint';
 
-	public const CODE_MISSING_NATIVE_TYPE_HINT = 'MissingNativeTypeHint';
+	const CODE_MISSING_NATIVE_TYPE_HINT = 'MissingNativeTypeHint';
 
-	public const CODE_MISSING_TRAVERSABLE_TYPE_HINT_SPECIFICATION = 'MissingTraversableTypeHintSpecification';
+	const CODE_MISSING_TRAVERSABLE_TYPE_HINT_SPECIFICATION = 'MissingTraversableTypeHintSpecification';
 
-	public const CODE_USELESS_ANNOTATION = 'UselessAnnotation';
+	const CODE_USELESS_ANNOTATION = 'UselessAnnotation';
 
-	public const CODE_USELESS_SUPPRESS = 'UselessSuppress';
+	const CODE_USELESS_SUPPRESS = 'UselessSuppress';
 
-	private const NAME = 'SlevomatCodingStandard.TypeHints.ReturnTypeHint';
+	const NAME = 'SlevomatCodingStandard.TypeHints.ReturnTypeHint';
 
 	/** @var bool|null */
 	public $enableObjectTypeHint = null;
@@ -91,8 +91,10 @@ class ReturnTypeHintSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $pointer): void
+	public function process(File $phpcsFile, $pointer)
 	{
 		$this->enableObjectTypeHint = SniffSettingsHelper::isEnabledByPhpVersion($this->enableObjectTypeHint, 70200);
 		$this->enableStaticTypeHint = SniffSettingsHelper::isEnabledByPhpVersion($this->enableStaticTypeHint, 80000);
@@ -130,14 +132,17 @@ class ReturnTypeHintSniff implements Sniff
 
 	/**
 	 * @param ReturnAnnotation[] $prefixedReturnAnnotations
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $returnTypeHint
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation|null $returnAnnotation
+	 * @return void
 	 */
 	private function checkFunctionTypeHint(
 		File $phpcsFile,
 		int $functionPointer,
-		?TypeHint $returnTypeHint,
-		?ReturnAnnotation $returnAnnotation,
+		$returnTypeHint,
+		$returnAnnotation,
 		array $prefixedReturnAnnotations
-	): void
+	)
 	{
 		$suppressNameAnyTypeHint = $this->getSniffName(self::CODE_MISSING_ANY_TYPE_HINT);
 		$isSuppressedAnyTypeHint = SuppressHelper::isSniffSuppressed($phpcsFile, $functionPointer, $suppressNameAnyTypeHint);
@@ -405,14 +410,17 @@ class ReturnTypeHintSniff implements Sniff
 
 	/**
 	 * @param ReturnAnnotation[] $prefixedReturnAnnotations
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $returnTypeHint
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation|null $returnAnnotation
+	 * @return void
 	 */
 	private function checkFunctionTraversableTypeHintSpecification(
 		File $phpcsFile,
 		int $functionPointer,
-		?TypeHint $returnTypeHint,
-		?ReturnAnnotation $returnAnnotation,
+		$returnTypeHint,
+		$returnAnnotation,
 		array $prefixedReturnAnnotations
-	): void
+	)
 	{
 		$suppressName = $this->getSniffName(self::CODE_MISSING_TRAVERSABLE_TYPE_HINT_SPECIFICATION);
 		$isSuppressed = SuppressHelper::isSniffSuppressed($phpcsFile, $functionPointer, $suppressName);
@@ -486,12 +494,17 @@ class ReturnTypeHintSniff implements Sniff
 		);
 	}
 
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $returnTypeHint
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation|null $returnAnnotation
+	 * @return void
+	 */
 	private function checkFunctionUselessAnnotation(
 		File $phpcsFile,
 		int $functionPointer,
-		?TypeHint $returnTypeHint,
-		?ReturnAnnotation $returnAnnotation
-	): void
+		$returnTypeHint,
+		$returnAnnotation
+	)
 	{
 		if ($returnAnnotation === null) {
 			return;
@@ -553,7 +566,10 @@ class ReturnTypeHintSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function checkClosureTypeHint(File $phpcsFile, int $closurePointer): void
+	/**
+	 * @return void
+	 */
+	private function checkClosureTypeHint(File $phpcsFile, int $closurePointer)
 	{
 		$returnTypeHint = FunctionHelper::findReturnTypeHint($phpcsFile, $closurePointer);
 		$returnsValue = FunctionHelper::returnsValue($phpcsFile, $closurePointer);
@@ -582,9 +598,10 @@ class ReturnTypeHintSniff implements Sniff
 	}
 
 	/**
-	 * @return GenericTypeNode|CallableTypeNode|IntersectionTypeNode|UnionTypeNode|ArrayTypeNode|ArrayShapeNode|IdentifierTypeNode|ThisTypeNode|NullableTypeNode|ConstTypeNode|ConditionalTypeNode|ConditionalTypeForParameterNode|null
+	 * @return \PHPStan\PhpDocParser\Ast\Type\TypeNode|null
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation|null $returnAnnotation
 	 */
-	private function getReturnTypeNode(?ReturnAnnotation $returnAnnotation): ?TypeNode
+	private function getReturnTypeNode($returnAnnotation)
 	{
 		if ($this->hasReturnAnnotation($returnAnnotation)) {
 			return $returnAnnotation->getType();
@@ -593,11 +610,15 @@ class ReturnTypeHintSniff implements Sniff
 		return null;
 	}
 
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $returnTypeHint
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation|null $returnAnnotation
+	 */
 	private function hasTraversableTypeHint(
 		File $phpcsFile,
 		int $functionPointer,
-		?TypeHint $returnTypeHint,
-		?ReturnAnnotation $returnAnnotation
+		$returnTypeHint,
+		$returnAnnotation
 	): bool
 	{
 		if (
@@ -624,12 +645,18 @@ class ReturnTypeHintSniff implements Sniff
 			);
 	}
 
-	private function hasReturnAnnotation(?ReturnAnnotation $returnAnnotation): bool
+	/**
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation|null $returnAnnotation
+	 */
+	private function hasReturnAnnotation($returnAnnotation): bool
 	{
 		return $returnAnnotation !== null && $returnAnnotation->getContent() !== null && !$returnAnnotation->isInvalid();
 	}
 
-	private function reportUselessSuppress(File $phpcsFile, int $pointer, bool $isSuppressed, string $suppressName): void
+	/**
+	 * @return void
+	 */
+	private function reportUselessSuppress(File $phpcsFile, int $pointer, bool $isSuppressed, string $suppressName)
 	{
 		if (!$isSuppressed) {
 			return;

@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class SpreadOperatorSpacingSniffTest extends TestCase
 {
 
-	public function testDefaultSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/spreadOperatorSpacingDefaultSettingsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/spreadOperatorSpacingDefaultSettingsErrors.php');
 
@@ -25,7 +31,10 @@ class SpreadOperatorSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/spreadOperatorSpacingModifiedSettingsNoErrors.php', [
 			'spacesCountAfterOperator' => 2,
@@ -33,7 +42,10 @@ class SpreadOperatorSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/spreadOperatorSpacingModifiedSettingsErrors.php', [
 			'spacesCountAfterOperator' => 2,

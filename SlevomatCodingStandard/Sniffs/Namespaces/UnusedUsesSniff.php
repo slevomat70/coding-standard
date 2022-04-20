@@ -44,8 +44,8 @@ use const T_SEMICOLON;
 class UnusedUsesSniff implements Sniff
 {
 
-	public const CODE_UNUSED_USE = 'UnusedUse';
-	public const CODE_MISMATCHING_CASE = 'MismatchingCaseSensitivity';
+	const CODE_UNUSED_USE = 'UnusedUse';
+	const CODE_MISMATCHING_CASE = 'MismatchingCaseSensitivity';
 
 	/** @var bool */
 	public $searchAnnotations = false;
@@ -75,8 +75,10 @@ class UnusedUsesSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $openTagPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $openTagPointer): void
+	public function process(File $phpcsFile, $openTagPointer)
 	{
 		if (TokenHelper::findPrevious($phpcsFile, T_OPEN_TAG, $openTagPointer - 1) !== null) {
 			return;

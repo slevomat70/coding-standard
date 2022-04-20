@@ -8,13 +8,19 @@ use function range;
 class AssignmentInConditionSniffTest extends TestCase
 {
 
-	public function testCorrectFile(): void
+	/**
+	 * @return void
+	 */
+	public function testCorrectFile()
 	{
 		$resultFile = self::checkFile(__DIR__ . '/data/noAssignmentsInConditions.php');
 		self::assertNoSniffErrorInFile($resultFile);
 	}
 
-	public function testIncorrectFile(): void
+	/**
+	 * @return void
+	 */
+	public function testIncorrectFile()
 	{
 		$resultFile = self::checkFile(__DIR__ . '/data/allAssignmentsInConditions.php');
 		self::assertEquals(6, $resultFile->getErrorCount());
@@ -23,7 +29,10 @@ class AssignmentInConditionSniffTest extends TestCase
 		}
 	}
 
-	public function testNoErrorsWithIgnoreAssignmentsInsideFunctionCalls(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWithIgnoreAssignmentsInsideFunctionCalls()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/noAssignmentsInConditionsIgnoreAssignmentsInsideFunctionCalls.php',
@@ -34,7 +43,10 @@ class AssignmentInConditionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrorsWithIgnoreAssignmentsInsideFunctionCalls(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithIgnoreAssignmentsInsideFunctionCalls()
 	{
 		$resultFile = self::checkFile(
 			__DIR__ . '/data/allAssignmentsInConditions.php',

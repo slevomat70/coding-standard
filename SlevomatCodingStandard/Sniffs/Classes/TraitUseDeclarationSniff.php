@@ -17,7 +17,7 @@ use const T_WHITESPACE;
 class TraitUseDeclarationSniff implements Sniff
 {
 
-	public const CODE_MULTIPLE_TRAITS_PER_DECLARATION = 'MultipleTraitsPerDeclaration';
+	const CODE_MULTIPLE_TRAITS_PER_DECLARATION = 'MultipleTraitsPerDeclaration';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -34,8 +34,10 @@ class TraitUseDeclarationSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $classPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $classPointer): void
+	public function process(File $phpcsFile, $classPointer)
 	{
 		$usePointers = ClassHelper::getTraitUsePointers($phpcsFile, $classPointer);
 
@@ -44,7 +46,10 @@ class TraitUseDeclarationSniff implements Sniff
 		}
 	}
 
-	private function checkDeclaration(File $phpcsFile, int $usePointer): void
+	/**
+	 * @return void
+	 */
+	private function checkDeclaration(File $phpcsFile, int $usePointer)
 	{
 		$commaPointer = TokenHelper::findNextLocal($phpcsFile, T_COMMA, $usePointer + 1);
 		if ($commaPointer === null) {

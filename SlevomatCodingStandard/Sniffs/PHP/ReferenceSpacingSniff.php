@@ -25,7 +25,7 @@ use const T_WHITESPACE;
 class ReferenceSpacingSniff implements Sniff
 {
 
-	public const CODE_INCORRECT_SPACES_AFTER_REFERENCE = 'IncorrectSpacesAfterReference';
+	const CODE_INCORRECT_SPACES_AFTER_REFERENCE = 'IncorrectSpacesAfterReference';
 
 	/** @var int */
 	public $spacesCountAfterReference = 0;
@@ -43,8 +43,10 @@ class ReferenceSpacingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $referencePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $referencePointer): void
+	public function process(File $phpcsFile, $referencePointer)
 	{
 		if (!$this->isReference($phpcsFile, $referencePointer)) {
 			return;

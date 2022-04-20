@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UseOnlyWhitelistedNamespacesSniffTest extends TestCase
 {
 
-	public function testUseOnlyWhitelistedNamespaces(): void
+	/**
+	 * @return void
+	 */
+	public function testUseOnlyWhitelistedNamespaces()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/whitelistedNamespacesInUses.php',
@@ -24,13 +27,19 @@ class UseOnlyWhitelistedNamespacesSniffTest extends TestCase
 		self::assertSniffError($report, 8, UseOnlyWhitelistedNamespacesSniff::CODE_NON_FULLY_QUALIFIED, 'Lorem\Ipsum');
 	}
 
-	public function testIgnoreUseFromAnonymousFunction(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoreUseFromAnonymousFunction()
 	{
 		$report = self::checkFile(__DIR__ . '/data/whitelistedNamespacesInUses.php');
 		self::assertNoSniffError($report, 12);
 	}
 
-	public function testIgnoreTraitUses(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoreTraitUses()
 	{
 		$report = self::checkFile(__DIR__ . '/data/whitelistedNamespacesInUses.php');
 		self::assertNoSniffError($report, 19);
@@ -38,7 +47,10 @@ class UseOnlyWhitelistedNamespacesSniffTest extends TestCase
 		self::assertNoSniffError($report, 21);
 	}
 
-	public function testAllowUseFromRootNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testAllowUseFromRootNamespace()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/whitelistedNamespacesInUses.php',

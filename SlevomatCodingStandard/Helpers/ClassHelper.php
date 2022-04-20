@@ -17,7 +17,12 @@ use const T_USE;
 class ClassHelper
 {
 
-	public static function getClassPointer(File $phpcsFile, int $pointer): ?int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @return int|null
+	 */
+	public static function getClassPointer($phpcsFile, $pointer)
 	{
 		$classPointers = array_reverse(self::getAllClassPointers($phpcsFile));
 		foreach ($classPointers as $classPointer) {
@@ -29,12 +34,20 @@ class ClassHelper
 		return null;
 	}
 
-	public static function isFinal(File $phpcsFile, int $classPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $classPointer
+	 */
+	public static function isFinal($phpcsFile, $classPointer): bool
 	{
 		return $phpcsFile->getTokens()[TokenHelper::findPreviousEffective($phpcsFile, $classPointer - 1)]['code'] === T_FINAL;
 	}
 
-	public static function getFullyQualifiedName(File $phpcsFile, int $classPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $classPointer
+	 */
+	public static function getFullyQualifiedName($phpcsFile, $classPointer): string
 	{
 		$className = self::getName($phpcsFile, $classPointer);
 
@@ -48,7 +61,11 @@ class ClassHelper
 		return $namespace !== null ? sprintf('%s%s%s', NamespaceHelper::NAMESPACE_SEPARATOR, $namespace, $name) : $name;
 	}
 
-	public static function getName(File $phpcsFile, int $classPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $classPointer
+	 */
+	public static function getName($phpcsFile, $classPointer): string
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -61,8 +78,9 @@ class ClassHelper
 
 	/**
 	 * @return array<int, string>
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
-	public static function getAllNames(File $phpcsFile): array
+	public static function getAllNames($phpcsFile): array
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -81,8 +99,10 @@ class ClassHelper
 
 	/**
 	 * @return int[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $classPointer
 	 */
-	public static function getTraitUsePointers(File $phpcsFile, int $classPointer): array
+	public static function getTraitUsePointers($phpcsFile, $classPointer): array
 	{
 		$useStatements = [];
 

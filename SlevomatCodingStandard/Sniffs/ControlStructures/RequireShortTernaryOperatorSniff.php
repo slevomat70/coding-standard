@@ -16,7 +16,7 @@ use const T_INLINE_THEN;
 class RequireShortTernaryOperatorSniff implements Sniff
 {
 
-	public const CODE_REQUIRED_SHORT_TERNARY_OPERATOR = 'RequiredShortTernaryOperator';
+	const CODE_REQUIRED_SHORT_TERNARY_OPERATOR = 'RequiredShortTernaryOperator';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -31,8 +31,10 @@ class RequireShortTernaryOperatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $inlineThenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $inlineThenPointer): void
+	public function process(File $phpcsFile, $inlineThenPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

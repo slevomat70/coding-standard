@@ -12,7 +12,10 @@ class DocCommentHelperTest extends TestCase
 	/** @var File */
 	private $testedCodeSnifferFile;
 
-	public function testClassHasDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testClassHasDocComment()
 	{
 		self::assertTrue(
 			DocCommentHelper::hasDocComment(
@@ -28,7 +31,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testClassGetDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testClassGetDocComment()
 	{
 		self::assertSame(
 			"* Class WithDocComment\n *\n * @see https://www.slevomat.cz",
@@ -45,7 +51,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testClassHasNoDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testClassHasNoDocComment()
 	{
 		self::assertFalse(
 			DocCommentHelper::hasDocComment(
@@ -55,7 +64,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testClassHasEmptyDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testClassHasEmptyDocComment()
 	{
 		self::assertTrue(
 			DocCommentHelper::hasDocComment(
@@ -71,7 +83,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testClassHasDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testClassHasDocCommentDescription()
 	{
 		self::assertTrue(
 			DocCommentHelper::hasDocCommentDescription(
@@ -81,7 +96,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testClassHasNoDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testClassHasNoDocCommentDescription()
 	{
 		self::assertFalse(
 			DocCommentHelper::hasDocCommentDescription(
@@ -97,7 +115,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testConstantHasDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testConstantHasDocComment()
 	{
 		self::assertTrue(
 			DocCommentHelper::hasDocComment(
@@ -113,7 +134,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testConstantHasNoDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testConstantHasNoDocComment()
 	{
 		self::assertFalse(
 			DocCommentHelper::hasDocComment(
@@ -123,7 +147,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testConstantHasDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testConstantHasDocCommentDescription()
 	{
 		self::assertTrue(
 			DocCommentHelper::hasDocCommentDescription(
@@ -133,7 +160,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testConstantHasNoDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testConstantHasNoDocCommentDescription()
 	{
 		self::assertFalse(
 			DocCommentHelper::hasDocCommentDescription(
@@ -149,7 +179,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testPropertyHasDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyHasDocComment()
 	{
 		self::assertTrue(
 			DocCommentHelper::hasDocComment(
@@ -165,7 +198,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testPropertyHasNoDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyHasNoDocComment()
 	{
 		self::assertFalse(
 			DocCommentHelper::hasDocComment(
@@ -175,7 +211,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testPropertyHasNoDocCommentButClassHas(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyHasNoDocCommentButClassHas()
 	{
 		self::assertFalse(
 			DocCommentHelper::hasDocComment(
@@ -191,7 +230,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testPropertyHasDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyHasDocCommentDescription()
 	{
 		self::assertTrue(
 			DocCommentHelper::hasDocCommentDescription(
@@ -201,7 +243,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testPropertyHasNoDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyHasNoDocCommentDescription()
 	{
 		self::assertFalse(
 			DocCommentHelper::hasDocCommentDescription(
@@ -217,7 +262,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testPropertyInLegacyFormatHasDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyInLegacyFormatHasDocComment()
 	{
 		self::assertTrue(
 			DocCommentHelper::hasDocComment(
@@ -227,7 +275,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionHasDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionHasDocComment()
 	{
 		self::assertTrue(
 			DocCommentHelper::hasDocComment(
@@ -243,7 +294,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionHasNoDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionHasNoDocComment()
 	{
 		self::assertFalse(
 			DocCommentHelper::hasDocComment(
@@ -253,7 +307,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionHasDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionHasDocCommentDescription()
 	{
 		self::assertTrue(
 			DocCommentHelper::hasDocCommentDescription(
@@ -263,7 +320,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionHasNoDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionHasNoDocCommentDescription()
 	{
 		self::assertFalse(
 			DocCommentHelper::hasDocCommentDescription(
@@ -279,7 +339,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testConstantGetDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testConstantGetDocCommentDescription()
 	{
 		self::assertEquals(
 			['Constant WITH_DOC_COMMENT_AND_DESCRIPTION'],
@@ -292,7 +355,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testPropertyGetDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testPropertyGetDocCommentDescription()
 	{
 		self::assertSame(
 			['Property with doc comment and description'],
@@ -305,7 +371,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testFunctionGetDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testFunctionGetDocCommentDescription()
 	{
 		self::assertSame(
 			['Function with doc comment and description', 'And is multi-line'],
@@ -318,7 +387,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testUnboundGetDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testUnboundGetDocCommentDescription()
 	{
 		self::assertSame(
 			['Created by Slevomat.'],
@@ -331,7 +403,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testUnboundMultiLineGetDocCommentDescription(): void
+	/**
+	 * @return void
+	 */
+	public function testUnboundMultiLineGetDocCommentDescription()
 	{
 		self::assertSame(
 			['This is', 'multiLine.'],
@@ -344,7 +419,10 @@ class DocCommentHelperTest extends TestCase
 		);
 	}
 
-	public function testIsInline(): void
+	/**
+	 * @return void
+	 */
+	public function testIsInline()
 	{
 		$phpcsFile = $this->getTestedCodeSnifferFile();
 

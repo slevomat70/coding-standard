@@ -7,9 +7,13 @@ use PHP_CodeSniffer\Files\File;
 class RequireOneLineDocCommentSniff extends AbstractRequireOneLineDocComment
 {
 
-	public const CODE_MULTI_LINE_DOC_COMMENT = 'MultiLineDocComment';
+	const CODE_MULTI_LINE_DOC_COMMENT = 'MultiLineDocComment';
 
-	protected function addError(File $phpcsFile, int $docCommentStartPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $docCommentStartPointer
+	 */
+	protected function addError($phpcsFile, $docCommentStartPointer): bool
 	{
 		$error = 'Found multi-line doc comment with single line content, use one-line doc comment instead.';
 

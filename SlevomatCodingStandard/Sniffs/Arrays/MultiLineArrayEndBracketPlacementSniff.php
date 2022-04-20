@@ -10,7 +10,7 @@ use const T_OPEN_SHORT_ARRAY;
 class MultiLineArrayEndBracketPlacementSniff implements Sniff
 {
 
-	public const CODE_ARRAY_END_WRONG_PLACEMENT = 'ArrayEndWrongPlacement';
+	const CODE_ARRAY_END_WRONG_PLACEMENT = 'ArrayEndWrongPlacement';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -23,8 +23,10 @@ class MultiLineArrayEndBracketPlacementSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $arrayStart
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $arrayStart): void
+	public function process(File $phpcsFile, $arrayStart)
 	{
 		$tokens = $phpcsFile->getTokens();
 

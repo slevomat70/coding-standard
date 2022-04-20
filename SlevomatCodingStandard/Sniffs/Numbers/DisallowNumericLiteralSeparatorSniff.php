@@ -12,7 +12,7 @@ use const T_LNUMBER;
 class DisallowNumericLiteralSeparatorSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_NUMERIC_LITERAL_SEPARATOR = 'DisallowedNumericLiteralSeparator';
+	const CODE_DISALLOWED_NUMERIC_LITERAL_SEPARATOR = 'DisallowedNumericLiteralSeparator';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -28,8 +28,10 @@ class DisallowNumericLiteralSeparatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $numberPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $numberPointer): void
+	public function process(File $phpcsFile, $numberPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

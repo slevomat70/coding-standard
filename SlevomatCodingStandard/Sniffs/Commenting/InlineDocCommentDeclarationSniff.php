@@ -36,10 +36,10 @@ use const T_WHILE;
 class InlineDocCommentDeclarationSniff implements Sniff
 {
 
-	public const CODE_INVALID_FORMAT = 'InvalidFormat';
-	public const CODE_INVALID_COMMENT_TYPE = 'InvalidCommentType';
-	public const CODE_MISSING_VARIABLE = 'MissingVariable';
-	public const CODE_NO_ASSIGNMENT = 'NoAssignment';
+	const CODE_INVALID_FORMAT = 'InvalidFormat';
+	const CODE_INVALID_COMMENT_TYPE = 'InvalidCommentType';
+	const CODE_MISSING_VARIABLE = 'MissingVariable';
+	const CODE_NO_ASSIGNMENT = 'NoAssignment';
 
 	/** @var bool */
 	public $allowDocCommentAboveReturn = false;
@@ -61,8 +61,10 @@ class InlineDocCommentDeclarationSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $commentOpenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $commentOpenPointer): void
+	public function process(File $phpcsFile, $commentOpenPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -104,7 +106,10 @@ class InlineDocCommentDeclarationSniff implements Sniff
 		$this->checkVariable($phpcsFile, $commentOpenPointer, $commentClosePointer);
 	}
 
-	private function checkFormat(File $phpcsFile, int $commentOpenPointer, int $commentClosePointer): void
+	/**
+	 * @return void
+	 */
+	private function checkFormat(File $phpcsFile, int $commentOpenPointer, int $commentClosePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -192,7 +197,10 @@ class InlineDocCommentDeclarationSniff implements Sniff
 		}
 	}
 
-	private function checkVariable(File $phpcsFile, int $docCommentOpenPointer, int $commentClosePointer): void
+	/**
+	 * @return void
+	 */
+	private function checkVariable(File $phpcsFile, int $docCommentOpenPointer, int $commentClosePointer)
 	{
 		$variableAnnotations = AnnotationHelper::getAnnotationsByName($phpcsFile, $docCommentOpenPointer, '@var');
 		if (count($variableAnnotations) === 0) {

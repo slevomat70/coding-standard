@@ -7,25 +7,37 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class TraitUseSpacingSniffTest extends TestCase
 {
 
-	public function testNoUses(): void
+	/**
+	 * @return void
+	 */
+	public function testNoUses()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingNoUses.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNoTraitUses(): void
+	/**
+	 * @return void
+	 */
+	public function testNoTraitUses()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingNoTraitUses.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingDefaultSettingsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingDefaultSettingsErrors.php');
 
@@ -40,13 +52,19 @@ class TraitUseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testOneUseDefaultSettingNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testOneUseDefaultSettingNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingOneUseDefaultSettingsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testOneUseDefaultSettingErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testOneUseDefaultSettingErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingOneUseDefaultSettingsErrors.php');
 
@@ -58,13 +76,19 @@ class TraitUseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testDefaultSettingWithCommentsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingWithCommentsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingDefaultSettingsWithCommentsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingWithCommentsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingWithCommentsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingDefaultSettingsWithCommentsErrors.php');
 
@@ -76,7 +100,10 @@ class TraitUseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingModifiedSettingsNoErrors.php', [
 			'linesCountBeforeFirstUse' => 0,
@@ -88,7 +115,10 @@ class TraitUseSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingModifiedSettingsErrors.php', [
 			'linesCountBeforeFirstUse' => 0,
@@ -109,7 +139,10 @@ class TraitUseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingWhenUseIsFirstInClassNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingWhenUseIsFirstInClassNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingModifiedSettingsWhenUseIsLastInClassNoErrors.php', [
 			'linesCountBeforeFirstUse' => 2,
@@ -121,7 +154,10 @@ class TraitUseSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingWhenUseIsFirstInClassErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingWhenUseIsFirstInClassErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingModifiedSettingsWhenUseIsLastInClassErrors.php', [
 			'linesCountBeforeFirstUse' => 2,
@@ -142,7 +178,10 @@ class TraitUseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingWhenUseIsLastInClassNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingWhenUseIsLastInClassNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingModifiedSettingsWhenUseIsLastInClassNoErrors.php', [
 			'linesCountBeforeFirstUse' => 0,
@@ -154,7 +193,10 @@ class TraitUseSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingWhenUseIsLastInClassErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingWhenUseIsLastInClassErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingModifiedSettingsWhenUseIsLastInClassErrors.php', [
 			'linesCountBeforeFirstUse' => 0,
@@ -175,7 +217,10 @@ class TraitUseSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingWhenUseIsLastInClass2Errors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingWhenUseIsLastInClass2Errors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/traitUseSpacingModifiedSettingsWhenUseIsLastInClass2Errors.php', [
 			'linesCountBeforeFirstUse' => 0,

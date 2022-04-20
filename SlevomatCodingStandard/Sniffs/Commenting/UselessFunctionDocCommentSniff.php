@@ -19,7 +19,7 @@ use const T_FUNCTION;
 class UselessFunctionDocCommentSniff implements Sniff
 {
 
-	public const CODE_USELESS_DOC_COMMENT = 'UselessDocComment';
+	const CODE_USELESS_DOC_COMMENT = 'UselessDocComment';
 
 	/** @var string[] */
 	public $traversableTypeHints = [];
@@ -40,8 +40,10 @@ class UselessFunctionDocCommentSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $functionPointer): void
+	public function process(File $phpcsFile, $functionPointer)
 	{
 		if (!DocCommentHelper::hasDocComment($phpcsFile, $functionPointer)) {
 			return;
@@ -90,7 +92,7 @@ class UselessFunctionDocCommentSniff implements Sniff
 			}
 		}
 
-		foreach (AnnotationHelper::getAnnotations($phpcsFile, $functionPointer) as [$annotation]) {
+		foreach (AnnotationHelper::getAnnotations($phpcsFile, $functionPointer) as list($annotation)) {
 			if (!in_array($annotation->getName(), ['@param', '@return'], true)) {
 				return;
 			}

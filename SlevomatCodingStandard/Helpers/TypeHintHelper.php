@@ -26,11 +26,17 @@ use const T_WHITESPACE;
 class TypeHintHelper
 {
 
+	/**
+	 * @param string $typeHint
+	 * @param bool $enableObjectTypeHint
+	 * @param bool $enableStaticTypeHint
+	 * @param bool $enableMixedTypeHint
+	 */
 	public static function isValidTypeHint(
-		string $typeHint,
-		bool $enableObjectTypeHint,
-		bool $enableStaticTypeHint,
-		bool $enableMixedTypeHint
+		$typeHint,
+		$enableObjectTypeHint,
+		$enableStaticTypeHint,
+		$enableMixedTypeHint
 	): bool
 	{
 		if (self::isSimpleTypeHint($typeHint)) {
@@ -52,17 +58,26 @@ class TypeHintHelper
 		return !self::isSimpleUnofficialTypeHints($typeHint);
 	}
 
-	public static function isSimpleTypeHint(string $typeHint): bool
+	/**
+	 * @param string $typeHint
+	 */
+	public static function isSimpleTypeHint($typeHint): bool
 	{
 		return in_array($typeHint, self::getSimpleTypeHints(), true);
 	}
 
-	public static function isSimpleIterableTypeHint(string $typeHint): bool
+	/**
+	 * @param string $typeHint
+	 */
+	public static function isSimpleIterableTypeHint($typeHint): bool
 	{
 		return in_array($typeHint, self::getSimpleIterableTypeHints(), true);
 	}
 
-	public static function convertLongSimpleTypeHintToShort(string $typeHint): string
+	/**
+	 * @param string $typeHint
+	 */
+	public static function convertLongSimpleTypeHintToShort($typeHint): string
 	{
 		$longToShort = [
 			'integer' => 'int',
@@ -71,20 +86,27 @@ class TypeHintHelper
 		return array_key_exists($typeHint, $longToShort) ? $longToShort[$typeHint] : $typeHint;
 	}
 
-	public static function isUnofficialUnionTypeHint(string $typeHint): bool
+	/**
+	 * @param string $typeHint
+	 */
+	public static function isUnofficialUnionTypeHint($typeHint): bool
 	{
 		return in_array($typeHint, ['scalar', 'numeric'], true);
 	}
 
-	public static function isVoidTypeHint(string $typeHint): bool
+	/**
+	 * @param string $typeHint
+	 */
+	public static function isVoidTypeHint($typeHint): bool
 	{
 		return in_array($typeHint, ['void', 'never', 'never-return', 'never-returns', 'no-return'], true);
 	}
 
 	/**
 	 * @return string[]
+	 * @param string $typeHint
 	 */
-	public static function convertUnofficialUnionTypeHintToOfficialTypeHints(string $typeHint): array
+	public static function convertUnofficialUnionTypeHintToOfficialTypeHints($typeHint): array
 	{
 		$conversion = [
 			'scalar' => ['string', 'int', 'float', 'bool'],
@@ -94,7 +116,12 @@ class TypeHintHelper
 		return $conversion[$typeHint];
 	}
 
-	public static function isTypeDefinedInAnnotation(File $phpcsFile, int $pointer, string $typeHint): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @param string $typeHint
+	 */
+	public static function isTypeDefinedInAnnotation($phpcsFile, $pointer, $typeHint): bool
 	{
 		/** @var int $docCommentOpenPointer */
 		$docCommentOpenPointer = DocCommentHelper::findDocCommentOpenPointer($phpcsFile, $pointer);
@@ -102,7 +129,12 @@ class TypeHintHelper
 			|| self::isAlias($phpcsFile, $docCommentOpenPointer, $typeHint);
 	}
 
-	public static function getFullyQualifiedTypeHint(File $phpcsFile, int $pointer, string $typeHint): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @param string $typeHint
+	 */
+	public static function getFullyQualifiedTypeHint($phpcsFile, $pointer, $typeHint): string
 	{
 		if (self::isSimpleTypeHint($typeHint)) {
 			return self::convertLongSimpleTypeHintToShort($typeHint);
@@ -148,7 +180,10 @@ class TypeHintHelper
 		];
 	}
 
-	public static function isSimpleUnofficialTypeHints(string $typeHint): bool
+	/**
+	 * @param string $typeHint
+	 */
+	public static function isSimpleUnofficialTypeHints($typeHint): bool
 	{
 		static $simpleUnofficialTypeHints;
 
@@ -179,17 +214,24 @@ class TypeHintHelper
 
 	/**
 	 * @param string[] $traversableTypeHints
+	 * @param string $type
 	 */
-	public static function isTraversableType(string $type, array $traversableTypeHints): bool
+	public static function isTraversableType($type, $traversableTypeHints): bool
 	{
 		return self::isSimpleIterableTypeHint($type) || in_array($type, $traversableTypeHints, true);
 	}
 
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 * @param string $typeHint
+	 * @param string $typeHintInAnnotation
+	 */
 	public static function typeHintEqualsAnnotation(
-		File $phpcsFile,
-		int $functionPointer,
-		string $typeHint,
-		string $typeHintInAnnotation
+		$phpcsFile,
+		$functionPointer,
+		$typeHint,
+		$typeHintInAnnotation
 	): bool
 	{
 		$typeHintParts = explode('|', self::normalize($typeHint));
@@ -212,7 +254,11 @@ class TypeHintHelper
 		return true;
 	}
 
-	public static function getStartPointer(File $phpcsFile, int $endPointer): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $endPointer
+	 */
+	public static function getStartPointer($phpcsFile, $endPointer): int
 	{
 		$previousPointer = TokenHelper::findPreviousExcluding(
 			$phpcsFile,

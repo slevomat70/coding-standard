@@ -12,7 +12,7 @@ use const T_CATCH;
 class DeadCatchSniff implements Sniff
 {
 
-	public const CODE_CATCH_AFTER_THROWABLE_CATCH = 'CatchAfterThrowableCatch';
+	const CODE_CATCH_AFTER_THROWABLE_CATCH = 'CatchAfterThrowableCatch';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -27,8 +27,10 @@ class DeadCatchSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $catchPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $catchPointer): void
+	public function process(File $phpcsFile, $catchPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

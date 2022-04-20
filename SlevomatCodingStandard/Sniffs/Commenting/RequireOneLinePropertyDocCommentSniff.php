@@ -12,13 +12,15 @@ use const T_VARIABLE;
 class RequireOneLinePropertyDocCommentSniff extends AbstractRequireOneLineDocComment
 {
 
-	public const CODE_MULTI_LINE_PROPERTY_COMMENT = 'MultiLinePropertyComment';
+	const CODE_MULTI_LINE_PROPERTY_COMMENT = 'MultiLinePropertyComment';
 
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $docCommentStartPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $docCommentStartPointer): void
+	public function process(File $phpcsFile, $docCommentStartPointer)
 	{
 		$propertyPointer = TokenHelper::findNext($phpcsFile, T_VARIABLE, $docCommentStartPointer + 1);
 		if ($propertyPointer === null) {
@@ -44,7 +46,11 @@ class RequireOneLinePropertyDocCommentSniff extends AbstractRequireOneLineDocCom
 		parent::process($phpcsFile, $docCommentStartPointer);
 	}
 
-	protected function addError(File $phpcsFile, int $docCommentStartPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $docCommentStartPointer
+	 */
+	protected function addError($phpcsFile, $docCommentStartPointer): bool
 	{
 		$error = 'Found multi-line comment for property %s with single line content, use one-line comment instead.';
 

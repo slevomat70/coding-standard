@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class PropertyTypeHintSniffTest extends TestCase
 {
 
-	public function testDisabledNativeNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDisabledNativeNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/propertyTypeHintDisabledNativeNoErrors.php', [
 			'enableNativeTypeHint' => false,
@@ -15,7 +18,10 @@ class PropertyTypeHintSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDisabledNativeErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDisabledNativeErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/propertyTypeHintDisabledNativeErrors.php', [
 			'enableNativeTypeHint' => false,
@@ -33,7 +39,10 @@ class PropertyTypeHintSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testEnabledNativeNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testEnabledNativeNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/propertyTypeHintEnabledNativeNoErrors.php', [
 			'enableNativeTypeHint' => true,
@@ -44,7 +53,10 @@ class PropertyTypeHintSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testEnabledNativeErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testEnabledNativeErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/propertyTypeHintEnabledNativeErrors.php', [
 			'enableNativeTypeHint' => true,
@@ -110,7 +122,10 @@ class PropertyTypeHintSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testEnabledNativeWithUnionNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testEnabledNativeWithUnionNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/propertyTypeHintEnabledNativeWithUnionNoErrors.php', [
 			'enableNativeTypeHint' => true,
@@ -121,7 +136,10 @@ class PropertyTypeHintSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testEnabledNativeWithUnionErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testEnabledNativeWithUnionErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/propertyTypeHintEnabledNativeWithUnionErrors.php', [
 			'enableNativeTypeHint' => true,

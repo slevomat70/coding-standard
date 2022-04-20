@@ -60,14 +60,14 @@ use const T_DOC_COMMENT_WHITESPACE;
 class AnnotationHelper
 {
 
-	public const PREFIXES = ['psalm', 'phpstan'];
+	const PREFIXES = ['psalm', 'phpstan'];
 
 	/**
 	 * @internal
-	 * @param VariableAnnotation|ParameterAnnotation|ReturnAnnotation|ThrowsAnnotation|PropertyAnnotation|MethodAnnotation|TemplateAnnotation|ExtendsAnnotation|ImplementsAnnotation|UseAnnotation|MixinAnnotation|TypeAliasAnnotation|TypeImportAnnotation $annotation
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation
 	 * @return TypeNode[]
 	 */
-	public static function getAnnotationTypes(Annotation $annotation): array
+	public static function getAnnotationTypes($annotation): array
 	{
 		$annotationTypes = [];
 
@@ -97,10 +97,10 @@ class AnnotationHelper
 
 	/**
 	 * @internal
-	 * @param VariableAnnotation|ParameterAnnotation|ReturnAnnotation|ThrowsAnnotation|PropertyAnnotation|MethodAnnotation|TemplateAnnotation|ExtendsAnnotation|ImplementsAnnotation|UseAnnotation|MixinAnnotation $annotation
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation
 	 * @return ConstExprNode[]
 	 */
-	public static function getAnnotationConstantExpressions(Annotation $annotation): array
+	public static function getAnnotationConstantExpressions($annotation): array
 	{
 		$constantExpressions = [];
 
@@ -125,9 +125,12 @@ class AnnotationHelper
 
 	/**
 	 * @internal
-	 * @param VariableAnnotation|ParameterAnnotation|ReturnAnnotation|ThrowsAnnotation|PropertyAnnotation|MethodAnnotation|TemplateAnnotation|ExtendsAnnotation|ImplementsAnnotation|UseAnnotation|MixinAnnotation $annotation
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param \PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode
+	 * @param \PHPStan\PhpDocParser\Ast\Type\TypeNode $fixedTypeNode
 	 */
-	public static function fixAnnotationType(File $phpcsFile, Annotation $annotation, TypeNode $typeNode, TypeNode $fixedTypeNode): string
+	public static function fixAnnotationType($phpcsFile, $annotation, $typeNode, $fixedTypeNode): string
 	{
 		$fixedAnnotation = self::fixAnnotation($annotation, $typeNode, $fixedTypeNode);
 
@@ -136,13 +139,16 @@ class AnnotationHelper
 
 	/**
 	 * @internal
-	 * @param VariableAnnotation|ParameterAnnotation|ReturnAnnotation|ThrowsAnnotation|PropertyAnnotation|MethodAnnotation|TemplateAnnotation|ExtendsAnnotation|ImplementsAnnotation|UseAnnotation|MixinAnnotation $annotation
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param \PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode $node
+	 * @param \PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode $fixedNode
 	 */
 	public static function fixAnnotationConstantFetchNode(
-		File $phpcsFile,
-		Annotation $annotation,
-		ConstFetchNode $node,
-		ConstFetchNode $fixedNode
+		$phpcsFile,
+		$annotation,
+		$node,
+		$fixedNode
 	): string
 	{
 		if ($annotation instanceof MethodAnnotation) {
@@ -193,8 +199,11 @@ class AnnotationHelper
 
 	/**
 	 * @return (VariableAnnotation|ParameterAnnotation|ReturnAnnotation|ThrowsAnnotation|PropertyAnnotation|MethodAnnotation|TemplateAnnotation|ExtendsAnnotation|ImplementsAnnotation|UseAnnotation|MixinAnnotation|GenericAnnotation)[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @param string $annotationName
 	 */
-	public static function getAnnotationsByName(File $phpcsFile, int $pointer, string $annotationName): array
+	public static function getAnnotationsByName($phpcsFile, $pointer, $annotationName): array
 	{
 		$annotations = self::getAnnotations($phpcsFile, $pointer);
 
@@ -203,8 +212,10 @@ class AnnotationHelper
 
 	/**
 	 * @return (VariableAnnotation|ParameterAnnotation|ReturnAnnotation|ThrowsAnnotation|PropertyAnnotation|MethodAnnotation|TemplateAnnotation|ExtendsAnnotation|ImplementsAnnotation|UseAnnotation|MixinAnnotation|GenericAnnotation)[][]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
 	 */
-	public static function getAnnotations(File $phpcsFile, int $pointer): array
+	public static function getAnnotations($phpcsFile, $pointer): array
 	{
 		return SniffLocalCache::getAndSetIfNotCached(
 			$phpcsFile,
@@ -367,16 +378,20 @@ class AnnotationHelper
 	}
 
 	/**
-	 * @param ReturnAnnotation|ParameterAnnotation|VariableAnnotation $annotation
+	 * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation
 	 * @param array<int, string> $traversableTypeHints
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $functionPointer
+	 * @param \SlevomatCodingStandard\Helpers\TypeHint|null $typeHint
+	 * @param bool $enableUnionTypeHint
 	 */
 	public static function isAnnotationUseless(
-		File $phpcsFile,
-		int $functionPointer,
-		?TypeHint $typeHint,
-		Annotation $annotation,
-		array $traversableTypeHints,
-		bool $enableUnionTypeHint = false
+		$phpcsFile,
+		$functionPointer,
+		$typeHint,
+		$annotation,
+		$traversableTypeHints,
+		$enableUnionTypeHint = false
 	): bool
 	{
 		if ($annotation->isInvalid()) {
@@ -514,13 +529,7 @@ class AnnotationHelper
 
 		$annotationClassName = get_class($annotation);
 
-		return new $annotationClassName(
-			$annotation->getName(),
-			$annotation->getStartPointer(),
-			$annotation->getEndPointer(),
-			$annotation->getContent(),
-			$fixedContentNode
-		);
+		return new $annotationClassName($annotation->getName(), $annotation->getStartPointer(), $annotation->getEndPointer(), $annotation->getContent(), $fixedContentNode);
 	}
 
 	private static function fix(File $phpcsFile, Annotation $annotation, Annotation $fixedAnnotation): string

@@ -29,7 +29,7 @@ use const T_YIELD_FROM;
 class LanguageConstructWithParenthesesSniff implements Sniff
 {
 
-	public const CODE_USED_WITH_PARENTHESES = 'UsedWithParentheses';
+	const CODE_USED_WITH_PARENTHESES = 'UsedWithParentheses';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -56,8 +56,10 @@ class LanguageConstructWithParenthesesSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $languageConstructPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $languageConstructPointer): void
+	public function process(File $phpcsFile, $languageConstructPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 		/** @var int $openParenthesisPointer */

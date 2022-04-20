@@ -15,7 +15,7 @@ use const T_CLASS;
 class SuperfluousErrorNamingSniff implements Sniff
 {
 
-	public const CODE_SUPERFLUOUS_SUFFIX = 'SuperfluousSuffix';
+	const CODE_SUPERFLUOUS_SUFFIX = 'SuperfluousSuffix';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -30,8 +30,10 @@ class SuperfluousErrorNamingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $classPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $classPointer): void
+	public function process(File $phpcsFile, $classPointer)
 	{
 		$className = ClassHelper::getName($phpcsFile, $classPointer);
 

@@ -8,13 +8,19 @@ use function range;
 class DisallowYodaComparisonSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/disallowYodaComparisonNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/disallowYodaComparisonErrors.php');
 
@@ -25,7 +31,10 @@ class DisallowYodaComparisonSniffTest extends TestCase
 		self::assertSniffError($report, 41, DisallowYodaComparisonSniff::CODE_DISALLOWED_YODA_COMPARISON);
 	}
 
-	public function testFixable(): void
+	/**
+	 * @return void
+	 */
+	public function testFixable()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fixableDisallowYodaComparisons.php',

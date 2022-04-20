@@ -57,8 +57,10 @@ class ReferencedNameHelper
 
 	/**
 	 * @return ReferencedName[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $openTagPointer
 	 */
-	public static function getAllReferencedNames(File $phpcsFile, int $openTagPointer): array
+	public static function getAllReferencedNames($phpcsFile, $openTagPointer): array
 	{
 		$lazyValue = static function () use ($phpcsFile, $openTagPointer): array {
 			return self::createAllReferencedNames($phpcsFile, $openTagPointer);
@@ -69,8 +71,10 @@ class ReferencedNameHelper
 
 	/**
 	 * @return ReferencedName[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $openTagPointer
 	 */
-	public static function getAllReferencedNamesInAttributes(File $phpcsFile, int $openTagPointer): array
+	public static function getAllReferencedNamesInAttributes($phpcsFile, $openTagPointer): array
 	{
 		$lazyValue = static function () use ($phpcsFile, $openTagPointer): array {
 			return self::createAllReferencedNamesInAttributes($phpcsFile, $openTagPointer);
@@ -79,7 +83,12 @@ class ReferencedNameHelper
 		return SniffLocalCache::getAndSetIfNotCached($phpcsFile, 'referencesFromAttributes', $lazyValue);
 	}
 
-	public static function getReferenceName(File $phpcsFile, int $nameStartPointer, int $nameEndPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $nameStartPointer
+	 * @param int $nameEndPointer
+	 */
+	public static function getReferenceName($phpcsFile, $nameStartPointer, $nameEndPointer): string
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -95,7 +104,11 @@ class ReferencedNameHelper
 		return $referencedName;
 	}
 
-	public static function getReferencedNameEndPointer(File $phpcsFile, int $startPointer): int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $startPointer
+	 */
+	public static function getReferencedNameEndPointer($phpcsFile, $startPointer): int
 	{
 		$tokens = $phpcsFile->getTokens();
 

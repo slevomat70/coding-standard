@@ -12,12 +12,20 @@ use function substr;
 class StringHelper
 {
 
-	public static function startsWith(string $haystack, string $needle): bool
+	/**
+	 * @param string $haystack
+	 * @param string $needle
+	 */
+	public static function startsWith($haystack, $needle): bool
 	{
 		return $needle === '' || strpos($haystack, $needle) === 0;
 	}
 
-	public static function endsWith(string $haystack, string $needle): bool
+	/**
+	 * @param string $haystack
+	 * @param string $needle
+	 */
+	public static function endsWith($haystack, $needle): bool
 	{
 		return $needle === '' || substr($haystack, -strlen($needle)) === $needle;
 	}

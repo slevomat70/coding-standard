@@ -22,7 +22,7 @@ use const T_PUBLIC;
 class ClassConstantVisibilitySniff implements Sniff
 {
 
-	public const CODE_MISSING_CONSTANT_VISIBILITY = 'MissingConstantVisibility';
+	const CODE_MISSING_CONSTANT_VISIBILITY = 'MissingConstantVisibility';
 
 	/** @var bool */
 	public $fixable = false;
@@ -40,8 +40,10 @@ class ClassConstantVisibilitySniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $constantPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $constantPointer): void
+	public function process(File $phpcsFile, $constantPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ReferenceSpacingSniffTest extends TestCase
 {
 
-	public function testDefaultSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/referenceSpacingDefaultSettingsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/referenceSpacingDefaultSettingsErrors.php');
 
@@ -35,7 +41,10 @@ class ReferenceSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/referenceSpacingModifiedSettingsNoErrors.php', [
 			'spacesCountAfterReference' => 2,
@@ -43,7 +52,10 @@ class ReferenceSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/referenceSpacingModifiedSettingsErrors.php', [
 			'spacesCountAfterReference' => 2,

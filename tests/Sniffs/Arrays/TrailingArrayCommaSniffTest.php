@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class TrailingArrayCommaSniffTest extends TestCase
 {
 
-	public function testCheckFile(): void
+	/**
+	 * @return void
+	 */
+	public function testCheckFile()
 	{
 		$report = self::checkFile(__DIR__ . '/data/trailingCommas.php', [
 			'enableAfterHeredoc' => true,
@@ -20,7 +23,10 @@ class TrailingArrayCommaSniffTest extends TestCase
 		self::assertSniffError($report, 44, TrailingArrayCommaSniff::CODE_MISSING_TRAILING_COMMA);
 	}
 
-	public function testFixable(): void
+	/**
+	 * @return void
+	 */
+	public function testFixable()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fixableTrailingCommas.php', [
 			'enableAfterHeredoc' => true,
@@ -28,7 +34,10 @@ class TrailingArrayCommaSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testDisabledAfterHeredoc(): void
+	/**
+	 * @return void
+	 */
+	public function testDisabledAfterHeredoc()
 	{
 		$report = self::checkFile(__DIR__ . '/data/trailingCommasDisabledAfterHeredoc.php', [
 			'enableAfterHeredoc' => false,

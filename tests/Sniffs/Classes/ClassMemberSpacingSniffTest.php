@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ClassMemberSpacingSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/classMemberSpacingNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/classMemberSpacingErrors.php');
 
@@ -28,7 +34,10 @@ class ClassMemberSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testErrorsWithModifiedLinecCount(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithModifiedLinecCount()
 	{
 		$report = self::checkFile(__DIR__ . '/data/classMemberSpacingErrors.php', [
 			'linesCountBetweenMembers' => 2,

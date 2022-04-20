@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UselessFunctionDocCommentSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessFunctionDocCommentSniffNoErrors.php', [
 			'traversableTypeHints' => ['Traversable', '\ArrayIterator'],
@@ -15,7 +18,10 @@ class UselessFunctionDocCommentSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessFunctionDocCommentSniffErrors.php');
 

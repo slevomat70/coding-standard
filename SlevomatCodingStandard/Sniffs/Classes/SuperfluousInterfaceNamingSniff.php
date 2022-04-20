@@ -13,8 +13,8 @@ use const T_INTERFACE;
 class SuperfluousInterfaceNamingSniff implements Sniff
 {
 
-	public const CODE_SUPERFLUOUS_PREFIX = 'SuperfluousPrefix';
-	public const CODE_SUPERFLUOUS_SUFFIX = 'SuperfluousSuffix';
+	const CODE_SUPERFLUOUS_PREFIX = 'SuperfluousPrefix';
+	const CODE_SUPERFLUOUS_SUFFIX = 'SuperfluousSuffix';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -29,8 +29,10 @@ class SuperfluousInterfaceNamingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $interfacePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $interfacePointer): void
+	public function process(File $phpcsFile, $interfacePointer)
 	{
 		$interfaceName = ClassHelper::getName($phpcsFile, $interfacePointer);
 
@@ -38,7 +40,10 @@ class SuperfluousInterfaceNamingSniff implements Sniff
 		$this->checkSuffix($phpcsFile, $interfacePointer, $interfaceName);
 	}
 
-	private function checkPrefix(File $phpcsFile, int $interfacePointer, string $interfaceName): void
+	/**
+	 * @return void
+	 */
+	private function checkPrefix(File $phpcsFile, int $interfacePointer, string $interfaceName)
 	{
 		$prefix = substr($interfaceName, 0, 9);
 
@@ -49,7 +54,10 @@ class SuperfluousInterfaceNamingSniff implements Sniff
 		$phpcsFile->addError(sprintf('Superfluous prefix "%s".', $prefix), $interfacePointer, self::CODE_SUPERFLUOUS_PREFIX);
 	}
 
-	private function checkSuffix(File $phpcsFile, int $interfacePointer, string $interfaceName): void
+	/**
+	 * @return void
+	 */
+	private function checkSuffix(File $phpcsFile, int $interfacePointer, string $interfaceName)
 	{
 		$suffix = substr($interfaceName, -9);
 

@@ -11,7 +11,10 @@ use SlevomatCodingStandard\Helpers\TestCase;
 class ParameterAnnotationTest extends TestCase
 {
 
-	public function testAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotation()
 	{
 		$annotation = new ParameterAnnotation(
 			'@param',
@@ -34,14 +37,20 @@ class ParameterAnnotationTest extends TestCase
 		self::assertSame('@param string $parameter Description', $annotation->export());
 	}
 
-	public function testUnsupportedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testUnsupportedAnnotation()
 	{
 		self::expectException(InvalidArgumentException::class);
 		self::expectExceptionMessage('Unsupported annotation @var.');
 		new ParameterAnnotation('@var', 1, 1, null, null);
 	}
 
-	public function testGetContentNodeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetContentNodeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @param annotation.');
@@ -49,7 +58,10 @@ class ParameterAnnotationTest extends TestCase
 		$annotation->getContentNode();
 	}
 
-	public function testGetDescriptionWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetDescriptionWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @param annotation.');
@@ -57,7 +69,10 @@ class ParameterAnnotationTest extends TestCase
 		$annotation->getDescription();
 	}
 
-	public function testGetParameterNameWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetParameterNameWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @param annotation.');
@@ -65,7 +80,10 @@ class ParameterAnnotationTest extends TestCase
 		$annotation->getParameterName();
 	}
 
-	public function testGetTypeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetTypeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @param annotation.');

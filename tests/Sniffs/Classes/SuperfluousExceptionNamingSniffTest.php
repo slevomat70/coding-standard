@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class SuperfluousExceptionNamingSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/superfluousExceptionNamingNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/superfluousExceptionNamingErrors.php');
 

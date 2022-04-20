@@ -20,7 +20,7 @@ use const T_SEMICOLON;
 class DisallowMultiConstantDefinitionSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_MULTI_CONSTANT_DEFINITION = 'DisallowedMultiConstantDefinition';
+	const CODE_DISALLOWED_MULTI_CONSTANT_DEFINITION = 'DisallowedMultiConstantDefinition';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -33,8 +33,10 @@ class DisallowMultiConstantDefinitionSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $constantPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $constantPointer): void
+	public function process(File $phpcsFile, $constantPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

@@ -29,7 +29,11 @@ abstract class AbstractLineCall implements Sniff
 		return array_merge(TokenHelper::getOnlyNameTokenCodes(), [T_SELF, T_STATIC, T_PARENT]);
 	}
 
-	protected function isCall(File $phpcsFile, int $stringPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $stringPointer
+	 */
+	protected function isCall($phpcsFile, $stringPointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -44,14 +48,23 @@ abstract class AbstractLineCall implements Sniff
 		return $tokens[$previousPointer]['code'] !== T_FUNCTION;
 	}
 
-	protected function getLineStart(File $phpcsFile, int $pointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	protected function getLineStart($phpcsFile, $pointer): string
 	{
 		$firstPointerOnLine = TokenHelper::findFirstTokenOnLine($phpcsFile, $pointer);
 
 		return IndentationHelper::convertTabsToSpaces($phpcsFile, TokenHelper::getContent($phpcsFile, $firstPointerOnLine, $pointer));
 	}
 
-	protected function getCall(File $phpcsFile, int $parenthesisOpenerPointer, int $parenthesisCloserPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $parenthesisOpenerPointer
+	 * @param int $parenthesisCloserPointer
+	 */
+	protected function getCall($phpcsFile, $parenthesisOpenerPointer, $parenthesisCloserPointer): string
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -92,7 +105,11 @@ abstract class AbstractLineCall implements Sniff
 		return trim($call);
 	}
 
-	protected function getLineEnd(File $phpcsFile, int $pointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	protected function getLineEnd($phpcsFile, $pointer): string
 	{
 		$firstPointerOnNextLine = TokenHelper::findFirstTokenOnNextLine($phpcsFile, $pointer);
 

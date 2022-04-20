@@ -7,7 +7,10 @@ use const T_OPEN_TAG;
 class TestCaseChecksTokenBoundsTest extends TestCase
 {
 
-	public function testThrowsTokenPointerOutOfBoundsException(): void
+	/**
+	 * @return void
+	 */
+	public function testThrowsTokenPointerOutOfBoundsException()
 	{
 		try {
 			$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/emptyPhpFile.php');

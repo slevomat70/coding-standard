@@ -11,8 +11,8 @@ use const T_IS_NOT_EQUAL;
 class DisallowEqualOperatorsSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_EQUAL_OPERATOR = 'DisallowedEqualOperator';
-	public const CODE_DISALLOWED_NOT_EQUAL_OPERATOR = 'DisallowedNotEqualOperator';
+	const CODE_DISALLOWED_EQUAL_OPERATOR = 'DisallowedEqualOperator';
+	const CODE_DISALLOWED_NOT_EQUAL_OPERATOR = 'DisallowedNotEqualOperator';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -28,8 +28,10 @@ class DisallowEqualOperatorsSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $operatorPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $operatorPointer): void
+	public function process(File $phpcsFile, $operatorPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

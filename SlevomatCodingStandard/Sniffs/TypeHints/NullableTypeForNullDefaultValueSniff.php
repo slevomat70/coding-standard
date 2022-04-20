@@ -23,9 +23,9 @@ use const T_VARIABLE;
 class NullableTypeForNullDefaultValueSniff implements Sniff
 {
 
-	public const CODE_NULLABILITY_TYPE_MISSING = 'NullabilityTypeMissing';
+	const CODE_NULLABILITY_TYPE_MISSING = 'NullabilityTypeMissing';
 
-	private const NAME = 'SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue';
+	const NAME = 'SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -38,8 +38,10 @@ class NullableTypeForNullDefaultValueSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $functionPointer): void
+	public function process(File $phpcsFile, $functionPointer)
 	{
 		if (SuppressHelper::isSniffSuppressed($phpcsFile, $functionPointer, self::NAME)) {
 			return;

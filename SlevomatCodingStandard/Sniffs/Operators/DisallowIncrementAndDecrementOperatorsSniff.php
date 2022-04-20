@@ -12,10 +12,10 @@ use const T_INC;
 class DisallowIncrementAndDecrementOperatorsSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_PRE_INCREMENT_OPERATOR = 'DisallowedPreIncrementOperator';
-	public const CODE_DISALLOWED_POST_INCREMENT_OPERATOR = 'DisallowedPostIncrementOperator';
-	public const CODE_DISALLOWED_PRE_DECREMENT_OPERATOR = 'DisallowedPreDecrementOperator';
-	public const CODE_DISALLOWED_POST_DECREMENT_OPERATOR = 'DisallowedPostDecrementOperator';
+	const CODE_DISALLOWED_PRE_INCREMENT_OPERATOR = 'DisallowedPreIncrementOperator';
+	const CODE_DISALLOWED_POST_INCREMENT_OPERATOR = 'DisallowedPostIncrementOperator';
+	const CODE_DISALLOWED_PRE_DECREMENT_OPERATOR = 'DisallowedPreDecrementOperator';
+	const CODE_DISALLOWED_POST_DECREMENT_OPERATOR = 'DisallowedPostDecrementOperator';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -31,8 +31,10 @@ class DisallowIncrementAndDecrementOperatorsSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $operatorPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $operatorPointer): void
+	public function process(File $phpcsFile, $operatorPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireTernaryOperatorSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireTernaryOperatorNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireTernaryOperatorErrors.php');
 
@@ -33,7 +39,10 @@ class RequireTernaryOperatorSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testWithIgnoredMultiLineNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithIgnoredMultiLineNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireTernaryOperatorWithIgnoredMultiLineNoErrors.php', [
 			'ignoreMultiLine' => true,
@@ -41,7 +50,10 @@ class RequireTernaryOperatorSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testWithIgnoredMultiLineErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithIgnoredMultiLineErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireTernaryOperatorWithIgnoredMultiLineErrors.php', [
 			'ignoreMultiLine' => true,
@@ -53,13 +65,19 @@ class RequireTernaryOperatorSniffTest extends TestCase
 		self::assertSniffError($report, 16, RequireTernaryOperatorSniff::CODE_TERNARY_OPERATOR_NOT_USED);
 	}
 
-	public function testIfWithoutCurlyBraces(): void
+	/**
+	 * @return void
+	 */
+	public function testIfWithoutCurlyBraces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireTernaryOperatorIfWithoutCurlyBraces.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testElseWithoutCurlyBraces(): void
+	/**
+	 * @return void
+	 */
+	public function testElseWithoutCurlyBraces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireTernaryOperatorElseWithoutCurlyBraces.php');
 		self::assertNoSniffErrorInFile($report);

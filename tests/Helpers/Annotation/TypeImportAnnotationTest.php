@@ -11,7 +11,10 @@ use SlevomatCodingStandard\Helpers\TestCase;
 class TypeImportAnnotationTest extends TestCase
 {
 
-	public function testAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testAnnotation()
 	{
 		$annotation = new TypeImportAnnotation(
 			'@phpstan-import-type',
@@ -32,14 +35,20 @@ class TypeImportAnnotationTest extends TestCase
 		self::assertSame('@phpstan-import-type Whatever from Anything as ImportedAs', $annotation->export());
 	}
 
-	public function testUnsupportedAnnotation(): void
+	/**
+	 * @return void
+	 */
+	public function testUnsupportedAnnotation()
 	{
 		self::expectException(InvalidArgumentException::class);
 		self::expectExceptionMessage('Unsupported annotation @param.');
 		new TypeImportAnnotation('@param', 1, 1, null, null);
 	}
 
-	public function testGetContentNodeWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetContentNodeWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @phpstan-import-type annotation.');
@@ -47,7 +56,10 @@ class TypeImportAnnotationTest extends TestCase
 		$annotation->getContentNode();
 	}
 
-	public function testGetImportedAliasWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetImportedAliasWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @phpstan-import-type annotation.');
@@ -55,7 +67,10 @@ class TypeImportAnnotationTest extends TestCase
 		$annotation->getImportedAlias();
 	}
 
-	public function testGetImportedFromWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetImportedFromWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @phpstan-import-type annotation.');
@@ -63,7 +78,10 @@ class TypeImportAnnotationTest extends TestCase
 		$annotation->getImportedFrom();
 	}
 
-	public function testGetImportedAsWhenInvalid(): void
+	/**
+	 * @return void
+	 */
+	public function testGetImportedAsWhenInvalid()
 	{
 		self::expectException(LogicException::class);
 		self::expectExceptionMessage('Invalid @phpstan-import-type annotation.');

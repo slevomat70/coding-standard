@@ -39,7 +39,7 @@ use const T_WHITESPACE;
 class ClassMemberSpacingSniff implements Sniff
 {
 
-	public const CODE_INCORRECT_COUNT_OF_BLANK_LINES_BETWEEN_MEMBERS = 'IncorrectCountOfBlankLinesBetweenMembers';
+	const CODE_INCORRECT_COUNT_OF_BLANK_LINES_BETWEEN_MEMBERS = 'IncorrectCountOfBlankLinesBetweenMembers';
 
 	/** @var int */
 	public $linesCountBetweenMembers = 1;
@@ -56,8 +56,10 @@ class ClassMemberSpacingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $classPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $classPointer): void
+	public function process(File $phpcsFile, $classPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -141,7 +143,10 @@ class ClassMemberSpacingSniff implements Sniff
 		} while (true);
 	}
 
-	private function findNextMember(File $phpcsFile, int $classPointer, int $previousMemberPointer): ?int
+	/**
+	 * @return int|null
+	 */
+	private function findNextMember(File $phpcsFile, int $classPointer, int $previousMemberPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

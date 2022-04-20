@@ -19,12 +19,16 @@ class TypeImportAnnotation extends Annotation
 	/** @var TypeAliasImportTagValueNode|null */
 	private $contentNode;
 
+	/**
+	 * @param string|null $content
+	 * @param \PHPStan\PhpDocParser\Ast\PhpDoc\TypeAliasImportTagValueNode|null $contentNode
+	 */
 	public function __construct(
 		string $name,
 		int $startPointer,
 		int $endPointer,
-		?string $content,
-		?TypeAliasImportTagValueNode $contentNode
+		$content,
+		$contentNode
 	)
 	{
 		if (!in_array(
@@ -74,7 +78,10 @@ class TypeImportAnnotation extends Annotation
 		return $this->contentNode->importedFrom;
 	}
 
-	public function getImportedAs(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getImportedAs()
 	{
 		$this->errorWhenInvalid();
 

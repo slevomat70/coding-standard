@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UselessIfConditionWithReturnSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessIfConditionWithReturnNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessIfConditionWithReturnErrors.php');
 
@@ -35,7 +41,10 @@ class UselessIfConditionWithReturnSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testErrorsWithAssumeAllConditionExpressionsAreAlreadyBooleanEnabled(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithAssumeAllConditionExpressionsAreAlreadyBooleanEnabled()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/uselessIfConditionWithReturnErrorsWithAssumeAllConditionExpressionsAreAlreadyBooleanEnabled.php',
@@ -52,13 +61,19 @@ class UselessIfConditionWithReturnSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testIfWithoutCurlyBraces(): void
+	/**
+	 * @return void
+	 */
+	public function testIfWithoutCurlyBraces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessIfConditionWithReturnIfWithoutCurlyBraces.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testElseWithoutCurlyBraces(): void
+	/**
+	 * @return void
+	 */
+	public function testElseWithoutCurlyBraces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/uselessIfConditionWithReturnElseWithoutCurlyBraces.php');
 		self::assertNoSniffErrorInFile($report);

@@ -11,7 +11,7 @@ use const T_OPEN_PARENTHESIS;
 class ShortListSniff implements Sniff
 {
 
-	public const CODE_LONG_LIST_USED = 'LongListUsed';
+	const CODE_LONG_LIST_USED = 'LongListUsed';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -24,8 +24,10 @@ class ShortListSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $pointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $pointer): void
+	public function process(File $phpcsFile, $pointer)
 	{
 		$fix = $phpcsFile->addFixableError('list(...) is forbidden, use [...] instead.', $pointer, self::CODE_LONG_LIST_USED);
 

@@ -14,7 +14,7 @@ use const T_VARIABLE;
 class DisallowConstructorPropertyPromotionSniff implements Sniff
 {
 
-	public const CODE_DISALLOWED_CONSTRUCTOR_PROPERTY_PROMOTION = 'DisallowedConstructorPropertyPromotion';
+	const CODE_DISALLOWED_CONSTRUCTOR_PROPERTY_PROMOTION = 'DisallowedConstructorPropertyPromotion';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -27,8 +27,10 @@ class DisallowConstructorPropertyPromotionSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $functionPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $functionPointer): void
+	public function process(File $phpcsFile, $functionPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

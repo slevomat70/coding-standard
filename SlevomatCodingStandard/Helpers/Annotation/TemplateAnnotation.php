@@ -18,7 +18,11 @@ class TemplateAnnotation extends Annotation
 	/** @var TemplateTagValueNode|null */
 	private $contentNode;
 
-	public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?TemplateTagValueNode $contentNode)
+	/**
+	 * @param string|null $content
+	 * @param \PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode|null $contentNode
+	 */
+	public function __construct(string $name, int $startPointer, int $endPointer, $content, $contentNode)
 	{
 		if (!in_array(
 			$name,
@@ -50,7 +54,10 @@ class TemplateAnnotation extends Annotation
 		return $this->getDescription() !== null;
 	}
 
-	public function getDescription(): ?string
+	/**
+	 * @return string|null
+	 */
+	public function getDescription()
 	{
 		$this->errorWhenInvalid();
 
@@ -64,7 +71,10 @@ class TemplateAnnotation extends Annotation
 		return $this->contentNode->name;
 	}
 
-	public function getBound(): ?TypeNode
+	/**
+	 * @return \PHPStan\PhpDocParser\Ast\Type\TypeNode|null
+	 */
+	public function getBound()
 	{
 		$this->errorWhenInvalid();
 

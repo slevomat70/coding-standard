@@ -13,7 +13,7 @@ use const T_LNUMBER;
 class RequireNumericLiteralSeparatorSniff implements Sniff
 {
 
-	public const CODE_REQUIRED_NUMERIC_LITERAL_SEPARATOR = 'RequiredNumericLiteralSeparator';
+	const CODE_REQUIRED_NUMERIC_LITERAL_SEPARATOR = 'RequiredNumericLiteralSeparator';
 
 	/** @var bool|null */
 	public $enable = null;
@@ -41,8 +41,10 @@ class RequireNumericLiteralSeparatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $numberPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $numberPointer): void
+	public function process(File $phpcsFile, $numberPointer)
 	{
 		$this->enable = SniffSettingsHelper::isEnabledByPhpVersion($this->enable, 70400);
 

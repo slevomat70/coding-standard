@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class DisallowShortTernaryOperatorSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/disallowShortTernaryOperatorNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/disallowShortTernaryOperatorErrors.php');
 
@@ -26,7 +32,10 @@ class DisallowShortTernaryOperatorSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testFixableDisabled(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableDisabled()
 	{
 		$report = self::checkFile(__DIR__ . '/data/disallowShortTernaryOperatorErrorsFixableDisabled.php', ['fixable' => false]);
 

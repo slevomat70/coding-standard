@@ -24,7 +24,7 @@ use const T_WHITESPACE;
 class RequireTernaryOperatorSniff implements Sniff
 {
 
-	public const CODE_TERNARY_OPERATOR_NOT_USED = 'TernaryOperatorNotUsed';
+	const CODE_TERNARY_OPERATOR_NOT_USED = 'TernaryOperatorNotUsed';
 
 	/** @var bool */
 	public $ignoreMultiLine = false;
@@ -42,8 +42,10 @@ class RequireTernaryOperatorSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $ifPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $ifPointer): void
+	public function process(File $phpcsFile, $ifPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -82,7 +84,10 @@ class RequireTernaryOperatorSniff implements Sniff
 		$this->checkIfWithAssignments($phpcsFile, $ifPointer, $elsePointer, $firstPointerInIf, $firstPointerInElse);
 	}
 
-	private function checkIfWithReturns(File $phpcsFile, int $ifPointer, int $elsePointer, int $returnInIf, int $returnInElse): void
+	/**
+	 * @return void
+	 */
+	private function checkIfWithReturns(File $phpcsFile, int $ifPointer, int $elsePointer, int $returnInIf, int $returnInElse)
 	{
 		$ifContainsComment = $this->containsComment($phpcsFile, $ifPointer);
 		$elseContainsComment = $this->containsComment($phpcsFile, $elsePointer);
@@ -137,13 +142,16 @@ class RequireTernaryOperatorSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
+	/**
+	 * @return void
+	 */
 	private function checkIfWithAssignments(
 		File $phpcsFile,
 		int $ifPointer,
 		int $elsePointer,
 		int $firstPointerInIf,
 		int $firstPointerInElse
-	): void
+	)
 	{
 		$tokens = $phpcsFile->getTokens();
 

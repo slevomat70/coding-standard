@@ -32,8 +32,10 @@ abstract class AbstractMethodSignature implements Sniff
 
 	/**
 	 * @return array<int, int>
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $methodPointer
 	 */
-	protected function getSignatureStartAndEndPointers(File $phpcsFile, int $methodPointer): array
+	protected function getSignatureStartAndEndPointers($phpcsFile, $methodPointer): array
 	{
 		$signatureStartPointer = TokenHelper::findFirstTokenOnLine($phpcsFile, $methodPointer);
 
@@ -49,7 +51,12 @@ abstract class AbstractMethodSignature implements Sniff
 		return [$signatureStartPointer, $signatureEndPointer];
 	}
 
-	protected function getSignature(File $phpcsFile, int $signatureStartPointer, int $signatureEndPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $signatureStartPointer
+	 * @param int $signatureEndPointer
+	 */
+	protected function getSignature($phpcsFile, $signatureStartPointer, $signatureEndPointer): string
 	{
 		$signature = TokenHelper::getContent($phpcsFile, $signatureStartPointer, $signatureEndPointer);
 		$signature = preg_replace(sprintf('~%s[ \t]*~', $phpcsFile->eolChar), ' ', $signature);
@@ -61,7 +68,11 @@ abstract class AbstractMethodSignature implements Sniff
 		return $signature;
 	}
 
-	protected function getSignatureWithoutTabs(File $phpcsFile, string $signature): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param string $signature
+	 */
+	protected function getSignatureWithoutTabs($phpcsFile, $signature): string
 	{
 		return IndentationHelper::convertTabsToSpaces($phpcsFile, $signature);
 	}

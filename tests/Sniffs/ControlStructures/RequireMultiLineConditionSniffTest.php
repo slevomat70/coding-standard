@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireMultiLineConditionSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineConditionNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineConditionErrors.php');
 
@@ -53,7 +59,10 @@ class RequireMultiLineConditionSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testForAllConditionsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testForAllConditionsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineConditionAllConditionsErrors.php', [
 			'minLineLength' => 0,
@@ -66,7 +75,10 @@ class RequireMultiLineConditionSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testNoErrorsWhenDisabledIfControlStructure(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWhenDisabledIfControlStructure()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineConditionWhenDisabledIfControlStructureNoErrors.php', [
 			'checkedControlStructures' => ['while'],
@@ -74,7 +86,10 @@ class RequireMultiLineConditionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNoErrorsWhenDisabledDoControlStructure(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWhenDisabledDoControlStructure()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineConditionWhenDisabledDoControlStructureNoErrors.php', [
 			'checkedControlStructures' => ['while'],
@@ -82,7 +97,10 @@ class RequireMultiLineConditionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNoErrorsWhenDisabledWhileControlStructure(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWhenDisabledWhileControlStructure()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineConditionWhenDisabledWhileControlStructureNoErrors.php', [
 			'checkedControlStructures' => ['do'],
@@ -90,7 +108,10 @@ class RequireMultiLineConditionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testFixerWhenBooleanOperatorOnPreviousLineEnabled(): void
+	/**
+	 * @return void
+	 */
+	public function testFixerWhenBooleanOperatorOnPreviousLineEnabled()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineConditionFixerWhenBooleanOperatorOnPreviousLineEnabled.php', [
 			'booleanOperatorOnPreviousLine' => true,
@@ -99,7 +120,10 @@ class RequireMultiLineConditionSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testWithAlwaysSplitAllConditionPartsEnabledNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithAlwaysSplitAllConditionPartsEnabledNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineConditionWithAlwaysSplitAllConditionPartsEnabledNoErrors.php', [
 			'alwaysSplitAllConditionParts' => true,
@@ -107,7 +131,10 @@ class RequireMultiLineConditionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testWithAlwaysSplitAllConditionPartsEnabledErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithAlwaysSplitAllConditionPartsEnabledErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineConditionWithAlwaysSplitAllConditionPartsEnabledErrors.php', [
 			'alwaysSplitAllConditionParts' => true,

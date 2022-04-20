@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class EarlyExitSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitErrors.php');
 
@@ -38,43 +44,64 @@ class EarlyExitSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testIfWithoutCurlyBraces(): void
+	/**
+	 * @return void
+	 */
+	public function testIfWithoutCurlyBraces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitIfWithoutCurlyBraces.php', [], [EarlyExitSniff::CODE_EARLY_EXIT_NOT_USED]);
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testElseifWithoutCurlyBraces(): void
+	/**
+	 * @return void
+	 */
+	public function testElseifWithoutCurlyBraces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitElseifWithoutCurlyBraces.php', [], [EarlyExitSniff::CODE_USELESS_ELSEIF]);
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testElseifWithSpace(): void
+	/**
+	 * @return void
+	 */
+	public function testElseifWithSpace()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitElseifWithSpace.php', [], [EarlyExitSniff::CODE_USELESS_ELSEIF]);
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testElseWithoutCurlyBraces(): void
+	/**
+	 * @return void
+	 */
+	public function testElseWithoutCurlyBraces()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitElseWithoutCurlyBraces.php', [], [EarlyExitSniff::CODE_USELESS_ELSE]);
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testInvalidElseif(): void
+	/**
+	 * @return void
+	 */
+	public function testInvalidElseif()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitInvalidElseif.php', [], [EarlyExitSniff::CODE_USELESS_ELSEIF]);
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testAlternativeSyntax(): void
+	/**
+	 * @return void
+	 */
+	public function testAlternativeSyntax()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitAlternativeSyntax.php', [], [EarlyExitSniff::CODE_USELESS_ELSEIF]);
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIgnoredStandaloneIfInScopeNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoredStandaloneIfInScopeNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitIgnoredStandaloneIfInScope.php', [
 			'ignoreStandaloneIfInScope' => true,
@@ -83,7 +110,10 @@ class EarlyExitSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNotIgnoredStandaloneIfInScopeErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNotIgnoredStandaloneIfInScopeErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitIgnoredStandaloneIfInScope.php', [
 			'ignoreStandaloneIfInScope' => false,
@@ -95,7 +125,10 @@ class EarlyExitSniffTest extends TestCase
 		self::assertSniffError($report, 11, EarlyExitSniff::CODE_EARLY_EXIT_NOT_USED, 'Use early exit to reduce code nesting.');
 	}
 
-	public function testIgnoredOneLineTrailingIfNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoredOneLineTrailingIfNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitIgnoredOneLineTrailingIfNoErrors.php', [
 			'ignoreOneLineTrailingIf' => true,
@@ -104,7 +137,10 @@ class EarlyExitSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIgnoredOneLineTrailingIfErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoredOneLineTrailingIfErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitIgnoredOneLineTrailingIfErrors.php', [
 			'ignoreOneLineTrailingIf' => true,
@@ -118,7 +154,10 @@ class EarlyExitSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testIgnoredTrailingIfWithOneInstructionNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoredTrailingIfWithOneInstructionNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitIgnoredTrailingIfWithOneInstructionNoErrors.php', [
 			'ignoreTrailingIfWithOneInstruction' => true,
@@ -127,7 +166,10 @@ class EarlyExitSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testIgnoredTrailingIfWithOneInstructionErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoredTrailingIfWithOneInstructionErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/earlyExitIgnoredTrailingIfWithOneInstructionErrors.php', [
 			'ignoreTrailingIfWithOneInstruction' => true,

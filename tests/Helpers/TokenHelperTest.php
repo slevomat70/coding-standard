@@ -20,7 +20,10 @@ use const T_WHITESPACE;
 class TokenHelperTest extends TestCase
 {
 
-	public function testFindNextAll(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNextAll()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/useStatements.php');
 
@@ -37,13 +40,19 @@ class TokenHelperTest extends TestCase
 		self::assertSame(T_CLASS, $tokens[$pointers[4]]['code']);
 	}
 
-	public function testFindNextEffective(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNextEffective()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/emptyPhpFile.php');
 		self::assertTokenPointer(T_OPEN_TAG, 1, $phpcsFile, TokenHelper::findNextEffective($phpcsFile, 0));
 	}
 
-	public function testFindNextEffectiveAtEndOfFile(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNextEffectiveAtEndOfFile()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/emptyPhpFile.php');
 		$openTagPointer = TokenHelper::findNext($phpcsFile, T_OPEN_TAG, 0);
@@ -51,19 +60,28 @@ class TokenHelperTest extends TestCase
 		self::assertNull(TokenHelper::findNextEffective($phpcsFile, $openTagPointer + 1));
 	}
 
-	public function testFindNextEffectiveWithComment(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNextEffectiveWithComment()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/effectiveCodeWithComment.php');
 		self::assertTokenPointer(T_CLASS, 5, $phpcsFile, TokenHelper::findNextEffective($phpcsFile, 1));
 	}
 
-	public function testFindNextEffectiveWithDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNextEffectiveWithDocComment()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/effectiveCodeWithDocComment.php');
 		self::assertTokenPointer(T_CLASS, 8, $phpcsFile, TokenHelper::findNextEffective($phpcsFile, 1));
 	}
 
-	public function testFindNothingNextExcluding(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNothingNextExcluding()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 		self::assertNull(TokenHelper::findNextExcluding($phpcsFile, [
@@ -78,7 +96,10 @@ class TokenHelperTest extends TestCase
 		], 0));
 	}
 
-	public function testFindNextExcluding(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNextExcluding()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 		self::assertTokenPointer(T_VARIABLE, 3, $phpcsFile, TokenHelper::findNextExcluding($phpcsFile, [
@@ -87,7 +108,10 @@ class TokenHelperTest extends TestCase
 		], 0));
 	}
 
-	public function testFindNextExcludingWithSpecifiedEndPointer(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNextExcludingWithSpecifiedEndPointer()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 		$variableTokenPointer = TokenHelper::findNext($phpcsFile, T_VARIABLE, 0);
@@ -98,7 +122,10 @@ class TokenHelperTest extends TestCase
 		], 0, $variableTokenPointer));
 	}
 
-	public function testFindNextAnyToken(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNextAnyToken()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 		$variableTokenPointer = TokenHelper::findNext($phpcsFile, T_VARIABLE, 0);
@@ -106,7 +133,10 @@ class TokenHelperTest extends TestCase
 		self::assertTokenPointer(T_VARIABLE, 3, $phpcsFile, TokenHelper::findNextAnyToken($phpcsFile, $variableTokenPointer));
 	}
 
-	public function testFindPreviousEffective(): void
+	/**
+	 * @return void
+	 */
+	public function testFindPreviousEffective()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 		$barTokenPointer = TokenHelper::findNext($phpcsFile, T_STRING, 1);
@@ -114,7 +144,10 @@ class TokenHelperTest extends TestCase
 		self::assertTokenPointer(T_EQUAL, 3, $phpcsFile, $assignmentTokenPointer);
 	}
 
-	public function testFindPreviousEffectiveWithComment(): void
+	/**
+	 * @return void
+	 */
+	public function testFindPreviousEffectiveWithComment()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/effectiveCodeWithComment.php');
 		self::assertTokenPointer(
@@ -125,7 +158,10 @@ class TokenHelperTest extends TestCase
 		);
 	}
 
-	public function testFindPreviousEffectiveWithDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testFindPreviousEffectiveWithDocComment()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/effectiveCodeWithDocComment.php');
 		self::assertTokenPointer(
@@ -136,7 +172,10 @@ class TokenHelperTest extends TestCase
 		);
 	}
 
-	public function testFindNothingPreviousExcluding(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNothingPreviousExcluding()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 		self::assertNull(TokenHelper::findPreviousExcluding($phpcsFile, [
@@ -151,7 +190,10 @@ class TokenHelperTest extends TestCase
 		], TokenHelper::getLastTokenPointer($phpcsFile)));
 	}
 
-	public function testFindPreviousExcluding(): void
+	/**
+	 * @return void
+	 */
+	public function testFindPreviousExcluding()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 		self::assertTokenPointer(T_OPEN_PARENTHESIS, 3, $phpcsFile, TokenHelper::findPreviousExcluding($phpcsFile, [
@@ -161,7 +203,10 @@ class TokenHelperTest extends TestCase
 		], TokenHelper::getLastTokenPointer($phpcsFile)));
 	}
 
-	public function testFindPreviousExcludingWithSpecifiedEndPointer(): void
+	/**
+	 * @return void
+	 */
+	public function testFindPreviousExcludingWithSpecifiedEndPointer()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 
@@ -176,7 +221,10 @@ class TokenHelperTest extends TestCase
 		], $lastTokenPointer, $stringTokenPointer));
 	}
 
-	public function testFindNothingPreviousExcludingWithSpecifiedEndPointer(): void
+	/**
+	 * @return void
+	 */
+	public function testFindNothingPreviousExcludingWithSpecifiedEndPointer()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 
@@ -191,7 +239,10 @@ class TokenHelperTest extends TestCase
 		], $lastTokenPointer, $openParenthesisTokenPointer));
 	}
 
-	public function testFindFirstTokenOnLine(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstTokenOnLine()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 		$functionCallPointer = TokenHelper::findNext($phpcsFile, T_STRING, 0);
@@ -199,7 +250,10 @@ class TokenHelperTest extends TestCase
 		self::assertTokenPointer(T_VARIABLE, 3, $phpcsFile, TokenHelper::findFirstTokenOnLine($phpcsFile, $functionCallPointer));
 	}
 
-	public function testFindFirstTokenOnLineForFirstToken(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstTokenOnLineForFirstToken()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 		$openTagPointer = TokenHelper::findNext($phpcsFile, T_OPEN_TAG, 0);
@@ -207,7 +261,10 @@ class TokenHelperTest extends TestCase
 		self::assertSame($openTagPointer, TokenHelper::findFirstTokenOnLine($phpcsFile, $openTagPointer));
 	}
 
-	public function testFindFirstTokenOnNextLine(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstTokenOnNextLine()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleTwo.php');
 		$variableTokenPointer = TokenHelper::findNext($phpcsFile, T_VARIABLE, 0);
@@ -215,13 +272,19 @@ class TokenHelperTest extends TestCase
 		self::assertTokenPointer(T_STRING, 4, $phpcsFile, TokenHelper::findFirstTokenOnNextLine($phpcsFile, $variableTokenPointer));
 	}
 
-	public function testFindFirstNonWhitespaceOnLine(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstNonWhitespaceOnLine()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleThree.php');
 		self::assertSame(0, TokenHelper::findFirstNonWhitespaceOnLine($phpcsFile, 0));
 	}
 
-	public function testFindFirstNonWhitespaceOnIndentedLine(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstNonWhitespaceOnIndentedLine()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/forLoop.php');
 		$tokens = $phpcsFile->getTokens();
@@ -234,7 +297,10 @@ class TokenHelperTest extends TestCase
 		self::assertSame('foo', $tokens[$firstNonWhiteSpaceTokenPointer]['content']);
 	}
 
-	public function testFindFirstTokenOnNextLineEndingWithAComment(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstTokenOnNextLineEndingWithAComment()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleFour.php');
 		$variableTokenPointer = TokenHelper::findNext($phpcsFile, T_VARIABLE, 0);
@@ -242,7 +308,10 @@ class TokenHelperTest extends TestCase
 		self::assertTokenPointer(T_STRING, 4, $phpcsFile, TokenHelper::findFirstTokenOnNextLine($phpcsFile, $variableTokenPointer));
 	}
 
-	public function testFindFirstTokenOnNextLineInDocComment(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstTokenOnNextLineInDocComment()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleThree.php');
 		$docBlockTokenPointer = TokenHelper::findNext($phpcsFile, T_DOC_COMMENT_OPEN_TAG, 0);
@@ -255,7 +324,10 @@ class TokenHelperTest extends TestCase
 		);
 	}
 
-	public function testFindFirstTokenOnIndentedNextLine(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstTokenOnIndentedNextLine()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/forLoop.php');
 		$tokens = $phpcsFile->getTokens();
@@ -268,33 +340,48 @@ class TokenHelperTest extends TestCase
 		self::assertSame('foo', $tokens[$fooTokenPointer]['content']);
 	}
 
-	public function testFindFirstTokenOnNonExistentNextLine(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstTokenOnNonExistentNextLine()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleTwo.php');
 		self::assertNull(TokenHelper::findFirstTokenOnNextLine($phpcsFile, TokenHelper::getLastTokenPointer($phpcsFile)));
 	}
 
-	public function testFindFirstTokenOnNonExistentNextLineAfterLastTokenInFile(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstTokenOnNonExistentNextLineAfterLastTokenInFile()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleTwo.php');
 		self::assertNull(TokenHelper::findFirstTokenOnNextLine($phpcsFile, TokenHelper::getLastTokenPointer($phpcsFile) + 1));
 	}
 
-	public function testFindFirstNonWhitespaceOnNextLine(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstNonWhitespaceOnNextLine()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleTwo.php');
 
 		self::assertNull(TokenHelper::findFirstNonWhitespaceOnNextLine($phpcsFile, TokenHelper::getLastTokenPointer($phpcsFile) + 1));
 	}
 
-	public function testFindFirstNonWhitespaceOnPreviousLine(): void
+	/**
+	 * @return void
+	 */
+	public function testFindFirstNonWhitespaceOnPreviousLine()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleTwo.php');
 
 		self::assertNull(TokenHelper::findFirstNonWhitespaceOnPreviousLine($phpcsFile, 0));
 	}
 
-	public function testGetContent(): void
+	/**
+	 * @return void
+	 */
+	public function testGetContent()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleTwo.php');
 		$variableTokenPointer = TokenHelper::findNext($phpcsFile, T_VARIABLE, 0);
@@ -305,7 +392,10 @@ class TokenHelperTest extends TestCase
 		self::assertSame(sprintf('$i++;%sfoo(', $phpcsFile->eolChar), $content);
 	}
 
-	public function testGetLastTokenPointer(): void
+	/**
+	 * @return void
+	 */
+	public function testGetLastTokenPointer()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/sampleOne.php');
 		$semicolonTokenPointer = TokenHelper::findNext($phpcsFile, T_SEMICOLON, 0);
@@ -315,7 +405,10 @@ class TokenHelperTest extends TestCase
 		self::assertSame($lastWhitespaceTokenPointer, TokenHelper::getLastTokenPointer($phpcsFile));
 	}
 
-	public function testGetLastTokenPointerInEmptyFile(): void
+	/**
+	 * @return void
+	 */
+	public function testGetLastTokenPointerInEmptyFile()
 	{
 		try {
 			$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/emptyFile.php');

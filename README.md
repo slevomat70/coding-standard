@@ -1,4 +1,4 @@
-# Slevomat Coding Standard
+# PHP 7.0 support for: Slevomat Coding Standard
 
 [![Latest version](https://img.shields.io/packagist/v/slevomat/coding-standard.svg?colorB=007EC6)](https://packagist.org/packages/slevomat/coding-standard)
 [![Downloads](https://img.shields.io/packagist/dt/slevomat/coding-standard.svg?colorB=007EC6)](https://packagist.org/packages/slevomat/coding-standard)

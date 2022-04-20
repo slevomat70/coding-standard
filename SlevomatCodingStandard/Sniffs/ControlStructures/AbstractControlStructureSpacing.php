@@ -57,28 +57,28 @@ use const T_YIELD_FROM;
 abstract class AbstractControlStructureSpacing implements Sniff
 {
 
-	public const CODE_INCORRECT_LINES_COUNT_BEFORE_CONTROL_STRUCTURE = 'IncorrectLinesCountBeforeControlStructure';
-	public const CODE_INCORRECT_LINES_COUNT_BEFORE_FIRST_CONTROL_STRUCTURE = 'IncorrectLinesCountBeforeFirstControlStructure';
-	public const CODE_INCORRECT_LINES_COUNT_AFTER_CONTROL_STRUCTURE = 'IncorrectLinesCountAfterControlStructure';
-	public const CODE_INCORRECT_LINES_COUNT_AFTER_LAST_CONTROL_STRUCTURE = 'IncorrectLinesCountAfterLastControlStructure';
+	const CODE_INCORRECT_LINES_COUNT_BEFORE_CONTROL_STRUCTURE = 'IncorrectLinesCountBeforeControlStructure';
+	const CODE_INCORRECT_LINES_COUNT_BEFORE_FIRST_CONTROL_STRUCTURE = 'IncorrectLinesCountBeforeFirstControlStructure';
+	const CODE_INCORRECT_LINES_COUNT_AFTER_CONTROL_STRUCTURE = 'IncorrectLinesCountAfterControlStructure';
+	const CODE_INCORRECT_LINES_COUNT_AFTER_LAST_CONTROL_STRUCTURE = 'IncorrectLinesCountAfterLastControlStructure';
 
-	protected const KEYWORD_IF = 'if';
-	protected const KEYWORD_DO = 'do';
-	protected const KEYWORD_WHILE = 'while';
-	protected const KEYWORD_FOR = 'for';
-	protected const KEYWORD_FOREACH = 'foreach';
-	protected const KEYWORD_SWITCH = 'switch';
-	protected const KEYWORD_CASE = 'case';
-	protected const KEYWORD_DEFAULT = 'default';
-	protected const KEYWORD_TRY = 'try';
-	protected const KEYWORD_PARENT = 'parent';
-	protected const KEYWORD_GOTO = 'goto';
-	protected const KEYWORD_BREAK = 'break';
-	protected const KEYWORD_CONTINUE = 'continue';
-	protected const KEYWORD_RETURN = 'return';
-	protected const KEYWORD_THROW = 'throw';
-	protected const KEYWORD_YIELD = 'yield';
-	protected const KEYWORD_YIELD_FROM = 'yield_from';
+	const KEYWORD_IF = 'if';
+	const KEYWORD_DO = 'do';
+	const KEYWORD_WHILE = 'while';
+	const KEYWORD_FOR = 'for';
+	const KEYWORD_FOREACH = 'foreach';
+	const KEYWORD_SWITCH = 'switch';
+	const KEYWORD_CASE = 'case';
+	const KEYWORD_DEFAULT = 'default';
+	const KEYWORD_TRY = 'try';
+	const KEYWORD_PARENT = 'parent';
+	const KEYWORD_GOTO = 'goto';
+	const KEYWORD_BREAK = 'break';
+	const KEYWORD_CONTINUE = 'continue';
+	const KEYWORD_RETURN = 'return';
+	const KEYWORD_THROW = 'throw';
+	const KEYWORD_YIELD = 'yield';
+	const KEYWORD_YIELD_FROM = 'yield_from';
 
 	/** @var (string|int)[]|null */
 	private $tokensToCheck;
@@ -95,11 +95,20 @@ abstract class AbstractControlStructureSpacing implements Sniff
 
 	abstract protected function getLinesCountBefore(): int;
 
-	abstract protected function getLinesCountBeforeFirst(File $phpcsFile, int $controlStructurePointer): int;
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $controlStructurePointer
+	 */
+	abstract protected function getLinesCountBeforeFirst($phpcsFile, $controlStructurePointer): int;
 
 	abstract protected function getLinesCountAfter(): int;
 
-	abstract protected function getLinesCountAfterLast(File $phpcsFile, int $controlStructurePointer, int $controlStructureEndPointer): int;
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $controlStructurePointer
+	 * @param int $controlStructureEndPointer
+	 */
+	abstract protected function getLinesCountAfterLast($phpcsFile, $controlStructurePointer, $controlStructureEndPointer): int;
 
 	/**
 	 * @return (int|string)[]
@@ -112,8 +121,10 @@ abstract class AbstractControlStructureSpacing implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $controlStructurePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $controlStructurePointer): void
+	public function process(File $phpcsFile, $controlStructurePointer)
 	{
 		$this->checkLinesBefore($phpcsFile, $controlStructurePointer);
 
@@ -125,7 +136,12 @@ abstract class AbstractControlStructureSpacing implements Sniff
 		}
 	}
 
-	protected function checkLinesBefore(File $phpcsFile, int $controlStructurePointer): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $controlStructurePointer
+	 * @return void
+	 */
+	protected function checkLinesBefore($phpcsFile, $controlStructurePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -228,7 +244,12 @@ abstract class AbstractControlStructureSpacing implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	protected function checkLinesAfter(File $phpcsFile, int $controlStructurePointer): void
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $controlStructurePointer
+	 * @return void
+	 */
+	protected function checkLinesAfter($phpcsFile, $controlStructurePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

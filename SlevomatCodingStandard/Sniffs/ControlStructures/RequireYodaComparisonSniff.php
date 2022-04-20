@@ -21,7 +21,7 @@ use const T_IS_NOT_IDENTICAL;
 class RequireYodaComparisonSniff implements Sniff
 {
 
-	public const CODE_REQUIRED_YODA_COMPARISON = 'RequiredYodaComparison';
+	const CODE_REQUIRED_YODA_COMPARISON = 'RequiredYodaComparison';
 
 	/** @var bool */
 	public $alwaysVariableOnRight = false;
@@ -42,8 +42,10 @@ class RequireYodaComparisonSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $comparisonTokenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $comparisonTokenPointer): void
+	public function process(File $phpcsFile, $comparisonTokenPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 		$leftSideTokens = YodaHelper::getLeftSideTokens($tokens, $comparisonTokenPointer);

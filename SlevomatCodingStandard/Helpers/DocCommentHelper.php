@@ -35,12 +35,21 @@ use const T_WHITESPACE;
 class DocCommentHelper
 {
 
-	public static function hasDocComment(File $phpcsFile, int $pointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	public static function hasDocComment($phpcsFile, $pointer): bool
 	{
 		return self::findDocCommentOpenPointer($phpcsFile, $pointer) !== null;
 	}
 
-	public static function getDocComment(File $phpcsFile, int $pointer): ?string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @return string|null
+	 */
+	public static function getDocComment($phpcsFile, $pointer)
 	{
 		$docCommentOpenToken = self::findDocCommentOpenPointer($phpcsFile, $pointer);
 		if ($docCommentOpenToken === null) {
@@ -57,9 +66,11 @@ class DocCommentHelper
 	}
 
 	/**
-	 * @return Comment[]|null
+	 * @return mixed[]|null
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
 	 */
-	public static function getDocCommentDescription(File $phpcsFile, int $pointer): ?array
+	public static function getDocCommentDescription($phpcsFile, $pointer)
 	{
 		$docCommentOpenPointer = self::findDocCommentOpenPointer($phpcsFile, $pointer);
 
@@ -103,7 +114,11 @@ class DocCommentHelper
 		return count($comments) > 0 ? $comments : null;
 	}
 
-	public static function hasInheritdocAnnotation(File $phpcsFile, int $pointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	public static function hasInheritdocAnnotation($phpcsFile, $pointer): bool
 	{
 		$docComment = self::getDocComment($phpcsFile, $pointer);
 		if ($docComment === null) {
@@ -113,12 +128,21 @@ class DocCommentHelper
 		return stripos($docComment, '@inheritdoc') !== false;
 	}
 
-	public static function hasDocCommentDescription(File $phpcsFile, int $pointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 */
+	public static function hasDocCommentDescription($phpcsFile, $pointer): bool
 	{
 		return self::getDocCommentDescription($phpcsFile, $pointer) !== null;
 	}
 
-	public static function findDocCommentOpenPointer(File $phpcsFile, int $pointer): ?int
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $pointer
+	 * @return int|null
+	 */
+	public static function findDocCommentOpenPointer($phpcsFile, $pointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -138,7 +162,11 @@ class DocCommentHelper
 		return null;
 	}
 
-	public static function isInline(File $phpcsFile, int $docCommentOpenPointer): bool
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $docCommentOpenPointer
+	 */
+	public static function isInline($phpcsFile, $docCommentOpenPointer): bool
 	{
 		$tokens = $phpcsFile->getTokens();
 

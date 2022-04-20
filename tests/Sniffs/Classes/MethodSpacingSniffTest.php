@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class MethodSpacingSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/methodSpacingNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/methodSpacingErrors.php');
 
@@ -53,7 +59,10 @@ class MethodSpacingSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testErrorsDifferentSettingsAndSameLinesCount(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsDifferentSettingsAndSameLinesCount()
 	{
 		$report = self::checkFile(__DIR__ . '/data/methodSpacingErrors.php', [
 			'minLinesCount' => 2,
@@ -88,7 +97,10 @@ class MethodSpacingSniffTest extends TestCase
 		);
 	}
 
-	public function testWithDifferentSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithDifferentSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/methodSpacingWithDifferentSettingsNoErrors.php', [
 			'minLinesCount' => 2,
@@ -97,7 +109,10 @@ class MethodSpacingSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testWithDifferentSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWithDifferentSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/methodSpacingWithDifferentSettingsErrors.php', [
 			'minLinesCount' => 2,

@@ -18,7 +18,7 @@ use const T_WHITESPACE;
 class EmptyCommentSniff implements Sniff
 {
 
-	public const CODE_EMPTY_COMMENT = 'EmptyComment';
+	const CODE_EMPTY_COMMENT = 'EmptyComment';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -34,8 +34,10 @@ class EmptyCommentSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $commentStartPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $commentStartPointer): void
+	public function process(File $phpcsFile, $commentStartPointer)
 	{
 		$commentEndPointer = CommentHelper::getCommentEndPointer($phpcsFile, $commentStartPointer);
 

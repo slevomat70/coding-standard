@@ -19,7 +19,7 @@ use const T_VARIABLE;
 class UnusedInheritedVariablePassedToClosureSniff implements Sniff
 {
 
-	public const CODE_UNUSED_INHERITED_VARIABLE = 'UnusedInheritedVariable';
+	const CODE_UNUSED_INHERITED_VARIABLE = 'UnusedInheritedVariable';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -34,8 +34,10 @@ class UnusedInheritedVariablePassedToClosureSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $usePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $usePointer): void
+	public function process(File $phpcsFile, $usePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -73,6 +75,9 @@ class UnusedInheritedVariablePassedToClosureSniff implements Sniff
 		} while (true);
 	}
 
+	/**
+	 * @return void
+	 */
 	private function checkVariableUsage(
 		File $phpcsFile,
 		int $usePointer,
@@ -80,7 +85,7 @@ class UnusedInheritedVariablePassedToClosureSniff implements Sniff
 		int $useParenthesisCloserPointer,
 		int $variablePointer,
 		int $scopeOwnerPointer
-	): void
+	)
 	{
 		$tokens = $phpcsFile->getTokens();
 

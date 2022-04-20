@@ -31,8 +31,10 @@ class BlockControlStructureSpacingSniff extends AbstractControlStructureSpacing
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $controlStructurePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $controlStructurePointer): void
+	public function process(File $phpcsFile, $controlStructurePointer)
 	{
 		if ($this->isWhilePartOfDo($phpcsFile, $controlStructurePointer)) {
 			return;
@@ -74,8 +76,10 @@ class BlockControlStructureSpacingSniff extends AbstractControlStructureSpacing
 
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $controlStructurePointer
 	 */
-	protected function getLinesCountBeforeFirst(File $phpcsFile, int $controlStructurePointer): int
+	protected function getLinesCountBeforeFirst($phpcsFile, $controlStructurePointer): int
 	{
 		return SniffSettingsHelper::normalizeInteger($this->linesCountBeforeFirst);
 	}
@@ -87,8 +91,11 @@ class BlockControlStructureSpacingSniff extends AbstractControlStructureSpacing
 
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $controlStructurePointer
+	 * @param int $controlStructureEndPointer
 	 */
-	protected function getLinesCountAfterLast(File $phpcsFile, int $controlStructurePointer, int $controlStructureEndPointer): int
+	protected function getLinesCountAfterLast($phpcsFile, $controlStructurePointer, $controlStructureEndPointer): int
 	{
 		return SniffSettingsHelper::normalizeInteger($this->linesCountAfterLast);
 	}

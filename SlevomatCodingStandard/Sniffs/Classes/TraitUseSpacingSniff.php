@@ -23,9 +23,9 @@ use const T_WHITESPACE;
 class TraitUseSpacingSniff implements Sniff
 {
 
-	public const CODE_INCORRECT_LINES_COUNT_BEFORE_FIRST_USE = 'IncorrectLinesCountBeforeFirstUse';
-	public const CODE_INCORRECT_LINES_COUNT_BETWEEN_USES = 'IncorrectLinesCountBetweenUses';
-	public const CODE_INCORRECT_LINES_COUNT_AFTER_LAST_USE = 'IncorrectLinesCountAfterLastUse';
+	const CODE_INCORRECT_LINES_COUNT_BEFORE_FIRST_USE = 'IncorrectLinesCountBeforeFirstUse';
+	const CODE_INCORRECT_LINES_COUNT_BETWEEN_USES = 'IncorrectLinesCountBetweenUses';
+	const CODE_INCORRECT_LINES_COUNT_AFTER_LAST_USE = 'IncorrectLinesCountAfterLastUse';
 
 	/** @var int */
 	public $linesCountBeforeFirstUse = 1;
@@ -57,8 +57,10 @@ class TraitUseSpacingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $classPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $classPointer): void
+	public function process(File $phpcsFile, $classPointer)
 	{
 		$usePointers = ClassHelper::getTraitUsePointers($phpcsFile, $classPointer);
 
@@ -71,7 +73,10 @@ class TraitUseSpacingSniff implements Sniff
 		$this->checkLinesBetweenUses($phpcsFile, $usePointers);
 	}
 
-	private function checkLinesBeforeFirstUse(File $phpcsFile, int $firstUsePointer): void
+	/**
+	 * @return void
+	 */
+	private function checkLinesBeforeFirstUse(File $phpcsFile, int $firstUsePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -144,7 +149,10 @@ class TraitUseSpacingSniff implements Sniff
 		$phpcsFile->fixer->endChangeset();
 	}
 
-	private function checkLinesAfterLastUse(File $phpcsFile, int $lastUsePointer): void
+	/**
+	 * @return void
+	 */
+	private function checkLinesAfterLastUse(File $phpcsFile, int $lastUsePointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -206,8 +214,9 @@ class TraitUseSpacingSniff implements Sniff
 
 	/**
 	 * @param int[] $usePointers
+	 * @return void
 	 */
-	private function checkLinesBetweenUses(File $phpcsFile, array $usePointers): void
+	private function checkLinesBetweenUses(File $phpcsFile, array $usePointers)
 	{
 		if (count($usePointers) === 1) {
 			return;

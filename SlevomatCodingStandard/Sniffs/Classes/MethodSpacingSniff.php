@@ -20,7 +20,7 @@ use const T_WHITESPACE;
 class MethodSpacingSniff implements Sniff
 {
 
-	public const CODE_INCORRECT_LINES_COUNT_BETWEEN_METHODS = 'IncorrectLinesCountBetweenMethods';
+	const CODE_INCORRECT_LINES_COUNT_BETWEEN_METHODS = 'IncorrectLinesCountBetweenMethods';
 
 	/** @var int */
 	public $minLinesCount = 1;
@@ -39,8 +39,10 @@ class MethodSpacingSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $methodPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $methodPointer): void
+	public function process(File $phpcsFile, $methodPointer)
 	{
 		if (!FunctionHelper::isMethod($phpcsFile, $methodPointer)) {
 			return;

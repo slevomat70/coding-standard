@@ -22,7 +22,7 @@ use const T_WHITESPACE;
 class NewWithoutParenthesesSniff implements Sniff
 {
 
-	public const CODE_USELESS_PARENTHESES = 'UselessParentheses';
+	const CODE_USELESS_PARENTHESES = 'UselessParentheses';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -37,8 +37,10 @@ class NewWithoutParenthesesSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $newPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $newPointer): void
+	public function process(File $phpcsFile, $newPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 		/** @var int $nextPointer */

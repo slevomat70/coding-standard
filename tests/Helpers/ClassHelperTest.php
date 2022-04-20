@@ -10,7 +10,10 @@ use const T_WHITESPACE;
 class ClassHelperTest extends TestCase
 {
 
-	public function testNameWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testNameWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/classWithNamespace.php');
 		self::assertSame(
@@ -38,7 +41,10 @@ class ClassHelperTest extends TestCase
 		);
 	}
 
-	public function testNameWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testNameWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/classWithoutNamespace.php');
 		self::assertSame(
@@ -66,25 +72,37 @@ class ClassHelperTest extends TestCase
 		);
 	}
 
-	public function testGetAllNamesWithNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testGetAllNamesWithNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/classWithNamespace.php');
 		self::assertSame(['FooClass', 'FooInterface', 'FooTrait'], array_values(ClassHelper::getAllNames($phpcsFile)));
 	}
 
-	public function testGetAllNamesWithoutNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testGetAllNamesWithoutNamespace()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/classWithoutNamespace.php');
 		self::assertSame(['FooClass', 'FooInterface', 'FooTrait'], array_values(ClassHelper::getAllNames($phpcsFile)));
 	}
 
-	public function testGetAllNamesWithNoClass(): void
+	/**
+	 * @return void
+	 */
+	public function testGetAllNamesWithNoClass()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/namespacedFile.php');
 		self::assertSame([], ClassHelper::getAllNames($phpcsFile));
 	}
 
-	public function testGetClassPointerWithoutClass(): void
+	/**
+	 * @return void
+	 */
+	public function testGetClassPointerWithoutClass()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/namespacedFile.php');
 
@@ -93,7 +111,10 @@ class ClassHelperTest extends TestCase
 		self::assertNull(ClassHelper::getClassPointer($phpcsFile, $usePointer));
 	}
 
-	public function testGetClassPointerWithClass(): void
+	/**
+	 * @return void
+	 */
+	public function testGetClassPointerWithClass()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/classWithoutNamespace.php');
 
@@ -102,7 +123,10 @@ class ClassHelperTest extends TestCase
 		self::assertSame(2, ClassHelper::getClassPointer($phpcsFile, $whitespacePointer));
 	}
 
-	public function testGetClassPointerWithMultipleClasses(): void
+	/**
+	 * @return void
+	 */
+	public function testGetClassPointerWithMultipleClasses()
 	{
 		$phpcsFile = $this->getCodeSnifferFile(__DIR__ . '/data/multipleClasses.php');
 

@@ -13,7 +13,7 @@ use const T_USE;
 class MultipleUsesPerLineSniff implements Sniff
 {
 
-	public const CODE_MULTIPLE_USES_PER_LINE = 'MultipleUsesPerLine';
+	const CODE_MULTIPLE_USES_PER_LINE = 'MultipleUsesPerLine';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -28,8 +28,10 @@ class MultipleUsesPerLineSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $usePointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $usePointer): void
+	public function process(File $phpcsFile, $usePointer)
 	{
 		if (
 			UseStatementHelper::isAnonymousFunctionUse($phpcsFile, $usePointer)

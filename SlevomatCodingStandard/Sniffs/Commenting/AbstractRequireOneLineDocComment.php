@@ -18,7 +18,11 @@ use const T_DOC_COMMENT_WHITESPACE;
 abstract class AbstractRequireOneLineDocComment implements Sniff
 {
 
-	abstract protected function addError(File $phpcsFile, int $docCommentStartPointer): bool;
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $docCommentStartPointer
+	 */
+	abstract protected function addError($phpcsFile, $docCommentStartPointer): bool;
 
 	/**
 	 * @return array<int, (int|string)>
@@ -31,8 +35,10 @@ abstract class AbstractRequireOneLineDocComment implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $docCommentStartPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $docCommentStartPointer): void
+	public function process(File $phpcsFile, $docCommentStartPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

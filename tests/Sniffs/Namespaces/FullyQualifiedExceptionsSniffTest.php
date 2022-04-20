@@ -9,7 +9,10 @@ use TypeError;
 class FullyQualifiedExceptionsSniffTest extends TestCase
 {
 
-	public function test(): void
+	/**
+	 * @return void
+	 */
+	public function test()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fullyQualifiedExceptionNames.php');
 
@@ -38,14 +41,20 @@ class FullyQualifiedExceptionsSniffTest extends TestCase
 		self::assertNoSniffError($report, 28);
 	}
 
-	public function testClassSuffixedErrorOrExceptionIsNotAnExceptionButReported(): void
+	/**
+	 * @return void
+	 */
+	public function testClassSuffixedErrorOrExceptionIsNotAnExceptionButReported()
 	{
 		$report = self::checkFile(__DIR__ . '/data/ignoredNames.php');
 		self::assertSniffError($report, 3, FullyQualifiedExceptionsSniff::CODE_NON_FULLY_QUALIFIED_EXCEPTION);
 		self::assertSniffError($report, 7, FullyQualifiedExceptionsSniff::CODE_NON_FULLY_QUALIFIED_EXCEPTION);
 	}
 
-	public function testIgnoredNames(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoredNames()
 	{
 		$report = self::checkFile(__DIR__ . '/data/ignoredNames.php', [
 			'ignoredNames' => [
@@ -56,7 +65,10 @@ class FullyQualifiedExceptionsSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testClassSuffixedErrorOrExceptionIsNotAnExceptionButReportedInNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testClassSuffixedErrorOrExceptionIsNotAnExceptionButReportedInNamespace()
 	{
 		$report = self::checkFile(__DIR__ . '/data/ignoredNamesInNamespace.php');
 		// *Error names are reported only with a root namespace
@@ -68,7 +80,10 @@ class FullyQualifiedExceptionsSniffTest extends TestCase
 		self::assertNoSniffError($report, 17);
 	}
 
-	public function testIgnoredNamesInNamespace(): void
+	/**
+	 * @return void
+	 */
+	public function testIgnoredNamesInNamespace()
 	{
 		$report = self::checkFile(__DIR__ . '/data/ignoredNamesInNamespace.php', [
 			'ignoredNames' => [
@@ -78,13 +93,19 @@ class FullyQualifiedExceptionsSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testFixableFullyQualified(): void
+	/**
+	 * @return void
+	 */
+	public function testFixableFullyQualified()
 	{
 		$report = self::checkFile(__DIR__ . '/data/fixableFullyQualifiedExceptions.php');
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testWithSpecialExceptionNames(): void
+	/**
+	 * @return void
+	 */
+	public function testWithSpecialExceptionNames()
 	{
 		$report = self::checkFile(
 			__DIR__ . '/data/fullyQualifiedSpecialExceptionNames.php',

@@ -17,7 +17,7 @@ use const T_DOC_COMMENT_OPEN_TAG;
 class ForbiddenCommentsSniff implements Sniff
 {
 
-	public const CODE_COMMENT_FORBIDDEN = 'CommentForbidden';
+	const CODE_COMMENT_FORBIDDEN = 'CommentForbidden';
 
 	/** @var string[] */
 	public $forbiddenCommentPatterns = [];
@@ -35,8 +35,10 @@ class ForbiddenCommentsSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $docCommentOpenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $docCommentOpenPointer): void
+	public function process(File $phpcsFile, $docCommentOpenPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

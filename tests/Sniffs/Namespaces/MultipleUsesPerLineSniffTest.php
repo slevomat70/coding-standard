@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class MultipleUsesPerLineSniffTest extends TestCase
 {
 
-	public function testMultipleUsesPerLine(): void
+	/**
+	 * @return void
+	 */
+	public function testMultipleUsesPerLine()
 	{
 		$report = self::checkFile(__DIR__ . '/data/multipleUsesPerLine.php');
 

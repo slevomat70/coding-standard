@@ -15,7 +15,7 @@ use const T_DOC_COMMENT_OPEN_TAG;
 class LongTypeHintsSniff implements Sniff
 {
 
-	public const CODE_USED_LONG_TYPE_HINT = 'UsedLongTypeHint';
+	const CODE_USED_LONG_TYPE_HINT = 'UsedLongTypeHint';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -30,8 +30,10 @@ class LongTypeHintsSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $docCommentOpenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $docCommentOpenPointer): void
+	public function process(File $phpcsFile, $docCommentOpenPointer)
 	{
 		$annotations = AnnotationHelper::getAnnotations($phpcsFile, $docCommentOpenPointer);
 

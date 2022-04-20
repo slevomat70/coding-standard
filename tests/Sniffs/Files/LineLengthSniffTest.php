@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class LineLengthSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/LineLengthSniffNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/LineLengthSniffErrors.php', ['ignoreImports' => false]);
 
@@ -28,7 +34,10 @@ class LineLengthSniffTest extends TestCase
 		self::assertSniffError($report, 20, LineLengthSniff::CODE_LINE_TOO_LONG);
 	}
 
-	public function testErrorsIgnoreComments(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsIgnoreComments()
 	{
 		$report = self::checkFile(__DIR__ . '/data/LineLengthSniffErrorsIgnoreComments.php', ['ignoreComments' => true]);
 
@@ -40,7 +49,10 @@ class LineLengthSniffTest extends TestCase
 		self::assertSniffError($report, 20, LineLengthSniff::CODE_LINE_TOO_LONG);
 	}
 
-	public function testErrorsIgnoreImports(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsIgnoreImports()
 	{
 		$report = self::checkFile(__DIR__ . '/data/LineLengthSniffErrorsIgnoreImports.php');
 
@@ -55,7 +67,10 @@ class LineLengthSniffTest extends TestCase
 		self::assertSniffError($report, 22, LineLengthSniff::CODE_LINE_TOO_LONG);
 	}
 
-	public function testErrorsWithoutUseStatements(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithoutUseStatements()
 	{
 		$report = self::checkFile(__DIR__ . '/data/LineLengthSniffErrorsWithoutUseStatements.php');
 

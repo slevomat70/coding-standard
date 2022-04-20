@@ -19,13 +19,21 @@ use const T_STRING;
 class ConstantHelper
 {
 
-	public static function getName(File $phpcsFile, int $constantPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $constantPointer
+	 */
+	public static function getName($phpcsFile, $constantPointer): string
 	{
 		$tokens = $phpcsFile->getTokens();
 		return $tokens[TokenHelper::findNext($phpcsFile, T_STRING, $constantPointer + 1)]['content'];
 	}
 
-	public static function getFullyQualifiedName(File $phpcsFile, int $constantPointer): string
+	/**
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @param int $constantPointer
+	 */
+	public static function getFullyQualifiedName($phpcsFile, $constantPointer): string
 	{
 		$name = self::getName($phpcsFile, $constantPointer);
 		$namespace = NamespaceHelper::findCurrentNamespaceName($phpcsFile, $constantPointer);
@@ -37,8 +45,9 @@ class ConstantHelper
 
 	/**
 	 * @return string[]
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
-	public static function getAllNames(File $phpcsFile): array
+	public static function getAllNames($phpcsFile): array
 	{
 		$previousConstantPointer = 0;
 

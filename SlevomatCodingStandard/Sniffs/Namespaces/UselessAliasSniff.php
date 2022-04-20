@@ -16,7 +16,7 @@ use const T_SEMICOLON;
 class UselessAliasSniff implements Sniff
 {
 
-	public const CODE_USELESS_ALIAS = 'UselessAlias';
+	const CODE_USELESS_ALIAS = 'UselessAlias';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -31,8 +31,10 @@ class UselessAliasSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $openTagPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $openTagPointer): void
+	public function process(File $phpcsFile, $openTagPointer)
 	{
 		if (TokenHelper::findPrevious($phpcsFile, T_OPEN_TAG, $openTagPointer - 1) !== null) {
 			return;

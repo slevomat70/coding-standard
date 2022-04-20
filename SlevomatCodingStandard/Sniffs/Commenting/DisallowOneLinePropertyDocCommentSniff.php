@@ -15,7 +15,7 @@ use const T_WHITESPACE;
 class DisallowOneLinePropertyDocCommentSniff implements Sniff
 {
 
-	public const CODE_ONE_LINE_PROPERTY_COMMENT = 'OneLinePropertyComment';
+	const CODE_ONE_LINE_PROPERTY_COMMENT = 'OneLinePropertyComment';
 
 	/**
 	 * @return int[]
@@ -28,8 +28,10 @@ class DisallowOneLinePropertyDocCommentSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $propertyPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $propertyPointer): void
+	public function process(File $phpcsFile, $propertyPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class UnionTypeHintFormatSniffTest extends TestCase
 {
 
-	public function testWhitespaceNotSetNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWhitespaceNotSetNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatWhitespaceNotSetNoErrors.php', [
 			'enable' => true,
@@ -15,7 +18,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testWhitespaceDisallowedNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWhitespaceDisallowedNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatWhitespaceDisallowedNoErrors.php', [
 			'enable' => true,
@@ -24,7 +30,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testWhitespaceDisallowedErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWhitespaceDisallowedErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatWhitespaceDisallowedErrors.php', [
 			'enable' => true,
@@ -50,7 +59,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testWhitespaceEnabledNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWhitespaceEnabledNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatWhitespaceEnabledNoErrors.php', [
 			'enable' => true,
@@ -59,7 +71,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testWhitespaceEnabledErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testWhitespaceEnabledErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatWhitespaceEnabledErrors.php', [
 			'enable' => true,
@@ -96,7 +111,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testShortNullableNotSetNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testShortNullableNotSetNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatShortNullableNotSetNoErrors.php', [
 			'enable' => true,
@@ -104,7 +122,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testShortNullableRequiredNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testShortNullableRequiredNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatShortNullableRequiredNoErrors.php', [
 			'enable' => true,
@@ -113,7 +134,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testShortNullableRequiredErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testShortNullableRequiredErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatShortNullableRequiredErrors.php', [
 			'enable' => true,
@@ -139,7 +163,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testShortNullableDisallowedNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testShortNullableDisallowedNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatShortNullableDisallowedNoErrors.php', [
 			'enable' => true,
@@ -148,7 +175,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testShortNullableDisallowedErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testShortNullableDisallowedErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatShortNullableDisallowedErrors.php', [
 			'enable' => true,
@@ -174,7 +204,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testNullPositionNotSetNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNullPositionNotSetNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatNullPositionNotSetNoErrors.php', [
 			'enable' => true,
@@ -182,7 +215,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNullPositionFirstNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNullPositionFirstNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatNullPositionFirstNoErrors.php', [
 			'enable' => true,
@@ -191,7 +227,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNullPositionFirstErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNullPositionFirstErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatNullPositionFirstErrors.php', [
 			'enable' => true,
@@ -217,7 +256,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testNullPositionLastNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNullPositionLastNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatNullPositionLastNoErrors.php', [
 			'enable' => true,
@@ -226,7 +268,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNullPositionLastErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNullPositionLastErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatNullPositionLastErrors.php', [
 			'enable' => true,
@@ -252,7 +297,10 @@ class UnionTypeHintFormatSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testShouldNotReportIfSniffIsDisabled(): void
+	/**
+	 * @return void
+	 */
+	public function testShouldNotReportIfSniffIsDisabled()
 	{
 		$report = self::checkFile(__DIR__ . '/data/unionTypeHintFormatShortNullableNotSetNoErrors.php', [
 			'enable' => false,

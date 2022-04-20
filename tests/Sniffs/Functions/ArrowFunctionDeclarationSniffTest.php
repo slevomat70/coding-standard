@@ -7,13 +7,19 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class ArrowFunctionDeclarationSniffTest extends TestCase
 {
 
-	public function testDefaultSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/arrowFunctionDeclarationDefaultSettingsNoErrors.php');
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testDefaultSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testDefaultSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/arrowFunctionDeclarationDefaultSettingsErrors.php');
 
@@ -77,7 +83,10 @@ class ArrowFunctionDeclarationSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testModifiedSettingsNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/arrowFunctionDeclarationModifiedSettingsNoErrors.php', [
 			'spacesCountAfterKeyword' => 0,
@@ -88,7 +97,10 @@ class ArrowFunctionDeclarationSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testModifiedSettingsErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testModifiedSettingsErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/arrowFunctionDeclarationModifiedSettingsErrors.php', [
 			'spacesCountAfterKeyword' => 0,

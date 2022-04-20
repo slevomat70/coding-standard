@@ -16,11 +16,11 @@ use const T_WHITESPACE;
 class SingleLineArrayWhitespaceSniff implements Sniff
 {
 
-	public const CODE_SPACE_BEFORE_COMMA = 'SpaceBeforeComma';
-	public const CODE_SPACE_AFTER_COMMA = 'SpaceAfterComma';
-	public const CODE_SPACE_AFTER_ARRAY_OPEN = 'SpaceAfterArrayOpen';
-	public const CODE_SPACE_BEFORE_ARRAY_CLOSE = 'SpaceBeforeArrayClose';
-	public const CODE_SPACE_IN_EMPTY_ARRAY = 'SpaceInEmptyArray';
+	const CODE_SPACE_BEFORE_COMMA = 'SpaceBeforeComma';
+	const CODE_SPACE_AFTER_COMMA = 'SpaceAfterComma';
+	const CODE_SPACE_AFTER_ARRAY_OPEN = 'SpaceAfterArrayOpen';
+	const CODE_SPACE_BEFORE_ARRAY_CLOSE = 'SpaceBeforeArrayClose';
+	const CODE_SPACE_IN_EMPTY_ARRAY = 'SpaceInEmptyArray';
 
 	/** @var int */
 	public $spacesAroundBrackets = 0;
@@ -39,6 +39,7 @@ class SingleLineArrayWhitespaceSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $stackPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
 	 */
 	public function process(File $phpcsFile, $stackPointer): int
 	{
@@ -104,7 +105,10 @@ class SingleLineArrayWhitespaceSniff implements Sniff
 		return SniffSettingsHelper::normalizeInteger($this->spacesAroundBrackets);
 	}
 
-	private function checkWhitespaceInEmptyArray(File $phpcsFile, int $arrayStart, int $arrayEnd): void
+	/**
+	 * @return void
+	 */
+	private function checkWhitespaceInEmptyArray(File $phpcsFile, int $arrayStart, int $arrayEnd)
 	{
 		if ($arrayEnd - $arrayStart === 1) {
 			return;
@@ -119,7 +123,10 @@ class SingleLineArrayWhitespaceSniff implements Sniff
 		$phpcsFile->fixer->replaceToken($arrayStart + 1, '');
 	}
 
-	private function checkWhitespaceAfterOpeningBracket(File $phpcsFile, int $arrayStart): void
+	/**
+	 * @return void
+	 */
+	private function checkWhitespaceAfterOpeningBracket(File $phpcsFile, int $arrayStart)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -148,7 +155,10 @@ class SingleLineArrayWhitespaceSniff implements Sniff
 		}
 	}
 
-	private function checkWhitespaceBeforeClosingBracket(File $phpcsFile, int $arrayEnd): void
+	/**
+	 * @return void
+	 */
+	private function checkWhitespaceBeforeClosingBracket(File $phpcsFile, int $arrayEnd)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -177,7 +187,10 @@ class SingleLineArrayWhitespaceSniff implements Sniff
 		}
 	}
 
-	private function checkWhitespaceBeforeComma(File $phpcsFile, int $comma): void
+	/**
+	 * @return void
+	 */
+	private function checkWhitespaceBeforeComma(File $phpcsFile, int $comma)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -202,7 +215,10 @@ class SingleLineArrayWhitespaceSniff implements Sniff
 		$phpcsFile->fixer->replaceToken($comma - 1, '');
 	}
 
-	private function checkWhitespaceAfterComma(File $phpcsFile, int $comma): void
+	/**
+	 * @return void
+	 */
+	private function checkWhitespaceAfterComma(File $phpcsFile, int $comma)
 	{
 		$tokens = $phpcsFile->getTokens();
 

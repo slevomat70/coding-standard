@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireNullSafeObjectOperatorSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNullSafeObjectOperatorNoErrors.php', [
 			'enable' => true,
@@ -15,7 +18,10 @@ class RequireNullSafeObjectOperatorSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNullSafeObjectOperatorErrors.php', [
 			'enable' => true,
@@ -33,7 +39,10 @@ class RequireNullSafeObjectOperatorSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testShouldNotReportIfSniffIsDisabled(): void
+	/**
+	 * @return void
+	 */
+	public function testShouldNotReportIfSniffIsDisabled()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireNullSafeObjectOperatorErrors.php', [
 			'enable' => false,

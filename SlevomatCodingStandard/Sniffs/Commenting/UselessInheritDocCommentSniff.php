@@ -19,7 +19,7 @@ use const T_WHITESPACE;
 class UselessInheritDocCommentSniff implements Sniff
 {
 
-	public const CODE_USELESS_INHERIT_DOC_COMMENT = 'UselessInheritDocComment';
+	const CODE_USELESS_INHERIT_DOC_COMMENT = 'UselessInheritDocComment';
 
 	/**
 	 * @return array<int, (int|string)>
@@ -34,8 +34,10 @@ class UselessInheritDocCommentSniff implements Sniff
 	/**
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 * @param int $docCommentOpenPointer
+	 * @param \PHP_CodeSniffer\Files\File $phpcsFile
+	 * @return void
 	 */
-	public function process(File $phpcsFile, $docCommentOpenPointer): void
+	public function process(File $phpcsFile, $docCommentOpenPointer)
 	{
 		$tokens = $phpcsFile->getTokens();
 

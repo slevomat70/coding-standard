@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireConstructorPropertyPromotionSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireConstructorPropertyPromotionNoErrors.php', [
 			'enable' => true,
@@ -15,7 +18,10 @@ class RequireConstructorPropertyPromotionSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireConstructorPropertyPromotionErrors.php', [
 			'enable' => true,
@@ -57,7 +63,10 @@ class RequireConstructorPropertyPromotionSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testShouldNotReportIfSniffIsDisabled(): void
+	/**
+	 * @return void
+	 */
+	public function testShouldNotReportIfSniffIsDisabled()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireConstructorPropertyPromotionErrors.php', [
 			'enable' => false,

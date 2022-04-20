@@ -7,7 +7,10 @@ use SlevomatCodingStandard\Sniffs\TestCase;
 class RequireMultiLineTernaryOperatorSniffTest extends TestCase
 {
 
-	public function testNoErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineTernaryOperatorNoErrors.php', [
 			'lineLengthLimit' => 80,
@@ -15,7 +18,10 @@ class RequireMultiLineTernaryOperatorSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrors(): void
+	/**
+	 * @return void
+	 */
+	public function testErrors()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineTernaryOperatorErrors.php', [
 			'lineLengthLimit' => 80,
@@ -33,7 +39,10 @@ class RequireMultiLineTernaryOperatorSniffTest extends TestCase
 		self::assertAllFixedInFile($report);
 	}
 
-	public function testNoErrorRecurrence(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorRecurrence()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineTernaryOperatorCloseTagNoNewline.php', [
 			'lineLengthLimit' => 120,
@@ -41,7 +50,10 @@ class RequireMultiLineTernaryOperatorSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testNoErrorsWithExpressionMinLength(): void
+	/**
+	 * @return void
+	 */
+	public function testNoErrorsWithExpressionMinLength()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineTernaryOperatorWithExpressionMinLengthNoErrors.php', [
 			'lineLengthLimit' => 30,
@@ -50,7 +62,10 @@ class RequireMultiLineTernaryOperatorSniffTest extends TestCase
 		self::assertNoSniffErrorInFile($report);
 	}
 
-	public function testErrorsWithExpressionMinLength(): void
+	/**
+	 * @return void
+	 */
+	public function testErrorsWithExpressionMinLength()
 	{
 		$report = self::checkFile(__DIR__ . '/data/requireMultiLineTernaryOperatorWithExpressionMinLengthErrors.php', [
 			'lineLengthLimit' => 30,
